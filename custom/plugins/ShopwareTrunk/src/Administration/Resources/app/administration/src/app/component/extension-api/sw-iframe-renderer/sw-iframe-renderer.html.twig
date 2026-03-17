@@ -1,0 +1,29 @@
+{% block sw_iframe_renderer %}
+<div :class="classes">
+    <template v-if="componentName">
+        <component :is="componentName" />
+    </template>
+
+    <template v-else-if="extensionIsApp">
+        <iframe
+            v-if="signedIframeSrc"
+            ref="iframe"
+            :src="signedIframeSrc"
+            :title="src"
+            width="100%"
+            :height="iFrameHeight"
+            @load="onIframeLoad"
+        ></iframe>
+    </template>
+
+    <iframe
+        v-else
+        ref="iframe"
+        :src="iFrameSrc"
+        :title="src"
+        width="100%"
+        :height="iFrameHeight"
+        @load="onIframeLoad"
+    ></iframe>
+</div>
+{% endblock %}

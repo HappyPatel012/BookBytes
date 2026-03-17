@@ -1,0 +1,83 @@
+/**
+ * @sw-package framework
+ */
+
+const { Service } = Shopware;
+const READ_NOTIFICATION = 'notification.lastReadAt';
+
+/**
+ * @private
+ */
+export default class AdminNotificationWorker {
+    constructor() {
+        this._notificationService = Service('notificationsService');
+        this._userConfigService = Service('userConfigService');
+        this._userService = Service('userService');
+        this._notiticationInterval = 5000;
+        this._notiticationTimeoutId = null;
+        this._timestamp = null;
+        this._limit = 5;
+    }
+
+    start() {
+        if (!Shopware.Context.app.config.adminWorker.enableNotificationWorker) {
+            return;
+        }
+
+        this.fetchUserConfig().then(() => {
+            this.loadNotifications();
+        });
+    }
+
+    loadNotifications() {
+        this._notificationService
+            .fetchNotifications(this._limit, this._timestamp)
+            .then(({ notifications, timestamp }) => {
+                notifications.forEach((notification) => {
+                    const { status, message } = notification;
+                    this.createNotification(status, message);
+                });
+
+                if (timestamp) {
+                    this._timestamp = timestamp;
+                    this._userConfigService.upsert({
+                        [READ_NOTIFICATION]: { timestamp },
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error while fetching notifications', error);
+            });
+
+        this._notiticationTimeoutId = setTimeout(() => {
+            this.loadNotifications();
+        }, this._notiticationInterval);
+    }
+
+    terminate() {
+        if (this._notiticationTimeoutId) {
+            clearTimeout(this._notiticationTimeoutId);
+            this._notiticationTimeoutId = null;
+        }
+    }
+
+    createNotification(variant, message) {
+        Shopware.Store.get('notification').createNotification({
+            variant,
+            message,
+        });
+    }
+
+    async fetchUserConfig() {
+        const response = await this._userConfigService.search([READ_NOTIFICATION]);
+        const value = response.data[READ_NOTIFICATION];
+
+        if (value) {
+            this._timestamp = value.timestamp;
+        } else {
+            // If no timestamp is found, fetch the user's creation date as a fallback
+            const userResponse = await this._userService.getUser();
+            this._timestamp = userResponse.data.createdAt.timestamp;
+        }
+    }
+}

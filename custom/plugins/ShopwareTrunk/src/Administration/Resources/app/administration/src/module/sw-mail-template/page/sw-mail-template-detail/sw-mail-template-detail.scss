@@ -1,0 +1,57 @@
+.sw-mail-template-detail {
+    &__html-editor,
+    &__subject-field,
+    &__sender-name-field,
+    &__description-field {
+        margin-bottom: 0;
+
+        .sw-field {
+            margin-bottom: 0;
+        }
+    }
+
+    &__available-variables-sidebar-container {
+        height: 100%;
+    }
+
+    .sw-tree {
+        .sw-tree__content {
+            max-height: 100%;
+        }
+
+        .icon--regular-circle-xxs,
+        .sw-mail-template-detail__copy_icon,
+        .icon--regular-folder,
+        .icon--regular-folder-open {
+            display: none;
+        }
+
+        .sw-tree-item__children {
+            .sw-mail-template-detail__copy_icon {
+                display: block;
+                max-width: var(--scale-size-14);
+                color: var(--color-icon-secondary-default);
+
+                &:hover {
+                    color: var(--color-icon-brand-default);
+                }
+
+                &:active {
+                    color: var(--color-icon-brand-hover);
+                }
+            }
+        }
+    }
+
+    &__test-mail-sidebar-container {
+        padding: var(--scale-size-20);
+        border-top: 1px solid var(--color-border-primary-default);
+    }
+
+    &__attachments-info-grid {
+        position: relative;
+        margin-top: var(--scale-size-20);
+        border: 1px solid var(--color-border-primary-default);
+        border-radius: var(--border-radius-xs);
+    }
+}
