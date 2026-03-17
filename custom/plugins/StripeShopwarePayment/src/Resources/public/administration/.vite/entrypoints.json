@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/stripeshopwarepayment/administration/",
+  "entryPoints": {
+    "stripe-shopware-payment": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/stripeshopwarepayment/administration/assets/stripe-shopware-payment-xb9WYeyq.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

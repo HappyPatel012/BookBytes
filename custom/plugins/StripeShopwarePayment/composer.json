@@ -1,0 +1,79 @@
+{
+    "name": "stripe/shopware-payment",
+    "description": "Stripe payment processing for Shopware 6",
+    "license": "proprietary",
+    "type": "shopware-platform-plugin",
+    "version": "1.17.2",
+    "authors": [
+        {
+            "name": "Stripe Payments Europe, Ltd.",
+            "email": "support@stripe.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "shopware/core": "~6.6",
+        "shopware/storefront": "~6.6",
+        "stripe/stripe-php": "^9.9.0",
+        "symfony/config": "~7.0",
+        "symfony/dependency-injection": "~7.0",
+        "symfony/http-foundation": "~7.0"
+    },
+    "require-dev": {
+        "mikey179/vfsstream": "^1.6.8",
+        "phpunit/phpunit": "^9.5.0"
+    },
+    "conflict": {
+        "shopware/administration": "< 6.4.0"
+    },
+    "suggest": {
+        "shopware/administration": "Enables Stripe Payment to be operated via Shopware 6 administration frontend.",
+        "shopware/storefront": "Enables Stripe Payment methods in the Shopware 6 Storefront."
+    },
+    "autoload": {
+        "psr-4": {
+            "Stripe\\ShopwarePayment\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "**.unit.php",
+            "**.integration.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "ocramius/package-versions": true,
+            "viison/composer-git-hooks-installer-plugin": true
+        },
+        "lock": false,
+        "platform": {
+            "php": "7.4.3"
+        }
+    },
+    "extra": {
+        "ci-min-supported-shopware-version": "6.4.8.0",
+        "description": {
+            "de-DE": "Das Plugin \"Stripe Payment\" ermöglicht die Zahlungsabwicklung über Stripe.",
+            "en-GB": "The Plugin \"Stripe Payment\" enables payment processing via Stripe."
+        },
+        "label": {
+            "de-DE": "Stripe Payment",
+            "en-GB": "Stripe Payment"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://stripe.com/de",
+            "en-GB": "https://stripe.com"
+        },
+        "shopware-plugin-class": "Stripe\\ShopwarePayment\\StripeShopwarePayment",
+        "supportLink": {
+            "de-DE": "https://stripe.com/de",
+            "en-GB": "https://stripe.com"
+        }
+    },
+    "scripts": {
+        "test:integration": "APP_ENV=test ${SHOPWARE_DIR}/vendor/bin/phpunit --config phpunit.integration.xml --testdox",
+        "test:unit": "./vendor/bin/phpunit --config phpunit.unit.xml --testdox"
+    }
+}

@@ -1,0 +1,312 @@
+{
+    "klaviyo-job-listing": {
+        "general": {
+            "title": "Klaviyo Job Listing",
+            "description": "job-listing"
+        },
+        "menu": {
+            "title": "Klaviyo Job Listing"
+        },
+        "page": {
+            "listing": {
+                "title": "Job Übersicht",
+                "description": "Job Übersicht",
+                "grid": {
+                    "column": {
+                        "type": "Typ",
+                        "message": "Nachricht",
+                        "status": "Status",
+                        "name": "Name",
+                        "started-at": "Begonnen am",
+                        "finished-at": "Fertiggestellt am",
+                        "created-at": "Erstellt am"
+                    }
+                }
+            },
+            "detail": {
+                "textHeadline": "Job",
+                "jobChildrenTitle": "Job Kinder"
+            },
+            "job-listing": {
+                "filter": {
+                    "job-status": "Job Status",
+                    "job-status-placeholder": "Wähle einen Job Status...",
+                    "job-type": "Job Typ",
+                    "job-type-placeholder": "Wähle einen Job Type...",
+                    "created-at": "Job erstellt am",
+                    "from": "von",
+                    "to": "bis"
+                }
+            }
+        },
+        "actions": {
+            "reschedule-job": {
+                "button": {
+                    "label": "Job nochmal ausführen"
+                }
+            },
+            "show-messages": {
+                "button": {
+                    "label": "Zeige Nachrichten"
+                }
+            }
+        }
+    },
+    "klaviyo-integration-settings": {
+        "label": "Klaviyo",
+        "title": "Klaviyo",
+        "general": {
+            "title": "Allgemein",
+            "credentialsAlert": "Einstellungen müssen auf Verkaufskanal Ebene durchgeführt sein.",
+            "doubleoptinAlert": "Listen sind in allen Klaviyo-Konten standardmäßig auf Double-Opt-In eingestellt. Achten Sie darauf, dass Sie Double Opt-In nicht gleichzeitig in Shopware und Klaviyo aktiviert haben!",
+            "initialization": {
+                "label": "Klaviyo nach der ersten Interaktion mit der Seite initialisieren.",
+                "general-label": "Interaktionseinstellungen",
+                "helpText": "Nachdem eun User mit der Seite interagiert hat, werden die Klaviyo-Skripte initialisiert. Bei nachfolgenden Seitenübergängen werden die Skripte sofort initialisiert."
+            },
+            "cookie": {
+                "title": "Cookie consent"
+            }
+        },
+        "pop-up": {
+            "title": "Wieder auf Lager Popup-Stile",
+            "open-button-fieldset-label": "Pop-Up öffnen Button",
+            "close-button-fieldset-label": "Pop-Up schließen Button",
+            "subscribe-button-fieldset-label": "Anmelden Button",
+            "snippet-button-fieldset-label": "Snippet Namen",
+            "additional-classes-fieldset-label": "Zusätzliche Klassen",
+            "colorLabel": "Farbe",
+            "backgroundLabel": "Hintergrund",
+            "openBtnLabel": "Öffnen Button",
+            "closeBtnLabel": "Schließen Button",
+            "contentMessageLabel": "Inhaltsnachricht",
+            "subscribeBtnLabel": "Anmelden Button",
+            "subscribeCheckboxLabel": "Anmelden Kontrollkästchen-Text",
+            "emailFieldLabel": "E-Mail Feld Etikett",
+            "emailFieldPlaceholder": "E-Mail Feld Platzhalter"
+        },
+        "configs": {
+            "credentials": {
+                "messageNotBlank": "Pflichtfeld."
+            },
+            "enabled": {
+                "label": "Account aktivieren",
+                "helpText": "Durch Aktivieren dieses Schalters kannst du das konfigurierte Klaviyo-Konto für den aktuellen Verkaufskanal aktivieren/deaktivieren."
+            },
+            "privateApiKey": {
+                "label": "Klaviyo Private API Schlüssel",
+                "helpText": "Klaviyo Private API Schlüssel. Du findest ihn in deinem Klaviyo Konto."
+            },
+            "publicApiKey": {
+                "label": "Klaviyo Public API Schlüssel",
+                "helpText": "Klaviyo Public API Schlüssel. Du findest ihn in deinem Klaviyo Konto."
+            },
+            "klaviyoListForSubscribersSync": {
+                "label": "Klaviyo List für die Synchronisierung der Abonnenten",
+                "helpText": "Die ID der Abonnentenliste in Klaviyo, zu der alle Shopware6-Abonnenten hinzugefügt werden sollen."
+            },
+            "bisVariantField": {
+                "label": "Zuordnung von Produktidentifikationsfeldern",
+                "helpText": "Zuordnung der Produktidentifikation. Mit dieser Option können Sie den Typ des Produktidentifikators in allen Ereignissen in Klaviyo auswählen, in denen Produktdaten erwähnt werden.",
+                "productId": "Produkt ID"
+            },
+            "orderIdentification": {
+                "label": "Zuordnung der Bestellidentifikationsfelder",
+                "helpText": "Wählen Sie die Bestellidentifikationsvariable aus, die an Klaviyo gesendet wird",
+                "orderId": "Order ID",
+                "orderNumber": "Order Nummer"
+            },
+            "cookieConsent": {
+                "label": "Cookie Consent",
+                "helpText": "Cookie Consent",
+                "nothingLabel": "Nothing",
+                "shopwareLabel": "Shopware Default",
+                "cookieBotLabel": "CookieBot",
+                "consentManagerLabel": "Consent Manager",
+                "usercentricsLabel": "Usercentrics"
+            },
+            "trackDeletedAccountOrders": {
+                "label": "Übersicht über die Bestellungen eines gelöschten Kontos",
+                "helpText": "Sollen die Bestellevents von gelöschten Kunden zu Klaviyo synchronisiert werden? Hinweis: Wenn diese Funktion aktiviert ist, können doppelte Klaviyo-Profile synchronisiert werden."
+            },
+            "trackViewedProduct": {
+                "label": "Angesehene Produkte tracken",
+                "helpText": "Soll das \"Viewed Product\" zu Klaviyo übertragen werden?"
+            },
+            "trackRecentlyViewedItems": {
+                "label": "Kürzlich angesehene Produkte tracken",
+                "helpText": "Soll das \"Recently Viewed Items\" zu Klaviyo übertragen werden?"
+            },
+            "trackAddedToCart": {
+                "label": "Zum Warenkorb hinzugefügt tracken",
+                "helpText": "Soll das \"Added to Cart Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackStartedCheckout": {
+                "label": "Begonnener Checkout tracken",
+                "helpText": "Soll das \"Started Checkout Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackPlacedOrder": {
+                "label": "Bestellungen tracken",
+                "helpText": "Soll das \"Placed Order Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackOrderedProduct": {
+                "label": "Bestelltes Produkt tracken",
+                "helpText": "Soll das \"Ordered Product Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackFulfilledOrder": {
+                "label": "Ausgelieferte Bestellung tracken",
+                "helpText": "Soll das \"Fulfilled Order Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackCancelledOrder": {
+                "label": "Stornierte Bestellung tracken",
+                "helpText": "Soll das \"Cancelled Order Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackRefundedOrder": {
+                "label": "Erstattete Bestellung tracken",
+                "helpText": "Soll das \"Refunded Order Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackPaidOrder": {
+                "label": "Bezahlt Bestellung tracken",
+                "helpText": "Soll das \"Paid Order Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackShippedOrder": {
+                "label": "Ausgeliefert Bestellung tracken",
+                "helpText": "Soll das \"Shipped Order Event\" zu Klaviyo übertragen werden?\nDas beeinflusst auch histoirische Events."
+            },
+            "trackSubscribedToBackInStock": {
+                "label": "Wieder auf Lager tracken",
+                "helpText": "Soll das \"Back In Stock Event\" zu Klaviyo übertragen werden?\n"
+            },
+            "oldJobCleanup": {
+                "label": "Aktivieren Sie die Bereinigung alter Jobs",
+                "helpText": "Ermöglicht das Bereinigen alter Jobs in der Klaviyo-Stellenanzeige"
+            },
+            "oldJobCleanupPeriod": {
+                "after": "Nach",
+                "days": "Tagen"
+            },
+            "apiValidation": {
+                "buttonLabel": "API-key Prüfung",
+                "emptyErrorMessage": "\"{entityName}\" darf nicht leer sein!",
+                "generalErrorMessage": "API-Schlüssel können nicht validiert werden",
+                "incorrectCredentialsTitle": "Falsche Anmeldeinformationen",
+                "correctApiMessage": "API-keys sind gültig",
+                "listNotExistMessage": "In Klaviyo wurde keine Liste gefunden, die dem angegebenen öffentlichen Schlüssel entspricht!"
+            },
+            "enableDailySynchronization": {
+                "label": "Aktivieren Sie die tägliche Abonnentensynchronisierung",
+                "helpText": "Mit dieser Option können Sie die tägliche geplante Synchronisierung von Abonnenten aktivieren"
+            },
+            "timeDailySynchronization": {
+                "label": "Zeit für die tägliche Synchronisierung der Abonnenten",
+                "helpText": "Die Option gibt an, zu welchem Zeitpunkt die tägliche Abonnentensynchronisierung erfolgen soll"
+            },
+            "excludedSubscribersSynchronization": {
+                "label": "Tägliche Synchronisierung der ausgeschlossenen Abonnenten aktivieren",
+                "helpText": "Mit dieser Option können Sie die tägliche geplante Synchronisierung der ausgeschlossenen Abonnenten aktivieren."
+            },
+            "withoutSubscribersSync": {
+                "label": "Kunden ohne Abonnement für die Synchronisierung aktivieren",
+                "helpText": "Mit dieser Option können Sie in Klaviyo Profile von Kunden erstellen, die kein Abonnement haben, wenn Sie Abonnenten synchronisieren"
+            },
+            "withoutOrdersSync": {
+                "label": "Synchronisation aktivieren Kunden ohne Auftrag",
+                "helpText": "Diese Option erlaubt es, beim Start der historischen Synchronisation, in Klaviyo Profile von Kunden zu erstellen, die keine Bestellungen haben"
+            },
+            "doubleProcessLaunchWarning": {
+                "label": "\"{entityName}\" wird gerade ausgeführt. Bitte beachten Sie, dass das parallele Starten mehrerer Synchronisationen zu Unterbrechungen führen kann, da die Klaviyo-Rate begrenzt ist \"{docUrl}\". Wollen Sie fortfahren?",
+                "actionCanceled": "Aktion abgebrochen."
+            },
+            "doubleProcessLaunchWarningPopup": {
+                "confirmActionTitle": "Aktion bestätigen",
+                "confirmLabel": "Bestätigen",
+                "cancelLabel": "Abbrechen"
+            },
+            "lists": {
+                "warning": "Für dieses Profil wurden in Klaviyo keine Listen gefunden",
+                "error": "Fehler beim Abrufen der Listen aus dem Klaviyo-Profil!"
+            }
+        },
+        "customer": {
+            "title": "Zusatzfelder Mapping",
+            "fieldMapping": {
+                "labelNotFilledError": "Feldname muss ausgefüllt sein.",
+                "noMappingFieldsError": "Es gibt keine Kunden-Zusatzfelder.",
+                "item": {
+                    "fieldName": "Zusatzfeld Name",
+                    "fieldNamePlaceholder": "Zusatzfeld Typ"
+                }
+            }
+        },
+        "order": {
+            "title": "Zusatzfelder Mapping",
+            "fieldMapping": {
+                "labelNotFilledError": "Feldname muss ausgefüllt sein.",
+                "noMappingFieldsError": "Es gibt keine benutzerdefinierten Bestellfelder für die Zuordnung.",
+                "item": {
+                    "fieldName": "Zusatzfeld Name",
+                    "fieldNamePlaceholder": "Zusatzfeld Typ"
+                }
+            }
+        }
+    },
+    "klaviyo_integration_plugin": {
+        "not_available": "N/A",
+        "subscribers": {
+            "last_synchronization_status": {
+                "finished": "Letzte Synchronisierung: {status} ({date})",
+                "not_finished": "Letzte Synchronisierung: {status}"
+            },
+            "last_success_synchronization": "Letzte erfolgreiche Synchronisierung: {date}",
+            "get_synchronization_status": {
+                "failed": "Fehler bei letzter Synchronisierung"
+            },
+            "schedule_synchronization": {
+                "button_label": "Synchronisiere Abonnenten.",
+                "success": "Abonennten Synchronisierung eingeplant.",
+                "failed": "Fehler bei der Planung der Abonennten Synchronisierung.",
+                "is_running": "Abonennten Synchronisierung läuft bereits.",
+                "is_scheduled": "Abonennten Synchronisierung ist bereits eingeplant."
+            }
+        },
+        "historical_events_tracking": {
+            "last_synchronization_status": {
+                "finished": "Letzte Synchronisierung: {status} ({date})",
+                "not_finished": "Letzte Synchronisierung: {status}"
+            },
+            "last_success_synchronization": "Letzte erfolgreiche Synchronisierung: {date}",
+            "get_synchronization_status": {
+                "failed": "Fehler bei der historischen Events Tracking Synchronisierung."
+            },
+            "schedule_synchronization": {
+                "button_label": "Synchronisiere historische Events.",
+                "success": "Historische Events Synchronisierung eingeplant.",
+                "failed": "Fehler bei Planung der historischen Events Synchronisation.",
+                "is_running": "Historische Events Synchronisation läuft bereits.",
+                "is_scheduled": "Historische Events Synchronisation ist bereits eingeplant."
+            },
+            "modal": {
+                "title": "Synchronisierung historischer Events",
+                "from_date": "Ab Datum",
+                "until_date": "Bis Datum",
+                "proceed_button": "Weitermachen",
+                "cancel_button": "Stornieren",
+                "invalid_date_range": "Für die Synchronisierung wurde ein ungültiger Datumsbereich angegeben!"
+            }
+        },
+        "promotion": {
+            "exportInKlaviyoFormatButtonLabel": "Export im Klaviyo Format",
+            "notification": {
+                "notificationExportErrorMessage": "Beim Exportieren der Aktion ist ein Fehler aufgetreten \"{entityName}\"."
+            }
+        },
+        "productComparison": {
+            "templates": {
+                "template-label": {
+                    "klaviyo-product-feed": "Klaviyo (XML)"
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,14 @@
+image: atlassian/default-image:2
+
+pipelines:
+  default:
+    - step:
+        name: Mirror Repository
+        clone:
+          depth: full
+        script:
+          - git clone git@bitbucket.org:overdosedigital/klaviyo-module.git
+          - cd klaviyo-module
+          - git remote set-url origin git@bitbucket.org:overdosedigital/klaviyo-module.git
+          - git remote add target git@github.com:klaviyo/shopware-klaviyo.git
+          - git push target master-3.x.x:master-3.x.x

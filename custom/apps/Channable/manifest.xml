@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+    <meta>
+        <name>Channable</name>
+        <label>Channable</label>
+        <label lang="de-DE">Channable</label>
+        <label lang="de-CH">Channable</label>
+        <label lang="nl-NL">Channable</label>
+        <label lang="fr-FR">Channable</label>
+        <label lang="es-ES">Channable</label>
+        <label lang="it-IT">Channable</label>
+        <description>Multichannel eCommerce Platform: Feed Management, Marketplace Listings, PPC</description>
+        <description lang="de-DE">Multichannel E-Commerce Plattform: Feed Management, Marktplatzlistings, SEA</description>
+        <description lang="de-CH">Multichannel E-Commerce Plattform: Feed Management, Marktplatzlistings, SEA</description>
+        <description lang="nl-NL">Multichannel e-commerce platform: Feedmanagement, Marketplace integraties, SEA</description>
+        <description lang="fr-FR">Plateforme e-commerce multicanal: Gestion de flux, intégration de marketplaces, SEA</description>
+        <description lang="es-ES">Plataforma de E-Commerce multicanal: Gestión de Feeds, Marketplace listings, PPC</description>
+        <description lang="it-IT">Piattaforma di e-commerce multicanale: Gestione dei feed, inserzioni sul mercato, PPC</description>
+        <author>Channable</author>
+        <copyright>Channable</copyright>
+        <version>1.0.2</version>
+        <icon>Resources/config/logo.png</icon>
+        <license>MIT</license>
+    </meta>
+    <setup>
+        <registrationUrl>https://app.channable.com/connect/shopware6</registrationUrl>
+    </setup>
+    <permissions>
+        <!-- Importer permissions -->
+        <read>product</read>
+        <read>product_media</read>
+        <read>product_manufacturer</read>
+        <read>product_visibility</read>
+        <read>product_search_keyword</read>
+        <read>product_stream</read>
+        <read>product_price</read>
+        <read>sales_channel</read>
+        <read>sales_channel_domain</read>
+        <read>language</read>
+        <read>currency</read>
+        <read>delivery_time</read>
+        <read>media</read>
+        <read>rule</read>
+        <read>seo_url</read>
+        <read>category</read>
+        <read>custom_field_set</read>
+        <read>property_group</read>
+        <read>main_category</read>
+        <read>property_group_option</read>
+        <read>unit</read>
+        <!-- Order connection permissions -->
+        <!-- Create and modify order (properties) -->
+        <read>order</read>
+        <create>order</create>
+        <update>order</update>
+        <read>order_customer</read>
+        <create>order_customer</create>
+        <update>order_customer</update>
+        <read>order_address</read>
+        <create>order_address</create>
+        <update>order_address</update>
+        <read>order_tag</read>
+        <create>order_tag</create>
+        <update>order_tag</update>
+        <read>order_delivery</read>
+        <create>order_delivery</create>
+        <update>order_delivery</update>
+        <read>order_delivery_position</read>
+        <create>order_delivery_position</create>
+        <update>order_delivery_position</update>
+        <read>order_transaction</read>
+        <create>order_transaction</create>
+        <update>order_transaction</update>
+        <read>order_line_item</read>
+        <create>order_line_item</create>
+        <update>order_line_item</update>
+        <!-- Create and modify customers -->
+        <read>customer</read>
+        <create>customer</create>
+        <update>customer</update>
+        <read>customer_address</read>
+        <create>customer_address</create>
+        <update>customer_address</update>
+        <read>payment_method</read>
+        <create>payment_method</create>
+        <update>payment_method</update>
+        <!-- Read and create Shopware backend settings -->
+        <read>webhook_event_log</read>
+        <read>app</read>
+        <read>integration</read>
+        <read>salutation</read>
+        <read>country</read>
+        <read>country_state</read>
+        <read>shipping_method</read>
+        <read>tax_rule</read>
+        <read>tax</read>
+        <read>state_machine</read>
+        <read>state_machine_state</read>
+        <read>number_range</read>
+        <read>number_range_type</read>
+        <read>number_range_state</read>
+        <create>number_range_state</create>
+        <update>number_range_state</update>
+        <read>number_range_sales_channel</read>
+        <read>tag</read>
+        <create>tag</create>
+        <update>tag</update>
+        <!-- Webhooks -->
+        <read>webhook</read>
+        <create>webhook</create>
+        <update>webhook</update>
+    </permissions>
+    <webhooks>
+        <webhook name="channable-product-changed" url="https://api.channable.com/v1/webhooks/shopware_stock_updates" event="product.written"/>
+        <webhook name="channable-app-uninstall" url="https://app.channable.com/connect/shopware6/uninstall" event="app.deleted"/>
+    </webhooks>
+    <admin>
+        <module name="Channable" source="https://app.channable.com/connect/shopware_app_iframe.html" parent="sw-settings">
+            <label>Connect to Channable</label>
+            <label lang="de-DE">Mit Channable verbinden</label>
+            <label lang="de-CH">Mit Channable verbinden</label>
+            <label lang="nl-NL">Koppel met Channable</label>
+            <label lang="fr-FR">Connecter avec Channable</label>
+            <label lang="es-ES">Conectarse a Channable</label>
+            <label lang="it-IT">Collegati a Channable</label>
+        </module>
+    </admin>
+</manifest>

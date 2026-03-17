@@ -1,0 +1,60 @@
+{% block stripe_payment %}
+    <sw-page>
+        <template #smart-bar-header>
+            <h2>
+                {{ $t('sw-settings.index.title') }}
+                <mt-icon
+                        v-if="shopwareVersion.startsWith('6.7')"
+                        small
+                        name="regular-chevron-right-xs"
+                />
+                <sw-icon
+                        v-else
+                        small
+                        name="regular-chevron-right-xs"
+                />
+                {{ $t('stripe-shopware-payment-config-page.smart-bar.title') }}
+            </h2>
+        </template>
+
+        <template #smart-bar-actions>
+            <mt-button v-if="shopwareVersion.startsWith('6.7')" :routerLink="{ name: 'sw.settings.index' }">
+                {{ $t('stripe-shopware-payment-config-page.smart-bar.cancel') }}
+            </mt-button>
+            <sw-button v-else :routerLink="{ name: 'sw.settings.index' }">
+                {{ $t('stripe-shopware-payment-config-page.smart-bar.cancel') }}
+            </sw-button>
+
+            {% block stripe_shopware_payment__payment_config_page__save_settings_button %}
+                <sw-button-process
+                        variant="primary"
+                        :isLoading="isLoading"
+                        :disabled="isLoading"
+                        :processSuccess="isSaveSuccessful"
+                        @click="saveConfig"
+                >
+                    {{ $t('stripe-shopware-payment-config-page.smart-bar.save') }}
+                </sw-button-process>
+            {% endblock %}
+        </template>
+
+        <template #content>
+            {% block stripe_shopware_payment__payment_config_page__main_content %}
+                <sw-card-view>
+                    {% block stripe_shopware_payment__payment_config_page__above_system_config_card %}
+                    {% endblock %}
+
+                    <sw-system-config
+                            ref="systemConfig"
+                            salesChannelSwitchable
+                            :domain="configDomain"
+                            @config-changed="updateConfig"
+                    />
+
+                    {% block stripe_shopware_payment__payment_config_page__below_system_config_card %}
+                    {% endblock %}
+                </sw-card-view>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

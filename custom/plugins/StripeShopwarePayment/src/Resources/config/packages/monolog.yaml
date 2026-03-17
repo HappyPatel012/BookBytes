@@ -1,0 +1,9 @@
+monolog:
+  channels: ['stripe_payment_channel']
+
+  handlers:
+    myPluginLogHandler:
+      type: rotating_file
+      path: "%kernel.logs_dir%/stripe_payment_%kernel.environment%.log"
+      level: error
+      channels: [ "stripe_payment_channel"]

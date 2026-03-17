@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe13ab993bfcc53a20286f5e9567563a",
+    "content-hash": "b8074a872b41b0b253ad40c3ab410c6e",
     "packages": [
         {
             "name": "async-aws/core",
@@ -2645,6 +2645,54 @@
                 "source": "https://github.com/jsonrainbow/json-schema/tree/v6.7.2"
             },
             "time": "2026-02-15T15:06:22+00:00"
+        },
+        {
+            "name": "klaviyo/shopware-klaviyo",
+            "version": "4.2.0",
+            "dist": {
+                "type": "path",
+                "url": "custom/plugins/klavi_overd",
+                "reference": "13c65a0d1a99e648e44af8c1c8d0627314d043a3"
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^8.2",
+                "shopware/administration": "6.7.*",
+                "shopware/core": "6.7.*",
+                "shopware/storefront": "6.7.*"
+            },
+            "type": "shopware-platform-plugin",
+            "extra": {
+                "shopware-plugin-class": "Klaviyo\\Integration\\klavi_overd",
+                "plugin-icon": "src/Resources/config/plugin.png",
+                "label": {
+                    "de-DE": "Klaviyo: Email Marketing & SMS",
+                    "en-GB": "Klaviyo: Email Marketing & SMS"
+                },
+                "description": {
+                    "de-DE": "Plugin, das Klaviyo mit Shopware verbindet und wesentliche Funktionen zur Nutzung von E-Mail-Marketingkampagnen bietet",
+                    "en-GB": "Plugin that connects Klaviyo with Shopware and provides essential functionality to use email marketing campaigns"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Klaviyo\\Integration\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "H1",
+                    "homepage": "https://h1.nl/"
+                }
+            ],
+            "description": "Shopware 6 plugin for Klaviyo integration",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "laminas/laminas-code",

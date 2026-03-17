@@ -1,0 +1,8 @@
+{
+  "main.js": {
+    "file": "assets/stripe-shopware-payment-xb9WYeyq.js",
+    "name": "stripe-shopware-payment",
+    "src": "main.js",
+    "isEntry": true
+  }
+}

@@ -1,0 +1,295 @@
+# 3.4.0
+# Neu: Übertragung von benutzerdefinierten Bestellfeldern für das Ereignis „Placed Order“ hinzugefügt.
+
+# 3.3.4
+# Fix: Erstellen einer zusätzlichen Bedingung, um das Datum der Auftragserstellung während der Synchronisierung historischer Aufträge zu erhalten.
+# Fix: Fehlerbehebung für doppelte E-Mails unter den Abonnenten bei der Synchronisierung von Abonnenten.
+### Fehler behoben: "Duplicate email found".
+# Fix: Behebung eines Problems beim Laden der Seite Rabatte & Aktionen.
+
+# 3.3.3
+# Fix: Korrigierte Anfragen in Bezug auf Bestellungen. Kundenprofildaten wurden aus den Bestellanforderungen entfernt, die ständig übermittelt wurden, was optional war.
+# Fix: Wenn ein Gast Artikel in den Warenkorb legt, wird nach der Autorisierung an der Kasse ebenfalls ein Ereignis ausgelöst: **Added to Cart**.
+# Fix: Es wurde ein Fehler bei der Bestätigung eines Abonnements von Shopware's double-opt-in behoben.
+### Fehler behoben: "Call to a member function getCookieConsent() on null".
+# Fix: Die js-Dateien der Plugin-Generierung wurden korrigiert.
+
+# 3.3.2
+# Fix:Ein neues erforderliches Feld `subscriptions` wurde zu den Bulk Unsubscribe Profiles hinzugefügt, in Übereinstimmung mit den letzten Änderungen von Breaking.
+
+# 3.3.1
+# Fix: Die Synchronisation von abgemeldeten Abonnenten von Klaviyo zu Shopware wurde korrigiert.
+# Fix: Das Problem mit dem Erstellungsdatum des Ereignisses in den Metriken während der historischen Synchronisierung von Aufträgen wurde behoben.
+### Behobenes Problem: Wenn das Ereignis kein **updated_at** enthielt, wurde der Wert Null übergeben und das historische Ereignis wurde mit dem Datum und der Uhrzeit der Synchronisierung gespeichert.
+
+# 3.3.0
+# Neu: Es wurde ein Popup-Fenster mit einer Warnung für Administratoren hinzugefügt, die gleichzeitig historische Synchronisationen von Bestellungen und Abonnenten durchführen können.
+
+# 3.2.2
+# Fix: Die API-Anfrage für die Übertragung von Abonnenten während der historischen Synchronisierung wurde geändert. Denn es wirkte sich auf das Erscheinungsbild des Zustimmungsstatus aus, dass der Abonnent abonniert ist.
+## Wichtige Änderungen: Historische Synchronisierung funktioniert jetzt über Double Opt-in.
+# Fix: Die Funktionalität des Schalters für die Zuordnung von Produktidentifikationsfeldern wurde korrigiert. Er wirkt sich nun auf alle Ereignisse aus, bei denen Produktdaten betroffen sind.
+
+# 3.2.1
+# Fix: Es wurde ein Problem behoben, durch das in einigen Fällen ein Fehler mit dem Status 409 auftrat.
+### Fehler behoben: "Conflict trying to update profile"
+### Fehler behoben: "A profile already exists with one of these identifiers."
+
+# 3.2.0
+# Neu: Hinzufügen der Synchronisation von Kunden, die keine Bestellungen oder Abonnements haben, wenn die entsprechenden historischen Synchronisationen initiiert werden. Zwei neue Cron Jobs wurden hinzugefügt: _**klaviyo.job.full_customer_subs_sync_processing**_ und **_klaviyo.job.full_customer_order_sync_processing_**
+## Dokumentation:
+https://overdosedigital.atlassian.net/wiki/spaces/KS6PUG/pages/3495821316/Synchronize+Historical+Data
+# Neu: Der Job Scheduler wurde um den neuen Status Teilweise erfolgreich erweitert. Er signalisiert, dass die Aufgabe teilweise abgeschlossen wurde.
+## Dokumentation:
+https://overdosedigital.atlassian.net/wiki/spaces/KS6PUG/pages/3031007243/Job+Scheduling+Overview
+# Neu: Aktualisierung der API-Revision auf die neueste Version - 2024-10-15. Verbesserte Leistung bei der Erstellung und Aktualisierung von Kunden - zusätzliche Anfragen wurden entfernt.
+# Neu: Überprüfung auf ungültige E-Mails bei der Synchronisierung von Kunden und Abonnenten hinzugefügt.
+# Fix: Fehler bei der Profilverdopplung beim Senden von Kundendaten an Klaviyo behoben.
+### Fehler behoben: "A profile already exist with one of these identifiers"
+# Fix: Es wurde ein Problem behoben, das in der Antwort auftrat, wenn ein Profil von Klaviyo identifiziert wurde.
+### Fehler behoben: "Identify Profile API response expected to be a JSON"
+
+# 3.1.3
+# Fix: Behebung von Fehlern beim Laden von Plugin-Abhängigkeiten bei der Installation und Aktivierung des Plugins.
+
+# 3.1.2
+# Fix: Es wurde ein Fix für die asynchrone Datensynchronisation und ein Fix für das Problem der Ermittlung des aktuellen Offsets bei historischen Synchronisationen hinzugefügt.
+# Fix: Fix für das Senden von Versandereignissen und bezahlten Ereignissen in der historischen Auftragssynchronisation.
+
+# 3.1.1
+# Fix: Behebung von Problemen beim Laden der Promotionsseite.
+
+# 3.1.0
+# Neu: Kompatibilität mit Usercentrics CMP hinzugefügt.
+# Neu: Erstellung eines separaten Cron-Prozesses für die Synchronisierung historischer Ereignisse. Überarbeitung des Codes zur Verarbeitung großer Datenmengen.
+
+# 3.0.0
+# Kompatibilitätsfreigabe mit Shopware 6.6^
+# Fix: Fehler beim Speichern der Plugin-Einstellungen behoben, wenn ein Wert in das Feld Listen-ID für Abonnenten-Synchronisation eingefügt wurde.
+
+# 2.13.3
+# Fix: Korrektur von mehrfachen Ladesätzen in der Auflistung.
+# Fix: Ändern des Datentyps bei der Übertragung von Produktkategorien in Bestellvorgängen.
+
+# 2.13.2
+# Fix: Es wurde ein Fehler behoben, wenn das Ereignis SwitchBuyBoxVariantEvent auf dem Widget ausgelöst wurde. Behebung von Abhängigkeiten in der Vorlage.
+
+# 2.13.1
+# Fix: Ein Problem mit der fehlenden Listen-ID von Abonnenten im PDP wurde behoben. Das Speichern der Listen-ID von Abonnenten in den Plugin-Einstellungen wurde neu gestaltet.
+# Fix: Es wurde ein Fehler behoben, wenn das Ereignis SwitchBuyBoxVariantEvent auf der PDP ausgelöst wurde.
+
+# 2.13.0
+# Neu: Die API-Revision wurde auf die neueste Version aktualisiert.
+# Neu: Um die Arbeit zu optimieren und die Leistung zu verbessern, wurde eine separate Cron-Aufgabe hinzugefügt, um ausgeschlossene Abonnenten zu synchronisieren.
+# Fix: Die Arbeit der Filter in Klaviyo Job Listing wurde korrigiert.
+
+# 2.12.0
+# Neu: Das Popup "Wieder auf Lager" ist jetzt verfügbar, wenn die Route `frontend.cms.buybox.switch` verwendet wird (SwitchBuyBoxVariantEvent).
+# Fix: Ein Fehler bei der Anwendung von Werbeaktionen wurde behoben.
+# Fix: Ein Fehler bei der Synchronisierung von Kundendaten wurde behoben.
+# Fix: Ein Fehler bei der Anzeige von leeren Aufträgen nach der täglichen Synchronisation wurde behoben.
+
+# 2.11.1
+# Fix: Veraltete Code-Tests, die Fehler verursachten, wurden entfernt.
+# Fix: Fehler bei der Synchronisierung von historischen Daten wurden behoben.
+# Fix: Ein Fehler bei der fehlenden Übersetzung des Produktherstellers wurde behoben.
+# Fix: Ein Fehler bei der Übertragung von Daten über eine Kundengruppe in benutzerdefinierte Felder wurde behoben.
+# Fix: Das Verhalten des Status des übergeordneten Auftrags in der Klaviyo Auftragsliste wurde korrigiert, wenn die untergeordneten Aufträge noch in Bearbeitung sind.
+# Fix: Die Anzeige der Anzahl der Datensätze im Klaviyo Job Listing beim Laden wurde korrigiert. Die Performance des Listings wurde verbessert.
+# Fix: Ein Fehler im Zusammenhang mit dem Ereignis "In den Warenkorb" wurde behoben, wenn das Ereignis nicht ausgelöst wurde.
+
+# 2.11.0
+# Fix: Ein Fehler beim Aktualisieren benutzerdefinierter Kundenfelder wurde behoben.
+# Fix: Ein Fehler beim Überschreiten der Anforderungslimitrate in Klaviyo wurde behoben.
+# Fix: Ein Fehler beim Empfang einer Antwort von Klaviyo nach dem Erstellen eines Kunden wurde behoben.
+# Fix: Die Übertragung des Vornamens, Nachnamens und der Anrede des Kunden bei der vollständigen Synchronisierung von Kunden wurde korrigiert.
+# Neu: Synchronisierung neuer Ereignisse des Bestellstatus hinzugefügt, wie zum Beispiel: Teilweise bezahlte Bestellung und Teilweise versendete Bestellung.
+
+# 2.10.0
+# Fix: Validierung von Telefonnummern in Bestellereignissen hinzugefügt. Wenn die Telefonnummer nicht existiert oder nicht dem e.164-Standard entspricht, wird die Veranstaltung in Klaviyo veröffentlicht, ohne dass die falsche Telefonnummer übermittelt wird.
+# Fix: Korrektur einiger Titel.
+# Neu: Hinzugefügte Versandkosten fehlen in Variablen und Daten.
+
+# 2.9.0
+# Fix: Sichtbarkeit von „Back In Stock“ auf PDP.
+# Neu: Die Plugin-API wurde auf die neueste Version der Klaviyo-API aktualisiert.
+
+# 2.8.4
+# Fix: Die Kategorie wird nun angezeigt, nachdem ein Produkt aus einer dynamischen Produktgruppe hinzugefügt wurde.
+# Fix: Das Plugin stellt die richtige Produkt-URL nach Domänensprache bereit.
+# Fix: Ändern von Titeln im Payload-Event „Zum Warenkorb hinzufügen“.
+
+# 2.8.3
+# Fix: Das Ereignis „Zum Warenkorb hinzufügen“ wird jetzt im Echtzeitmodus und nicht nach einem Zeitplan ausgelöst
+# Fix: Ein Fehler beim Ausführen asynchroner Abonnementvorgänge wurde behoben
+
+# 2.8.3
+# Fix: Es wurde ein Problem behoben, bei dem bei einem produktbezogenen Ereignis der Produktname fehlte
+# Fix: Es wurde ein Problem behoben, bei dem einige Transaktionsdaten nicht synchronisiert wurden
+# Fix: Es wurde ein Problem behoben, bei dem einige Daten für warenkorbbezogene Ereignisse fehlten
+
+# 2.8.1
+# Fix: Kundensprachfeld hinzugefügt, das bei der Synchronisierung von Newsletter-Empfängern zusammen mit anderen Daten an Klaviyo gesendet wird.
+# Fix: Tippfehler behoben
+
+# 2.8.0
+# Neu: Bessere Protokollierung im gesamten Plugin hinzugefügt.
+# Fix: Das Problem wurde behoben, bei dem Kunden im Raster des Admin-Panels keine Werbeaktionen für den Export auswählen konnten.
+# Fix: Es wurde ein Problem behoben, das bei einigen Kunden auftreten konnte, wenn gekaufte/aufgegebene Bestellungen nicht ordnungsgemäß aktualisiert wurden.
+# Fix: Es wurde ein Problem behoben, bei dem das E-Mail-Opt-in-Banner in Storefront fehlte
+
+# 2.7.1
+# Fix: Ein Fehler/Problem mit Cookiebot wurde behoben, das in der Browserkonsole ausgegeben wurde, wenn „Standard-Cookie-Benachrichtigung verwenden“ auf „Ja“ gesetzt war.
+# Fix: Es wurde ein Problem behoben, bei dem die Bestell-ID in den Ereignissen zu rückerstatteten Bestellungen falsch angezeigt wurde (die Bestell-ID wurde anstelle der Bestellnummer angezeigt, obwohl sie in der Plugin-Konfiguration auf Bestellnummer eingestellt war).
+
+# 2.7.0
+# Fix: Korrekturen für eine stabile Arbeit mit dem Cookie-Manager – CookieBot – hinzugefügt.
+# Fix: Korrekturen beim Synchronisieren von Abonnenten hinzugefügt.
+# Neu: Die Konfiguration „Tägliche Abonnentensynchronisierung“ wurde hinzugefügt.
+# Neu: Die Konfiguration „Bereinigung alter Jobs aktivieren“ wurde hinzugefügt.
+
+# 2.6.0
+# Funktion: Jetzt ist Double-Opt in der Nachrichtenübermittlung auf der Konfigurationsseite in allen Konfigurationsbereichen/Vertriebskanälen sichtbar.
+
+# 2.5.2
+# Fix: Das Problem wurde behoben, bei dem der Selektor in der Konfiguration „Klaviyo-Listenname für Abonnenten“ nicht angezeigt wurde.
+
+# 2.5.1
+# Fix: Das Problem wurde behoben, bei dem die Validierung des öffentlichen API-Schlüssels von Klaviyo nicht wie vorgesehen funktionierte
+
+# 2.5.0
+# Neu: Option hinzugefügt, um die Zuordnung für ihre Bestellung sowie den Lieferstatus als Pflichtfeld in einem Dropdown-Menü auszuwählen, damit dieser Status auch in Klaviyo ankommt.
+
+# 2.4.0
+# Feature: Kompatibilität mit „Consentmanager“ von Consentmanager.net hinzugefügt
+# Verbesserung: Die Implementierung des Ereignisses „Checkout gestartet“ im Plugin wurde für eine bessere Kompatibilität mit Checkout-Anpassungen und Plugins (z. B. 1-Schritt-Checkout und andere) überarbeitet.
+# HINWEIS: Wenn Sie beim Auschecken umfangreiche Anpassungen der Plugin-Dateien vorgenommen haben, empfehlen wir Ihnen, die Anpassungen auf Ihrer Seite zu überprüfen und zu überprüfen.
+# Fix: Das Problem wurde behoben, bei dem „Abbestellen“ auf der Seite „Mein Konto“ nicht funktionierte.
+
+# 2.3.2
+# Fix: Das Ereignis „Rückerstattete Bestellung“ wird jetzt angezeigt, nachdem auf die Schaltfläche „Historische Ereignisse synchronisiert“ geklickt wurde
+# Fix: Behebung des Problems, bei dem der Task-Manager zum Stillstand kommen/stoppen kann.
+
+# 2.3.1
+# Fix: Ereignisreihenfolge „Bestelltes Produkt“ nach historischer Synchronisierung
+
+# 2.3.0
+# Fix: Das Ereignis „Bezahlte Bestellung“ wurde nach der historischen Synchronisierung nicht für nicht bezahlte Bestellungen angezeigt
+# Fix: Das Problem wurde behoben, wenn Ereignisse nach jeder historischen Synchronisierung in den Aktivitätsprotokollen des Profils dupliziert wurden
+# Fix: Aufrufmethode „dump(extensionData)“ in der Twig-Datei entfernt
+# Fix: Beim Hinzufügen von „Echtzeit“-Benutzern zu Klaviyo wird jetzt die API „Liste abonnieren“ verwendet
+# Fix: Die Admin-Konfigurationsoption „Abonnentenliste“ ist kein Auswahl-/Dropdown-Menü mit Werten, die vom Klaviyo-Dienst abgerufen werden (wenn die API-Anmeldeinformationen gültig sind).
+
+# 2.2.0
+# Neu: Der Link zur Warenkorb-Wiederherstellung füllt jetzt die Adressdaten aus, die der Kunde vor dem Verlassen des Warenkorbs angegeben hat (falls zutreffend).
+# Fix: Das Problem wurde behoben, bei dem einige Kunden möglicherweise falsche Daten der an den Klaviyo-Service übergebenen Ereignisse sehen (Ereignisse für erfüllte Bestellungen usw.).
+
+# 2.1.0
+# Fix: Die Synchronisierung von Klaviyo-Ereignissen wurde behoben, wenn die Tracking-Kontrollkästchen im Admin-Bereich deaktiviert waren.
+# Fix: Korrektur der Synchronisierung historischer Datenauftragsstatus.
+# Fix: Ein Problem mit dem Modal „Wieder auf Lager“ wurde behoben.
+# Neu: Ein neuer Endpunkt wurde hinzugefügt, dank dem Sie die aktuelle Version des installierten Klaviyo-Plugins herausfinden können.
+
+# 2.0.1
+# Fix: Das Problem mit der Fehlermeldung in einigen Fällen beim Abonnieren des Newsletters wurde behoben.
+
+# 2.0.0
+# Kompatibilitätsfreigabe mit Shopwrae 6.5^
+# Fix: Verwendung entfernter Klassen und Dateien ersetzt.
+# Fix: Kleinere Änderungen an Erweiterungskonfigurationsklassen/-vorlagen (auf der Erweiterungskonfigurationsseite).
+# Neu: Job Scheduler Update – Kompatibilität mit Shopawre 6.5^-Versionen implementiert.
+# Neu: Job-Scheduler-Update – Job-Scheduler-Handler erweitern jetzt empfohlene Schnittstellen.
+# Neu: Controller-Routen verfügen jetzt über eine Annotationsdeklaration im neuen Format.
+# Neu: Einige vorgenommene Änderungen machen die Erweiterung abwärtsinkompatibel. Sie können die Abhängigkeiten in der Datei „composer.json“ sehen.
+
+# 1.0.19
+# Funktion: Möglichkeit hinzugefügt, die Bestellidentifikationsvariable zu ändern, die an das Klaviyo gesendet wird (war vorher: Bestell-Hash | jetzt können Sie entweder wählen: Bestell-Hash ODER Bestell-ID)
+
+# 1.0.18
+# Fix: Das Problem wurde behoben, bei dem „Back In Stock at Product Pate“ keine Daten an klaviyo sendete
+
+# 1.0.17
+* Fix: Das Problem wurde behoben, bei dem Produkte falsche Links (in klaviyo) zu Shops anderer Sprachen/Domains (shopware) hatten, wenn einem einzelnen Verkaufskanal zahlreiche Domains zugewiesen waren.
+
+# 1.0.16
+* Neu: Vertriebskanalinformationen wurden zum Klaviyo-Kunden hinzugefügt.
+
+# 1.0.15
+* New: Kompatibilität mit CookieBot hinzugefügt
+* New: Zusätzliche Kompatibilität mit den neuesten Versionen
+
+# 1.0.14
+* Neu: Auswahl von Variantenbezeichnern für BIS hinzugefügt
+
+# 1.0.13
+* Neu: Tracking für "PAID"-Bestellungen hinzugefügt
+* Neu: Produkt-SKU in der Funktion "Benachrichtigen, wenn auf Lager" hinzugefügt
+
+# 1.0.12
+* Neu: Warenkorb-Reset-Funktionalität hinzugefügt
+
+#1.0.11
+* Fix: Kontext wird für Hintergrundprozesse beibehalten
+
+# 1.0.10
+* Fix: Problem mit Plugin-Localstorage-Item-Set ohne Cookie-Einwilligung behoben
+
+# 1.0.9
+* Fix: Problem mit der Initialisierung des Klaviyo-Skripts ohne Cookie-Zustimmung behoben
+* Fix: Problem mit unsicherer Anzeige des Felds "Private API Schlüssel" behoben
+
+#1.0.8
+* Neu: Neue Klviyo-Markensymbole hinzugefügt
+* Neu: Neue Funktion hinzugefügt, um die Synchronisierung von Bestellereignissen gelöschter Konten zu aktivieren/deaktivieren
+* Neu: Reinigungsmechanismus für Joblisten hinzugefügt
+* Neu: Zusätzliche Informationsmeldungen während der Verarbeitung von Hintergrundjobs hinzugefügt
+* Neu: Job Scheduler Update - Jobbenachrichtigung mit korrekter Sortierreihenfolge hinzugefügt
+* Fix: Verbesserter Plugin-Deinstallationsprozess
+* Fix: Mögliches Problem mit Klaviyo-Listen-ID-Caching behoben
+* Fix: Mögliches Problem beim Synchronisieren von nicht abonnierten Empfängern von Klaviyo behoben
+* Fix: Mögliches Problem mit der Hintergrundverarbeitung von Bestellpositionen behoben
+* Fix: Mögliches Problem mit fehlender Plugin-Konfiguration während der Auftragssynchronisierung behoben
+
+#1.0.7
+* Neu: API-Schlüsselvalidierung in der Klaviyo-Konfiguration hinzugefügt
+* Neu: Aktivierung und Deaktivierung des Klaviyo-Trackings durch Cookies hinzugefügt
+* Neu: Bereinigen Sie ausstehende Jobs während des Deinstallationsprozesses
+* Neu: Symbol und Name des Klaviyo-Plugins geändert
+* Fix: Einschränkungen der Vertriebskanaloptionen in der Klaviyo-Konfiguration entfernt
+* Fix: Übersetzungen für alle Klaviyo-Texte hinzugefügt
+
+#1.0.6
+ * Fix: Wir haben das Problem mit der Leerlieferung der Bestellung behoben
+ * Fix: Wir haben das Problem mit den Checkout-Tracker-Kategorien behoben
+ * Fix: Wir haben ein Problem mit der Feed-Generierung behoben, wenn es kein Titelbild gibt
+
+#1.0.5
+ * Neu: Jetzt wird der Produkthersteller auf alle produktbezogenen Klaviyo-Events übertragen.
+ * Neu: Jetzt können Klaviyo-Kontoanmeldeinformationen nur auf Vertriebskanalebene konfiguriert werden.
+ * Neu: Jetzt kann das Klaviyo-Konto des Vertriebskanals deaktiviert werden, um die Verarbeitung von Ereignissen auf dem zugehörigen Kanal zu verhindern.
+ * Fix: Wir haben ein Problem mit der Storefront-Ereignisverfolgung mit aktivierter A/B-Testfunktion in Klaviyo behoben.
+ * Fix: Wir haben ein mögliches Problem mit der Kundendatensynchronisierung behoben.
+ * Fix: Wir haben ein potenzielles Ereignisbehandlungsproblem auf Kanälen mit falschen Anmeldeinformationen/Konfigurationen behoben.
+ * Fix: Wir haben das Problem mit dem Fehler beim Ändern des Bestellstatus von der Admin-Benutzeroberfläche behoben.
+ * Fix: Wir haben das Problem mit der historischen Synchronisierung von Bestellungen mit gelöschten Produkten behoben.
+
+#1.0.4
+ * Neu: Job Scheduler Update - verbesserte Admin-Benutzeroberfläche und praktische Nachrichtenbehandlung.
+ * Neu: Wir haben den Klaviyo Person API-Workflow aktualisiert.
+ * Fix: Problem mit der Verarbeitung von Gastbestellungen behoben.
+ * Fix: Das Problem mit dem "localhost"-Produktlink in nachverfolgten Bestellereignissen wurde behoben.
+ * Fix: Problem mit Klaviyo Tracking JS auf Seiten mit benutzerdefiniertem Layout behoben.
+ * Fix: Unnötige Einstellung "Catalog Feed Products Count" aus der Plugin-Konfiguration entfernt
+
+#1.0.3
+ * Neue E-Mail-Benachrichtigungsfunktion "Wieder auf Lager" hinzugefügt.
+ * Neue Funktion "Bidirektionale (un)Abonnenten-Synchronisation" hinzugefügt. Jetzt kann das Plugin Newsletter-Abmeldungen von Klaviyo zu Shopware und umgekehrt synchronisieren.
+
+#1.0.2
+ * Leistungsverbesserungen. Refactoring der Plugin-Codebasis. System-Job-Scheduler-Bundle hinzugefügt.
+
+#1.0.1
+ * Einheiten- und Integrationstest hinzugefügt.
+
+#1.0.0
+ * Implementierung der grundlegenden Plugin-Funktionalität.

@@ -1,0 +1,38 @@
+{
+  "stripe-shopware-payment-config-page": {
+    "title": "Stripe",
+    "smart-bar": {
+      "title": "Stripe",
+      "save": "Speichern",
+      "cancel": "Abbrechen"
+    },
+    "controller": {
+      "titles": {
+        "success": "Erfolg",
+        "error": "Fehler"
+      },
+      "messages": {
+        "save": {
+          "success": "Die Konfiguration wurde erfolgreich gespeichert.",
+          "error": "Die Konfiguration konnte nicht gespeichert werden, da folgender Fehler aufgetreten ist: {errorMessage}"
+        },
+        "webhook": {
+          "created": "Der Stripe Webhook wurde erfolgreich erstellt.",
+          "updated": "Der Stripe Webhook wurde erfolgreich aktualisiert.",
+          "error": "Der Stripe Webhook konnte nicht gespeichert werden, da folgender Fehler aufgetreten ist: {errorMessage}"
+        },
+        "credentials": {
+          "stripeSecretKey": "Geheimer Stripe-API-Schlüssel",
+          "stripePublishableKey": "Veröffentlichbarer Stripe-API-Schlüssel",
+          "valid": "Die Stripe API Zugangsdaten sind gültig.",
+          "invalid": "Die folgenden Stripe API Zugangsdaten sind ungültig: {invalidFields}",
+          "error": "Die Validierung der Stripe API Zugangsdaten ist fehlgeschlagen, da folgender Fehler aufgetreten ist: {errorMessage}"
+        },
+        "update-account-country": {
+          "error": "Das Land des Stripe-Accounts konnte nicht automatisch abgerufen werden: {errorMessage}"
+        },
+        "unknown-error": "Unbekannter Fehler"
+      }
+    }
+  }
+}

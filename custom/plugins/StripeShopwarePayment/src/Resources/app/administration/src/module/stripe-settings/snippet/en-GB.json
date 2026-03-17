@@ -1,0 +1,38 @@
+{
+  "stripe-shopware-payment-config-page": {
+    "title": "Stripe",
+    "smart-bar": {
+      "title": "Stripe",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "controller": {
+      "titles": {
+        "success": "Success",
+        "error": "Error"
+      },
+      "messages": {
+        "save": {
+          "success": "The configuration was saved successfully.",
+          "error": "The configuration could not be saved, because the following error occurred: {errorMessage}"
+        },
+        "webhook": {
+          "created": "The Stripe webhook was created successfully.",
+          "updated": "The Stripe webhook was updated successfully.",
+          "error": "The Stripe webhook could not be saved, because the following error occurred: {errorMessage}"
+        },
+        "credentials": {
+          "stripeSecretKey": "Secret Stripe API Key",
+          "stripePublishableKey": "Publishable Stripe API Key",
+          "valid": "The Stripe API Credentials are valid.",
+          "invalid": "The following Stripe API Credentials are invalid: {invalidFields}",
+          "error": "The validation of the Stripe API Credentials failed, because the following error occurred: {errorMessage}"
+        },
+        "update-account-country": {
+          "error": "The country of the Stripe account could not be retrieved automatically: {errorMessage}"
+        },
+        "unknown-error": "Unknown error"
+      }
+    }
+  }
+}

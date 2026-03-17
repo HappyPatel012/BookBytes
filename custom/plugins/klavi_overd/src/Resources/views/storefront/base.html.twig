@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{# Adding Klaviyo script #}
+{% block base_body_script %}
+    {{ parent() }}
+    {# Klaviyo script #}
+    {% block base_body_script_klaviyo_integration %}
+        {% if page.hasExtension('klaviyoIntegrationPluginExtension') %}
+            {% set extensionData = page.getExtension('klaviyoIntegrationPluginExtension') %}
+            {% set options = {'customerIdentityInfo': extensionData.customerIdentity } %}
+            {% set configurationOptions = {
+                'afterInteraction': extensionData.configuration.afterInteraction,
+                'publicApiKey':  extensionData.configuration.publicApiKey|sw_sanitize,
+                'customerId': context.customer.id,
+                'cookieConsent': extensionData.configuration.cookieConsent
+            } %}
+            <div style="display: none;" data-klaviyo-identity-tracking-component=""
+                 data-klaviyo-tracking="true"
+                 data-klaviyo-tracking-options="{{ configurationOptions|json_encode }}"
+                 data-klaviyo-identity-tracking-component-options="{{ options|json_encode }}"
+                 data-klaviyo-plugin-version="{{ extensionData.configuration.versions.composer_version }}"
+                 data-klaviyo-plugin-version-db="{{ extensionData.configuration.versions.db_version }}"
+                 data-klaviyo-shopware-version="{{ extensionData.configuration.shopwareVersion }}"
+            ></div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

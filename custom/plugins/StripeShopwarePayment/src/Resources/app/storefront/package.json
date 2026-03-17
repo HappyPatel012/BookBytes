@@ -1,0 +1,14 @@
+{
+  "name": "@stripe/shopware-payment",
+  "version": "0.1.0",
+  "description": "Stripe payment processing for Shopware 6",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@stripe/stripe-js": "^1.5.0",
+    "regenerator-runtime": "^0.13.11",
+    "jquery": "^3.5.1"
+  },
+  "scripts": {
+  }
+}

@@ -1,0 +1,28 @@
+.stripe-shopware-payment-sepa-bank-account-selection {
+    clear: both;
+
+    .mandate-button {
+        margin-top: 8px;
+    }
+}
+
+.stripe-shopware-payment-sepa-bank-account-selection, .stripe-shopware-payment-card-selection {
+    .custom-select {
+        cursor: pointer;
+        display: inline-block;
+        width: 100%;
+        height: calc(1.5em + 1.125rem + 2px);
+        padding: 0.5625rem 1.5625rem 0.5625rem 0.5625rem;
+        font-size: .875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #4a545b;
+        vertical-align: middle;
+        background-color: #fff;
+        border-radius: 3px;
+    }
+
+    .form-control {
+        height: calc(1.5em + 1.125rem + 2px);
+    }
+}

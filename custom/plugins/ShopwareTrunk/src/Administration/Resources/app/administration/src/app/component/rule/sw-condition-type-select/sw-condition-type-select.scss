@@ -1,9 +1,0 @@
-.sw-condition-type-select {
-    position: relative;
-    height: 100%;
-
-    &.has--error {
-        background-color: var(--color-background-critical-default);
-        border-color: var(--color-border-critical-default);
-    }
-}
