@@ -1,0 +1,2 @@
+const t='<py-base-field :label="label"> <mt-colorpicker class="py-field" v-bind="$attrs" :model-value="validatedValue" @update:modelValue="update" /> </py-base-field>',{Component:a}=Shopware,l=a.wrapComponentConfig({template:t,inheritAttrs:!1,props:{label:{type:String,required:!1,default:void 0},value:{type:String,required:!1,default:null}},emits:["update:value"],computed:{validatedValue(){return this.value??""}},methods:{update(e){this.$emit("update:value",e)}}});export{l as default};
+//# sourceMappingURL=index-DOSF5HzI.js.map

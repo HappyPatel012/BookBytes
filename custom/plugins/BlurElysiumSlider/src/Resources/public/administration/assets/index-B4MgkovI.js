@@ -1,0 +1,2 @@
+const e='<py-base-field :label="label" :layout="layout"> <div v-if="multi"> multi here </div> <sw-entity-single-select v-else class="py-field" v-bind="$attrs" /> </py-base-field>',{Component:l}=Shopware,t=l.wrapComponentConfig({template:e,inheritAttrs:!1,props:{label:{type:String,required:!1,default:void 0},layout:{type:String,required:!1,default:"column"},multi:{type:Boolean,required:!1,default:!1}}});export{t as default};
+//# sourceMappingURL=index-B4MgkovI.js.map

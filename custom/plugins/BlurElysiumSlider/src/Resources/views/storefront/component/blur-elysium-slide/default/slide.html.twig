@@ -1,0 +1,72 @@
+{% use '@BlurElysiumSlider/storefront/component/blur-elysium-slide/includes/container.html.twig' %}
+{% use '@BlurElysiumSlider/storefront/component/blur-elysium-slide/includes/cover-image.html.twig' %}
+{% use '@BlurElysiumSlider/storefront/component/blur-elysium-slide/includes/cover-video.html.twig' %}
+{% use '@BlurElysiumSlider/storefront/component/blur-elysium-slide/includes/link-overlay.html.twig' %}
+
+{% set defaultSlideClasses = [
+    'blur-elysium-slide',
+    'd-flex'
+] %}
+
+{% if showContainerWrapper is not defined %}  
+    {% set showContainerWrapper = false %}
+{% endif %}
+
+{% set headlineTagsWhitelist = [
+    '<br>',
+    '<i>',
+    '<b>',
+    '<u>',
+    '<strong>',
+    '<span>'
+] %}
+
+{% if slideClasses is defined %} 
+    {% set slideClasses = defaultSlideClasses|merge(slideClasses) %}
+{% else %}
+    {% set slideClasses = defaultSlideClasses %}
+{% endif %}
+
+{% set headlineContent = slideData.translated.title|striptags( headlineTagsWhitelist|join ) %}
+{% set descriptionContent = slideData.translated.description %}
+{% set actionMainUrl = slideData.translated.url %}
+{% set showActions = actionMainUrl and slideData.slideSettings.slide.linking.overlay is not same as( true ) %}
+{% set actionMainLabel = slideData.translated.buttonLabel ?? 'blurElysiumSlides.buttonLabel'|trans %}
+
+{% if slideData is null %}
+    <div class="{{ slideClasses|join(' ') }}">
+        No slide data
+    </div>
+{% else %}
+    {% block blur_elysium_slide %}
+
+        <div class="{{ slideClasses|join(' ') }}{% if slideData.slideSettings.slide.cssClass %} {{ slideData.slideSettings.slide.cssClass }}{% endif %}"
+            data-elysium-slide-id="{{ slideData.id }}"
+            style="aspect-ratio: var(--slide-aspect-ratio, auto);">
+
+            {% block blur_elysium_slide_prepend %}{% endblock %}
+            
+            {% block cms_element_blur_elysium_slide_style %}
+                {% sw_include '@Storefront/storefront/component/blur-elysium-slide/includes/style.html.twig' %}
+            {% endblock %}
+
+            {{ block('blur_elysium_slide_cover_image') }}
+            {{ block('blur_elysium_slide_cover_video') }}
+
+            {% block blur_elysium_slide_container_wrapper %}
+                {% if showContainerWrapper is same as(true) %}
+                    <div class="container d-flex blur-elysium-slide-container-wrapper">
+                {% endif %}
+                {{ block('blur_elysium_slide_container') }}
+                {% if showContainerWrapper is same as(true) %}
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {{ block('blur_elysium_slide_link_overlay') }}
+
+            {% block blur_elysium_slide_append %}{% endblock %}
+
+        </div>
+    {% endblock %}
+{% endif %}

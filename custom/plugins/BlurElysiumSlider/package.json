@@ -1,0 +1,29 @@
+{
+  "name": "@elysium-slider/package",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "lint:administration": "eslint --ext .ts,.vue src/Resources/app/administration/src",
+    "lint:administration:fix": "eslint --ext .ts,.vue --fix src/Resources/app/administration/src",
+    "lint:storefront": "eslint --ext .js,.ts,.vue src/Resources/app/storefront/src",
+    "lint:storefront:fix": "eslint --ext .js,.ts,.vue --fix src/Resources/app/storefront/src",
+    "md:changelog": "marked-it-cli ./ --output=./ --overwrite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robert Bisovski",
+  "license": "MIT",
+  "devDependencies": {
+    "@shopware-ag/entity-schema-types": "^5.8.14",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.5.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.19.2"
+  },
+  "dependencies": {
+    "marked-it-cli": "^2.4.5"
+  }
+}

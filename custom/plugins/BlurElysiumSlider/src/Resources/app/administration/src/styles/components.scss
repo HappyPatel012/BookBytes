@@ -1,0 +1,251 @@
+/** mt-card modification utility */
+.mt-card {
+    &.content-no-padding {
+        .mt-card__content {
+            padding: 0;
+        }
+    }
+}
+
+/** Common input styles */
+.blur-text-input,
+.blur-number-input,
+.blur-select-input,
+.blur-colorpicker {
+    .mt-block-field__block {
+        padding: var(--blur-input-block-padding-y, 0px) var(--blur-input-block-padding-x, 8px) !important;
+        border-radius: var(--blur-input-block-radius, 8px) !important;
+        box-shadow: var(--blur-input-block-shadow,
+                1px 1px 3px rgba(51, 68, 91, 0.1)) !important;
+    }
+
+    input {
+        padding: var(--blur-input-field-padding-y, 6px) var(--blur-input-field-padding-x, 8px) !important;
+        line-height: var(--blur-input-lh, 2) !important;
+        background-color: transparent !important;
+        text-overflow: ellipsis;
+    }
+
+    .mt-field__addition {
+        padding: var(--blur-input-inner-padding-y, 6px) var(--blur-input-inner-padding-x, 4px) !important;
+        min-width: auto;
+        background-color: transparent;
+        border: 0 none !important;
+        line-height: 1 !important;
+
+        &.is--prefix {
+            &:empty {
+
+                ~input,
+                ~.mt-select__selection {
+                    --blur-input-field-padding-x: 12px;
+                }
+            }
+        }
+    }
+
+    .mt-field__controls {
+        padding: var(--blur-input-inner-padding-y, 6px) var(--blur-input-inner-padding-x, 4px) !important;
+    }
+
+    &.is--disabled {
+        opacity: 0.5;
+
+        .mt-block-field__block {
+            background-color: var(--color-background-primary-disabled);
+        }
+    }
+}
+
+/** Text input styling **/
+.blur-text-input {
+    input {
+        // padding-top: 8px;
+        // padding-bottom: 8px;
+
+        &::placeholder {
+            color: var(--color-gray-600);
+            font-weight: var(--font-weight-regular);
+        }
+    }
+}
+
+/** Number input styling */
+.blur-number-input {
+    .mt-field__controls {
+        width: auto;
+
+        .mt-icon {
+            color: var(--color-gray-800);
+        }
+    }
+
+    input {
+        // line-height: 1.5 !important;
+        text-align: center;
+        font-weight: var(--font-weight-medium);
+
+        &::placeholder {
+            color: var(--color-gray-600);
+            font-weight: var(--font-weight-regular);
+        }
+    }
+}
+
+/** Entity select styling */
+.blur-entity-select-input {
+    .sw-block-field__block {
+        box-shadow: 0 1px 2px 0 rgba(51, 68, 91, 0.1);
+        border-radius: 8px;
+    }
+
+    .sw-entity-single-select__selection-input {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+        line-height: 1.5;
+    }
+}
+
+/** Select input styling */
+.blur-select-input {
+    --field-block-columns: minmax(0, 1fr);
+
+    &.has-device-indicator {
+        --field-block-columns: auto minmax(0, 1fr);
+    }
+
+    .mt-label {
+        padding: var(--blur-input-field-padding-y, 6px) var(--blur-input-field-padding-x, 8px) !important;
+        font-size: 14px;
+        user-select: none;
+        font-weight: 500;
+        height: auto;
+        line-height: 2;
+        margin: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        max-width: calc(100% - 40px);
+        min-width: auto;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .mt-label__caption,
+    .mt-select-selection-list__item {
+        display: contents;
+    }
+
+    .mt-block-field__block {
+        display: grid;
+        grid-template-columns: var(--field-block-columns);
+        align-items: center;
+    }
+
+    .mt-select__selection {
+        padding: 0;
+    }
+
+    .mt-select-selection-list {
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+        cursor: pointer;
+
+        >li {
+            display: contents;
+            pointer-events: none;
+        }
+    }
+
+    .mt-select-selection-list__input {
+        --blur-input-field-padding-y: 6px;
+        --blur-input-field-padding-x: 8px;
+        flex: 1 0%;
+        font-size: 14px;
+        min-width: auto;
+        min-height: auto !important;
+    }
+
+    .mt-select__selection-indicators {
+        right: 8px;
+    }
+}
+
+/** Colorpicker styling */
+.blur-colorpicker {
+    .mt-colorpicker__input {
+        // padding: 8px;
+        line-height: 1.5;
+    }
+
+    .mt-colorpicker__previewWrapper {
+        border-radius: 99rem;
+    }
+}
+
+/** Switch input styling */
+.blur-switch-input {
+    &.has-padding {
+        --switch-padding: 8px;
+    }
+
+    .mt-field--switch {
+        .mt-field__label label {
+            line-height: 1.5;
+            padding: 0 !important;
+        }
+
+        .mt-field--switch__input {
+            padding: 0;
+            height: auto;
+
+            .mt-field__switch-state {
+                position: relative;
+            }
+        }
+
+        .mt-field--switch__content {
+            gap: 8px;
+            padding: var(--switch-padding, 0px) 0;
+        }
+    }
+}
+
+.elysium-element-badge {
+    position: absolute;
+    z-index: 5;
+    inset: 0 auto auto 0;
+    font-size: 14px;
+    margin: 8px;
+    background-color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    line-height: 1.25;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.elysium-btn {
+    display: inline-flex;
+    padding: var(--btn-padding-y, 6px) var(--btn-padding-x, 10px);
+    border-radius: var(--btn-border-radius, 6px);
+    background-color: var(--btn-bg, var(--color-background-primary-default, #ffffff));
+    color: var(--btn-color, var(--color-text-primary-default, #333333));
+    border: 1px solid var(--btn-border-color, var(--color-border-primary-default, #dddddd));
+    line-height: 1.25;
+    font-size: var(--btn-font-size, 14px);
+    font-weight: var(--btn-font-weight, 600);
+    text-decoration-line: var(--btn-decoration-line, none);
+    transition: all 200ms;
+
+    &:hover {
+        --btn-bg: var(--color-background-tertiary-default, #eeeeee);
+    }
+
+    &.active {
+        --btn-bg: var(--color-interaction-primary-default);
+        --btn-color: var(--color-text-static-default);
+        --btn-border-color: var(--color-interaction-primary-default);
+    }
+}

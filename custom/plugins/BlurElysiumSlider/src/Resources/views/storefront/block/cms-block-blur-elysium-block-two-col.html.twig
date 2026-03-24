@@ -1,0 +1,61 @@
+{% block cms_block_blur_elysium_block_two_col %}
+    {% set blockClasses = [
+        'blur-elysium-block',
+        'two-col',
+        'd-grid'
+    ] %}
+
+    {% if block.customFields.columnStretch is same as(true) %}
+        {% set blockClasses = blockClasses|merge(['align-items-stretch']) %}
+    {% else %}
+        {% set blockClasses = blockClasses|merge(['align-items-start']) %}
+    {% endif %}
+
+    {% block cms_block_blur_elysium_block_two_col_style %}
+        <style>
+            [data-cms-block="{{ block.id }}"] {
+                --columns: minmax(0, 1fr);
+                --gap: 0;
+                grid-template-columns: var(--columns);
+                grid-gap: var(--gap);
+            }
+
+            {% for device, options in block.customFields.viewports %}
+                @media (min-width: {{ theme_config('breakpoint.' ~ blurElysiumBreakpoints[device])~'px' }}) {
+                    [data-cms-block="{{ block.id }}"] {
+                        {% if options.columnWrap is same as(true) %}
+                            --columns: minmax(0, 1fr);
+                        {% else %}
+                            --columns: minmax(0, {{ options.width.colOne}}fr) minmax(0, {{ options.width.colTwo}}fr);
+                        {% endif %}
+                        {% if options.gridGap is not empty %}
+                            --gap: {{ options.gridGap ~ 'px' }};
+                        {% endif %}
+                    }
+                }            
+            {% endfor %}
+        </style>
+    {% endblock %}
+
+    {% block cms_block_blur_elysium_block_two_col_element %}
+        <div class="{{ blockClasses|join(' ') }}" 
+            data-cms-block="{{ block.id }}">
+
+            {% block cms_block_blur_elysium_block_slot_one %}
+                {% set element = block.slots.getSlot('left') %}
+
+                {% block cms_block_blur_elysium_block_slot_one_incldue %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            {% endblock %}
+
+            {% block cms_block_blur_elysium_block_slot_two %}
+                {% set element = block.slots.getSlot('right') %}
+
+                {% block cms_block_blur_elysium_block_slot_two_incldue %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}
