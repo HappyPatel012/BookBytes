@@ -1,0 +1,56 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block utilities_offcanvas_header %}{% endblock %}
+
+{% block utilities_offcanvas_content %}
+    <div class="account-menu bb-account-menu">
+        <div class="bb-account-card">
+            <button class="bb-account-close js-offcanvas-close" type="button" aria-label="{{ 'general.closeMenu'|trans|striptags }}">
+                {% sw_icon 'x' style { size: 'sm' } %}
+            </button>
+
+            <div class="bb-account-top">
+                <div class="bb-account-avatar">
+                    {% if context.customer %}
+                        {{ (context.customer.firstName|default('G'))|first }}{{ (context.customer.lastName|default('R'))|first }}
+                    {% else %}
+                        GR
+                    {% endif %}
+                </div>
+                <div class="bb-account-title">
+                    {% if context.customer and not context.customer.guest %}
+                        {{ 'account.myAccount'|trans|sw_sanitize }}
+                    {% else %}
+                        Guest Reader
+                    {% endif %}
+                </div>
+                <div class="bb-account-subtitle">
+                    Welcome to your sanctuary.
+                </div>
+            </div>
+
+            {% if not context.customer %}
+                <div class="bb-account-actions">
+                    <a href="{{ path('frontend.account.login.page') }}"
+                       title="{{ 'account.loginSubmit'|trans|striptags }}"
+                       class="btn bb-account-login">
+                        {{ 'account.loginSubmit'|trans|sw_sanitize }}
+                    </a>
+                    <div class="bb-account-register">
+                        New here?
+                        <a href="{{ path('frontend.account.login.page') }}"
+                           title="{{ 'account.orRegisterLink'|trans|striptags }}">
+                            {{ 'account.orRegisterLink'|trans|striptags|lower }}
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if context.customer and not context.customer.guest %}
+                <div class="bb-account-links">
+                    {% sw_include '@Storefront/storefront/page/account/sidebar.html.twig' with {headerWidget: true} %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

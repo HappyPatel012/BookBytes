@@ -1,0 +1,78 @@
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{% block layout_header %}
+<header class="bb-header">
+    <div class="container-fluid bb-container">
+        <div class="bb-header-top">
+            <button
+                class="btn bb-menu-toggle header-actions-btn d-lg-none"
+                type="button"
+                data-off-canvas-menu="true"
+                aria-label="{{ 'general.menuLink'|trans|striptags }}"
+            >
+                {% sw_icon 'stack' %}
+            </button>
+
+            <div class="bb-logo">
+                <a class="bb-logo-link" href="{{ path('frontend.home.page') }}">
+                    <img class="bb-logo-image" src="{{ asset('bundles/serenigrin/assets/logo.png') }}" alt="BookBytes" width="140" height="46">
+                </a>
+            </div>
+
+            <div class="bb-search">
+                {% sw_include '@Storefront/storefront/layout/header/search.html.twig' %}
+            </div>
+
+            <div class="bb-actions">
+                <div class="bb-action-item d-sm-none">
+                    <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#searchCollapse"
+                            aria-expanded="false"
+                            aria-controls="searchCollapse"
+                            aria-label="{{ 'header.searchButton'|trans|striptags }}">
+                        {% sw_icon 'search' %}
+                    </button>
+                </div>
+
+                {% if config('core.cart.wishlistEnabled') %}
+                    <div class="bb-action-item">
+                        <a class="btn header-wishlist-btn header-actions-btn"
+                           href="{{ path('frontend.wishlist.page') }}"
+                           title="{{ 'header.wishlist'|trans|striptags }}"
+                           aria-labelledby="wishlist-basket-live-area"
+                        >
+                            {% sw_include '@Storefront/storefront/layout/header/actions/wishlist-widget.html.twig' %}
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="bb-action-item">
+                    {% sw_include '@Storefront/storefront/layout/header/actions/account-widget.html.twig' %}
+                </div>
+
+                {% set offcanvasCartOptions = { autoFocus: true } %}
+                <div class="bb-action-item"
+                     data-off-canvas-cart="true"
+                     data-off-canvas-cart-options="{{ offcanvasCartOptions|json_encode }}">
+                    <a
+                        class="btn header-cart-btn header-actions-btn"
+                        href="{{ path('frontend.checkout.cart.page') }}"
+                        data-cart-widget="true"
+                        title="{{ 'checkout.cartTitle'|trans|striptags }}"
+                        aria-labelledby="cart-widget-aria-label"
+                        aria-haspopup="dialog"
+                    >
+                        {% sw_include '@Storefront/storefront/layout/header/actions/cart-widget.html.twig' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bb-header-nav">
+            {% sw_include '@Storefront/storefront/layout/navbar/navbar.html.twig' with { header: header } %}
+        </div>
+    </div>
+</header>
+{% endblock %}

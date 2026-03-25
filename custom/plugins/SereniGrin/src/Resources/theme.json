@@ -1,0 +1,21 @@
+{
+  "name": "SereniGrin",
+  "author": "Happy Patel",
+  "views": [
+    "@Storefront",
+    "@Plugins",
+    "@SereniGrin"
+  ],
+  "style": [
+    "@Storefront",
+    "app/storefront/src/scss/base.scss"
+  ],
+  "script": [
+    "@Storefront",
+    "app/storefront/dist/storefront/js/sereni-grin/sereni-grin.js"
+  ],
+  "asset": [
+    "@Storefront",
+    "app/storefront/src/assets"
+  ]
+}

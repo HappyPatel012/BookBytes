@@ -1,0 +1,792 @@
+:root {
+    --bb-ink: #1f1a14;
+    --bb-ink-soft: #4b4036;
+    --bb-cream: #f8f3ea;
+    --bb-paper: #fffaf2;
+    --bb-line: #e7ddce;
+    --bb-accent: #5aa6e6;
+}
+
+body {
+    background: radial-gradient(circle at top left, #c9e4ff 0%, #f5fbff 45%, #ffd8d8 100%);
+}
+
+.bb-header {
+    background: #e7e7e7;
+    border-bottom: 1px solid #dbe6f3;
+    box-shadow: 0 6px 20px rgba(15, 53, 83, 0.08);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 30;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.bb-header .bb-container {
+    padding: 14px 36px 12px;
+}
+
+.bb-header-top {
+    display: grid;
+    grid-template-columns: auto minmax(320px, 1fr) auto;
+    align-items: center;
+    gap: 22px;
+}
+
+.bb-menu-toggle {
+    margin-right: 6px;
+}
+
+.bb-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.bb-logo-image {
+    height: 100px;
+    //   width: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
+}
+
+.bb-search .header-search {
+    width: 100%;
+}
+
+.bb-search .header-search-form {
+    width: 100%;
+}
+
+.bb-search .header-search-input {
+    border-radius: 999px 0 0 999px;
+    border-color: #dbe6f3;
+    background: #fff;
+    padding-left: 18px;
+    height: 46px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.header-search-input .header-search-btn .form-control:valid:focus{
+    box-shadow: none !important;
+    border: none;
+}
+
+.bb-search .header-search-btn {
+    border-radius: 0 999px 999px 0 !important;
+    border-color: #dbe6f3;
+    background: #fff;
+    height: 46px;
+}
+
+.bb-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bb-action-item .header-actions-btn {
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 6px 8px;
+    color: #35506a;
+}
+
+.bb-action-item .header-actions-btn:hover {
+    color: #0f3553;
+    border-color: #dbe6f3;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.bb-header-nav {
+    margin-top: 12px;
+    border-top: 1px solid #dbe6f3;
+    position: relative;
+    z-index: 45;
+    padding-bottom: 8px;
+}
+
+.bb-header-nav .container {
+    max-width: 100%;
+    padding: 0 36px;
+}
+
+.bb-header-nav .nav-main {
+    background: transparent;
+    padding-top: 6px;
+    position: relative;
+    z-index: 46;
+}
+
+.bb-header-nav .main-navigation-menu {
+    position: relative;
+    width: 100%;
+}
+
+.bb-header-nav .main-navigation-menu-list {
+    gap: 12px;
+}
+
+.bb-header-nav .main-navigation-link {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #2d4f6c;
+    padding: 8px 12px !important;
+    font-size: 1.1rem;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.bb-header-nav .main-navigation-link:hover,
+.bb-header-nav .main-navigation-link.active,
+.bb-header-nav .main-navigation-link.is-active {
+    color: #0f3553;
+    background: #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 1px 0 rgba(15, 53, 83, 0.08);
+}
+
+.main-navigation-menu .dropdown-menu {
+    border-radius: 14px;
+    border: 1px solid #dbe6f3;
+    box-shadow: 0 18px 36px rgba(15, 53, 83, 0.14);
+    padding: 16px 18px 12px;
+    background: rgba(255, 255, 255, 0.98);
+}
+
+.navigation-flyout-col {
+    border-right: 1px solid #e6eef8;
+}
+
+.navigation-flyout-col:last-child {
+    border-right: 0;
+}
+
+.navigation-flyout-category-link,
+.navigation-flyout-link,
+.navigation-flyout-col a,
+.navigation-flyout-col span {
+    color: #2f4f6b;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+.navigation-flyout-category-link:hover,
+.navigation-flyout-link:hover {
+    color: #0f3553;
+    text-decoration: none;
+}
+
+.navigation-flyout {
+    z-index: 70;
+    top: calc(100% - 4px);
+}
+
+.navigation-flyout-content {
+    z-index: 70;
+}
+
+@media (max-width: 991.98px) {
+    .bb-header-top {
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .bb-header .bb-container {
+        padding: 12px 16px 10px;
+    }
+
+    .bb-header-nav .container {
+        padding: 0 16px;
+    }
+
+    .bb-search {
+        grid-column: 1 / -1;
+    }
+
+    .bb-logo-image {
+        height: 36px;
+    }
+}
+
+/* Footer redesign to match BookBytes theme */
+.footer-main {
+    background: #e7e7e7;
+    color: #2b2b2b;
+    border-top: 1px solid #dbe6f3;
+}
+
+.footer-main .footer-column-headline {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #1f1a14;
+    margin-bottom: 12px;
+}
+
+.footer-main a {
+    color: #2f2a23;
+}
+
+.footer-main a:hover {
+    color: #0f3553;
+    text-decoration: none;
+}
+
+.footer-main .footer-columns {
+    gap: 24px;
+}
+
+.footer-main .footer-logo,
+.footer-main .footer-contact {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.footer-main .footer-contact .footer-contact-headline {
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.footer-main .footer-service-menu,
+.footer-main .footer-social,
+.footer-main .footer-navigation {
+    font-size: 0.95rem;
+}
+
+.footer-main .footer-navigation .footer-link,
+.footer-main .footer-service-menu .footer-link {
+    padding: 4px 0;
+}
+
+.footer-bottom {
+    background: #9a9a9a;
+    color: #0f3553;
+    border-top: 3px ridge #9a9a9af5;
+}
+
+.footer-bottom a {
+    color: #f3ead2;
+}
+
+.footer-bottom a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom .footer-copyright {
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+}
+
+/* Account dropdown (profile menu) */
+.account-menu .dropdown-menu {
+    border-radius: 14px;
+    border: 1px solid #dbe6f3;
+    box-shadow: 0 18px 36px rgba(15, 53, 83, 0.14);
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.98);
+    min-width: 220px;
+}
+
+.account-menu-dropdown {
+    padding: 0px !important;
+    border: none;
+    background: transparent;
+}
+
+.account-menu .dropdown-menu .account-menu-title {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #0f3553;
+    margin-bottom: 8px;
+}
+
+.account-menu .dropdown-menu .account-menu-login,
+.account-menu .dropdown-menu .account-menu-register {
+    border-radius: 999px;
+    padding: 8px 12px;
+}
+
+.account-menu .dropdown-menu .account-menu-login {
+    background: #0f3553;
+    border-color: #0f3553;
+    color: #fff;
+}
+
+.account-menu .dropdown-menu .account-menu-login:hover {
+    background: #0b2b43;
+    border-color: #0b2b43;
+}
+
+.account-menu .dropdown-menu .account-menu-register {
+    background: transparent;
+    border: 1px solid #dbe6f3;
+    color: #2d4f6c;
+}
+
+.account-menu .dropdown-menu .account-menu-register:hover {
+    background: #f2f7ff;
+    color: #0f3553;
+}
+
+.account-menu .dropdown-menu .list-group-item {
+    border: 0;
+    padding: 8px 4px;
+    color: #2f4f6b;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.account-menu .dropdown-menu .list-group-item:hover {
+    color: #0f3553;
+    background: transparent;
+}
+
+.account-menu .dropdown-menu .account-menu-divider {
+    border-color: #dbe6f3;
+    margin: 10px 0;
+}
+
+/* Profile popup redesign (card style) */
+.account-menu .dropdown-menu {
+    border-radius: 18px;
+    border: 1px solid #dbe6f3;
+    box-shadow: 0 22px 44px rgba(15, 53, 83, 0.16);
+    padding: 18px 18px 16px;
+    background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+    min-width: 260px;
+}
+
+.account-menu .dropdown-menu .account-menu-title {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #0f3553;
+    margin: 6px 0 4px;
+}
+
+.account-menu .dropdown-menu .account-menu-hello {
+    font-size: 0.9rem;
+    color: #5b7186;
+    margin-bottom: 10px;
+}
+
+.account-menu .dropdown-menu .account-menu-login,
+.account-menu .dropdown-menu .account-menu-register {
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+.account-menu .dropdown-menu .account-menu-login {
+    background: linear-gradient(135deg, #0f3553 0%, #0b2b43 100%);
+    border-color: #0f3553;
+    color: #fff;
+    font-weight: 600;
+}
+
+.account-menu .dropdown-menu .account-menu-login:hover {
+    filter: brightness(0.95);
+}
+
+.account-menu .dropdown-menu .account-menu-register {
+    background: transparent;
+    border: 1px solid #dbe6f3;
+    color: #2d4f6c;
+}
+
+.account-menu .dropdown-menu .account-menu-register:hover {
+    background: #f2f7ff;
+    color: #0f3553;
+}
+
+.account-menu .dropdown-menu .list-group-item {
+    border: 0;
+    padding: 10px 8px;
+    color: #2f4f6b;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    border-radius: 10px;
+}
+
+.account-menu .dropdown-menu .list-group-item:hover {
+    color: #0f3553;
+    background: #eef4ff;
+}
+
+.account-menu .dropdown-menu .account-menu-divider {
+    border-color: #dbe6f3;
+    margin: 12px 0;
+}
+
+/* BookBytes account menu (profile popup) */
+.bb-account-menu .bb-account-card {
+    border-radius: 18px;
+    border: 1px solid #dbe6f3;
+    box-shadow: 0 22px 44px rgba(15, 53, 83, 0.16);
+    padding: 18px;
+    background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+    min-width: 260px;
+}
+
+.bb-account-top {
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.bb-account-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #0f3553;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+}
+
+.bb-account-title {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: 700;
+    color: #0f3553;
+    font-size: 1.05rem;
+}
+
+.bb-account-subtitle {
+    color: #5b7186;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.bb-account-actions {
+    margin: 10px 0 14px;
+}
+
+.bb-account-login {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: linear-gradient(135deg, #0f3553 0%, #0b2b43 100%);
+    border: 1px solid #0f3553;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+}
+
+.bb-account-login:hover {
+    filter: brightness(0.95);
+    color: #fff;
+}
+
+.bb-account-register {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #5b7186;
+    text-align: center;
+}
+
+.bb-account-register a {
+    color: #0f3553;
+    font-weight: 600;
+}
+
+.bb-account-links .list-group-item {
+    border: 0;
+    padding: 10px 8px;
+    color: #2f4f6b;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    border-radius: 10px;
+}
+
+.bb-account-links .list-group-item:hover {
+    color: #0f3553;
+    background: #eef4ff;
+}
+
+/* Refined profile popup */
+.bb-account-card {
+    position: relative;
+}
+
+.bb-account-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #2d4f6c;
+}
+
+.bb-account-close:hover {
+    background: #eef4ff;
+    color: #0f3553;
+}
+
+.bb-account-links .header-account-menu .card {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.bb-account-links .account-aside-list-group {
+    margin: 0;
+}
+
+.bb-account-links .account-aside-item.is-active,
+.bb-account-links .account-aside-item:hover {
+    background: #0f3553;
+    color: #ffffff;
+}
+
+.bb-account-links .account-aside-item.is-active {
+    box-shadow: 0 6px 14px rgba(15, 53, 83, 0.16);
+}
+
+.bb-account-links .account-aside-footer {
+    border-top: 1px solid #e7eef7;
+    margin-top: 10px;
+    padding-top: 8px;
+}
+
+.bb-account-links .account-aside-btn {
+    color: #2f4f6b;
+    font-weight: 600;
+}
+
+.bb-account-links .account-aside-btn:hover {
+    color: #0f3553;
+}
+/* Account overview page – BookBytes theme */
+.account-overview {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  color: #23384d;
+}
+
+.account-overview h1,
+.account-overview h2,
+.account-overview h3 {
+  color: #0f3553;
+  letter-spacing: 0.02em;
+}
+
+.account-overview .account-welcome {
+  background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+  border: 1px solid #dbe6f3;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+}
+
+.account-overview .account-overview-card {
+  background: #ffffff;
+  border: 1px solid #dbe6f3;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+}
+
+.account-overview .account-overview-card .card-header,
+.account-overview .account-overview-card .card-body,
+.account-overview .account-overview-card .card-footer {
+  border-color: #e7eef7;
+}
+
+.account-overview .card-col {
+  margin-bottom: 18px;
+}
+
+.account-overview .account-overview-profile .card-body p,
+.account-overview .account-overview-newsletter .card-body p,
+.account-overview .account-overview-newest-order .card-body p {
+  color: #4e6377;
+}
+
+.account-overview .btn {
+  border-radius: 10px;
+}
+
+.account-overview .btn-primary {
+  background: #0f3553;
+  border-color: #0f3553;
+}
+
+.account-overview .btn-primary:hover {
+  background: #0b2b43;
+  border-color: #0b2b43;
+}
+
+.account-aside {
+  background: #ffffff;
+  border: 1px solid #dbe6f3;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+}
+
+.account-aside .account-aside-header {
+  background: #f6f9ff;
+  border-bottom: 1px solid #e7eef7;
+  color: #0f3553;
+  font-weight: 700;
+}
+
+.account-aside .account-aside-item {
+  border: 0;
+  color: #2f4f6b;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.account-aside .account-aside-item:hover,
+.account-aside .account-aside-item.is-active {
+  background: #0f3553;
+  color: #ffffff;
+}
+
+.account-aside .account-aside-footer {
+  border-top: 1px solid #e7eef7;
+}
+
+.account-aside .account-aside-btn {
+  color: #2f4f6b;
+  font-weight: 600;
+}
+
+.account-aside .account-aside-btn:hover {
+  color: #0f3553;
+}
+
+.account-orders-overview .order-item {
+  border: 1px solid #e7eef7;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(15, 53, 83, 0.06);
+}
+
+.account-orders-overview .order-item:hover {
+  border-color: #cfe1f5;
+}
+
+.account-overview .address-card,
+.account-overview .overview-billing-address .card,
+.account-overview .overview-shipping-address .card {
+  border-radius: 14px;
+}
+
+/* Custom account overview layout */
+.bb-account-overview {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  color: #23384d;
+}
+
+.bb-account-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+  border: 1px solid #dbe6f3;
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+  margin-bottom: 18px;
+}
+
+.bb-hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  color: #5b7186;
+}
+
+.bb-hero-title {
+  margin: 6px 0 4px;
+  color: #0f3553;
+}
+
+.bb-hero-subtitle {
+  color: #4e6377;
+  margin: 0;
+}
+
+.bb-hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bb-hero-actions .btn {
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+
+.bb-hero-actions .bb-ghost {
+  border: 1px solid #dbe6f3;
+  color: #2d4f6c;
+  background: #ffffff;
+}
+
+.bb-hero-actions .bb-ghost:hover {
+  background: #eef4ff;
+  color: #0f3553;
+}
+
+.bb-hero-actions .bb-primary {
+  background: #0f3553;
+  border: 1px solid #0f3553;
+  color: #ffffff;
+}
+
+.bb-hero-actions .bb-primary:hover {
+  background: #0b2b43;
+  border-color: #0b2b43;
+}
+
+.bb-account-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.bb-card {
+  background: #ffffff;
+  border: 1px solid #dbe6f3;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+}
+
+.bb-card-head {
+  padding: 14px 16px 0;
+  font-weight: 700;
+  color: #0f3553;
+}
+
+.bb-card-body {
+  padding: 12px 16px 16px;
+  color: #4e6377;
+}
+
+.bb-card.bb-full {
+  margin-bottom: 18px;
+}
+
+.bb-muted {
+  color: #5b7186;
+}
+
+@media (max-width: 991.98px) {
+  .bb-account-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bb-account-grid {
+    grid-template-columns: 1fr;
+  }
+}

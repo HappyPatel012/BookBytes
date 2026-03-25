@@ -1,0 +1,21 @@
+{
+  "name": "custom/serenigrin",
+  "description": "SereniGrin custom theme for Shopware 6",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "require": {
+    "shopware/core": "*"
+  },
+  "extra": {
+    "shopware-plugin-class": "SereniGrin\\SereniGrin",
+    "label": {
+      "en-GB": "SereniGrin",
+      "de-DE": "SereniGrin"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "SereniGrin\\": "src/"
+    }
+  }
+}

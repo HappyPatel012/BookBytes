@@ -1,0 +1,96 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% block page_account_main_content %}
+    {% block page_account_overview %}
+        <div class="bb-account-overview">
+            {% block page_account_overview_shipping_warning %}
+                {% set ableToShipToShippingCountry = context.customer.defaultShippingAddress.country.shippingAvailable %}
+
+                {% if not ableToShipToShippingCountry %}
+                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                        type: 'warning',
+                        content: 'account.overviewNotAbleToShip'|trans|sw_sanitize,
+                        announceOnLoad: true
+                    } %}
+                {% endif %}
+            {% endblock %}
+
+            {% block page_account_overview_request_group_info %}
+                {% if page.customer.requestedGroup %}
+                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                        type: 'info',
+                        content: 'account.overviewCustomerGroupRequest'|trans({
+                            '%group%': page.customer.requestedGroup.translated.name
+                        }),
+                        announceOnLoad: true
+                    } %}
+                {% endif %}
+            {% endblock %}
+
+            <section class="bb-account-hero">
+                <div class="bb-hero-text">
+                    <div class="bb-hero-kicker">BookBytes · Your reading sanctuary</div>
+                    <h1 class="bb-hero-title">Overview</h1>
+                    <p class="bb-hero-subtitle">Manage your profile, addresses and orders in one place.</p>
+                </div>
+                <div class="bb-hero-actions">
+                    <a class="btn bb-ghost" href="{{ path('frontend.account.profile.page') }}">Your Profile</a>
+                    <a class="btn bb-ghost" href="{{ path('frontend.account.address.page') }}">Addresses</a>
+                    <a class="btn bb-primary" href="{{ path('frontend.account.order.page') }}">Orders</a>
+                </div>
+            </section>
+
+            <section class="bb-account-grid">
+                <div class="bb-card">
+                    <div class="bb-card-head">Personal data</div>
+                    <div class="bb-card-body">
+                        <p>
+                            {% if context.customer.salutation and context.customer.salutation.salutationKey != 'not_specified' %}
+                                {{ context.customer.salutation.translated.displayName }}
+                            {% endif %}
+                            {% if context.customer.title %}
+                                {{ context.customer.title }}<br>
+                            {% endif %}
+                            {{ context.customer.firstName }} {{ context.customer.lastName }}
+                        </p>
+                        {% sw_include '@Storefront/storefront/component/account/customer-overview-personal-company.html.twig' with {
+                            customer: context.customer,
+                        } %}
+                        <p class="bb-muted">{{ context.customer.email|decodeIdnEmail }}</p>
+                    </div>
+                </div>
+
+                <div class="bb-card">
+                    <div class="bb-card-head">Newsletter</div>
+                    <div class="bb-card-body">
+                        <div class="js-newsletter-wrapper">
+                            {% sw_include '@Storefront/storefront/page/account/newsletter.html.twig' with { newsletterAccountPagelet: page.getNewsletterAccountPagelet() } %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bb-card bb-full">
+                <div class="bb-card-head">Addresses</div>
+                <div class="bb-card-body">
+                    {% sw_include '@Storefront/storefront/page/account/address.html.twig' %}
+                </div>
+            </section>
+
+            {% if page.newestOrder %}
+                <section class="bb-card bb-full">
+                    <div class="bb-card-head">Last order</div>
+                    <div class="bb-card-body">
+                        <div class="order-table">
+                            <div class="order-table-body" data-order-detail-loader="true">
+                                {% sw_include '@Storefront/storefront/page/account/order-history/order-item.html.twig' with {
+                                    order: page.newestOrder
+                                } %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endblock %}
