@@ -8,7 +8,7 @@
 }
 
 body {
-    background: radial-gradient(circle at top left, #c9e4ff 0%, #f5fbff 45%, #ffd8d8 100%);
+    background: radial-gradient(circle at top left, #151515 0%, #e7e7e7 45%, #151515 100%);
 }
 
 .bb-header {
@@ -67,7 +67,7 @@ body {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-.header-search-input .header-search-btn .form-control:valid:focus{
+.header-search-input .header-search-btn .form-control:valid:focus {
     box-shadow: none !important;
     border: none;
 }
@@ -564,229 +564,992 @@ body {
 .bb-account-links .account-aside-btn:hover {
     color: #0f3553;
 }
+
 /* Account overview page – BookBytes theme */
 .account-overview {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  color: #23384d;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: #23384d;
 }
 
 .account-overview h1,
 .account-overview h2,
 .account-overview h3 {
-  color: #0f3553;
-  letter-spacing: 0.02em;
+    color: #0f3553;
+    letter-spacing: 0.02em;
 }
 
 .account-overview .account-welcome {
-  background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
-  border: 1px solid #dbe6f3;
-  border-radius: 16px;
-  padding: 18px 20px;
-  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+    background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+    border: 1px solid #dbe6f3;
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
 }
 
 .account-overview .account-overview-card {
-  background: #ffffff;
-  border: 1px solid #dbe6f3;
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
 }
 
 .account-overview .account-overview-card .card-header,
 .account-overview .account-overview-card .card-body,
 .account-overview .account-overview-card .card-footer {
-  border-color: #e7eef7;
+    border-color: #e7eef7;
 }
 
 .account-overview .card-col {
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
 .account-overview .account-overview-profile .card-body p,
 .account-overview .account-overview-newsletter .card-body p,
 .account-overview .account-overview-newest-order .card-body p {
-  color: #4e6377;
+    color: #4e6377;
 }
 
 .account-overview .btn {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 .account-overview .btn-primary {
-  background: #0f3553;
-  border-color: #0f3553;
+    background: #0f3553;
+    border-color: #0f3553;
 }
 
 .account-overview .btn-primary:hover {
-  background: #0b2b43;
-  border-color: #0b2b43;
+    background: #0b2b43;
+    border-color: #0b2b43;
 }
 
 .account-aside {
-  background: #ffffff;
-  border: 1px solid #dbe6f3;
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
 }
 
 .account-aside .account-aside-header {
-  background: #f6f9ff;
-  border-bottom: 1px solid #e7eef7;
-  color: #0f3553;
-  font-weight: 700;
+    background: #f6f9ff;
+    border-bottom: 1px solid #e7eef7;
+    color: #0f3553;
+    font-weight: 700;
 }
 
 .account-aside .account-aside-item {
-  border: 0;
-  color: #2f4f6b;
-  border-radius: 10px;
-  padding: 10px 12px;
+    border: 0;
+    color: #2f4f6b;
+    border-radius: 10px;
+    padding: 10px 12px;
 }
 
 .account-aside .account-aside-item:hover,
 .account-aside .account-aside-item.is-active {
-  background: #0f3553;
-  color: #ffffff;
+    background: #0f3553;
+    color: #ffffff;
 }
 
 .account-aside .account-aside-footer {
-  border-top: 1px solid #e7eef7;
+    border-top: 1px solid #e7eef7;
 }
 
 .account-aside .account-aside-btn {
-  color: #2f4f6b;
-  font-weight: 600;
+    color: #2f4f6b;
+    font-weight: 600;
 }
 
 .account-aside .account-aside-btn:hover {
-  color: #0f3553;
+    color: #0f3553;
 }
 
 .account-orders-overview .order-item {
-  border: 1px solid #e7eef7;
-  border-radius: 14px;
-  box-shadow: 0 8px 18px rgba(15, 53, 83, 0.06);
+    border: 1px solid #e7eef7;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(15, 53, 83, 0.06);
 }
 
 .account-orders-overview .order-item:hover {
-  border-color: #cfe1f5;
+    border-color: #cfe1f5;
 }
 
 .account-overview .address-card,
 .account-overview .overview-billing-address .card,
 .account-overview .overview-shipping-address .card {
-  border-radius: 14px;
+    border-radius: 14px;
 }
 
 /* Custom account overview layout */
 .bb-account-overview {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  color: #23384d;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: #23384d;
 }
 
 .bb-account-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
-  border: 1px solid #dbe6f3;
-  border-radius: 18px;
-  padding: 22px 24px;
-  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
-  margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+    border: 1px solid #dbe6f3;
+    border-radius: 18px;
+    padding: 22px 24px;
+    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+    margin-bottom: 18px;
 }
 
 .bb-hero-kicker {
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.7rem;
-  color: #5b7186;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.7rem;
+    color: #5b7186;
 }
 
 .bb-hero-title {
-  margin: 6px 0 4px;
-  color: #0f3553;
+    margin: 6px 0 4px;
+    color: #0f3553;
 }
 
 .bb-hero-subtitle {
-  color: #4e6377;
-  margin: 0;
+    color: #4e6377;
+    margin: 0;
 }
 
 .bb-hero-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .bb-hero-actions .btn {
-  border-radius: 999px;
-  padding: 8px 16px;
+    border-radius: 999px;
+    padding: 8px 16px;
 }
 
 .bb-hero-actions .bb-ghost {
-  border: 1px solid #dbe6f3;
-  color: #2d4f6c;
-  background: #ffffff;
+    border: 1px solid #dbe6f3;
+    color: #2d4f6c;
+    background: #ffffff;
 }
 
 .bb-hero-actions .bb-ghost:hover {
-  background: #eef4ff;
-  color: #0f3553;
+    background: #eef4ff;
+    color: #0f3553;
 }
 
 .bb-hero-actions .bb-primary {
-  background: #0f3553;
-  border: 1px solid #0f3553;
-  color: #ffffff;
+    background: #0f3553;
+    border: 1px solid #0f3553;
+    color: #ffffff;
 }
 
 .bb-hero-actions .bb-primary:hover {
-  background: #0b2b43;
-  border-color: #0b2b43;
+    background: #0b2b43;
+    border-color: #0b2b43;
 }
 
 .bb-account-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-bottom: 18px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 18px;
 }
 
 .bb-card {
-  background: #ffffff;
-  border: 1px solid #dbe6f3;
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
 }
 
 .bb-card-head {
-  padding: 14px 16px 0;
-  font-weight: 700;
-  color: #0f3553;
+    padding: 14px 16px 0;
+    font-weight: 700;
+    color: #0f3553;
 }
 
 .bb-card-body {
-  padding: 12px 16px 16px;
-  color: #4e6377;
+    padding: 12px 16px 16px;
+    color: #4e6377;
 }
 
 .bb-card.bb-full {
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
 .bb-muted {
-  color: #5b7186;
+    color: #5b7186;
 }
 
 @media (max-width: 991.98px) {
-  .bb-account-hero {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .bb-account-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .bb-account-grid {
-    grid-template-columns: 1fr;
-  }
+    .bb-account-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Product listing card redesign */
+.product-box .card {
+    border-radius: 18px;
+    border: 1px solid #dbe6f3;
+    box-shadow: 0 14px 28px rgba(15, 53, 83, 0.12);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #ffffff;
+}
+
+.product-box .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 36px rgba(15, 53, 83, 0.16);
+}
+
+.product-box .product-image-wrapper {
+    background: #f4f8ff;
+    border-bottom: 1px solid #e7eef7;
+}
+
+.product-image-wrapper {
+    background: transparent !important;
+}
+
+.product-box .product-image {
+    padding: 18px;
+}
+
+.product-box .product-name {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1rem;
+    color: #0f3553;
+}
+
+.product-box .product-price {
+    font-weight: 700;
+    color: #0f3553;
+}
+
+.product-box .product-price.with-list-price {
+    color: #0f3553;
+}
+
+.product-box .list-price {
+    color: #6b7f91;
+}
+
+.product-box .product-rating {
+    margin-bottom: 6px;
+}
+
+.product-box .product-badges {
+    top: 12px;
+    left: 12px;
+}
+
+.product-box .product-wishlist {
+    right: 12px;
+    top: 12px;
+}
+
+.product-box .product-wishlist-btn {
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    border-radius: 999px;
+    box-shadow: 0 6px 14px rgba(15, 53, 83, 0.12);
+}
+
+.product-box .btn-buy {
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0f3553 0%, #0b2b43 100%);
+    border: 0;
+    font-weight: 600;
+}
+
+.product-box .btn-buy:hover {
+    filter: brightness(0.95);
+}
+
+/* Product listing card – BookBytes */
+.bb-product-card {
+    border: 1px solid #dbe6f3;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 14px 28px rgba(15, 53, 83, 0.10);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bb-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(15, 53, 83, 0.16);
+}
+
+.bb-product-card .card-body {
+    padding: 16px;
+}
+
+.bb-product-media {
+    position: relative;
+    background: #f3f7ff;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.bb-product-media .product-image {
+    max-height: 220px;
+}
+
+.bb-wishlist {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+}
+
+.bb-product-brand {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.68rem;
+    color: #5b7186;
+    margin-bottom: 6px;
+}
+
+.bb-product-title {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1rem;
+    color: #0f3553;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.bb-product-rating {
+    margin-bottom: 10px;
+}
+
+.bb-product-price {
+    font-weight: 700;
+    color: #0f3553;
+    margin: 8px 0 12px;
+}
+
+.bb-product-actions .btn {
+    border-radius: 999px;
+    padding: 8px 14px;
+}
+
+.bb-product-actions .btn-primary {
+    background: #0f3553;
+    border-color: #0f3553;
+}
+
+.bb-product-actions .btn-primary:hover {
+    background: #0b2b43;
+    border-color: #0b2b43;
+}
+
+.bb-product-actions .btn-light {
+    background: #f2f6ff;
+    border-color: #dbe6f3;
+}
+
+/* Product card – compact bookstore style */
+.bb-product-card {
+    border: 1px solid #dbe6f3;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 22px rgba(15, 53, 83, 0.08);
+    overflow: hidden;
+}
+
+.bb-product-card .card-body {
+    padding: 14px;
+}
+
+.bb-product-media {
+    position: relative;
+    background: #f6f9ff;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.bb-product-media .product-image {
+    max-height: 190px;
+}
+
+.bb-product-brand {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.65rem;
+    color: #5b7186;
+    margin-bottom: 6px;
+}
+
+.bb-product-title {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 0.98rem;
+    color: #0f3553;
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+.bb-product-price {
+    font-weight: 700;
+    color: #0f3553;
+    margin: 6px 0 10px;
+}
+
+.bb-product-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.bb-product-actions .btn {
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 0.88rem;
+}
+
+.bb-product-actions .btn-primary {
+    background: #0f3553;
+    border-color: #0f3553;
+}
+
+.bb-product-actions .btn-primary:hover {
+    background: #0b2b43;
+    border-color: #0b2b43;
+}
+
+.bb-buy-now {
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    color: #2d4f6c;
+}
+
+.bb-buy-now:hover {
+    background: #eef4ff;
+    color: #0f3553;
+}
+
+/* Wishlist count badge in header */
+.header-wishlist {
+    position: relative;
+}
+
+.header-wishlist-icon svg {
+    color: #0f3553;
+}
+
+.header-wishlist-badge {
+    position: absolute !important;
+    top: 0px !important;
+    right: -0.25rem;
+    background: #111111;
+    color: #f7e7d2;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(15, 53, 83, 0.2);
+}
+
+/* Wishlist icon + badge to match reference */
+.header-wishlist-icon svg {
+    color: #1a1a1a;
+}
+
+/* Final wishlist badge override */
+.header-wishlist {
+    position: relative;
+}
+
+.header-wishlist-icon svg {
+    color: #111111 !important;
+}
+
+
+
+/* Cart page – BookBytes layout */
+.bb-cart {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.bb-cart-header {
+    margin-bottom: 16px;
+}
+
+.bb-cart-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.7rem;
+    color: #5b7186;
+}
+
+.bb-cart-title {
+    color: #0f3553;
+    margin: 6px 0 4px;
+}
+
+.bb-cart-subtitle {
+    color: #4e6377;
+    margin: 0;
+}
+
+.bb-cart-list {
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+}
+
+.bb-cart-list .line-item {
+    border-bottom: 1px solid #e7eef7;
+    padding: 14px 8px;
+}
+
+.bb-cart-list .line-item:last-child {
+    border-bottom: 0;
+}
+
+// .bb-cart-aside {
+//     background: #ffffff;
+//     border: 1px solid #dbe6f3;
+//     border-radius: 18px;
+//     padding: 16px;
+//     box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+// }
+
+.bb-cart-summary-card{
+    background: transparent !important;
+    border: none;
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+}
+
+.bb-summary-head {
+    font-weight: 700;
+    color: #0f3553;
+    margin-bottom: 8px;
+}
+
+.bb-summary-actions .btn-primary {
+    background: #0f3553;
+    border-color: #0f3553;
+}
+
+.bb-summary-actions .btn-primary:hover {
+    background: #0b2b43;
+    border-color: #0b2b43;
+}
+
+/* Cart page – unique BookBytes styling */
+
+.bb-cart {
+    padding: 10px 0 20px;
+
+}
+
+.bb-cart-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.bb-cart-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.68rem;
+    color: #5b7186;
+}
+
+.bb-cart-title {
+    font-size: 2rem;
+    color: #0f3553;
+}
+
+.bb-cart-subtitle {
+    color: #4e6377;
+}
+
+.bb-cart-list {
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 16px 32px rgba(15, 53, 83, 0.10);
+}
+
+.bb-cart-list .line-item {
+    border-bottom: 1px solid #e7eef7;
+    padding: 18px 8px;
+}
+
+.bb-cart-list .line-item:last-child {
+    border-bottom: 0;
+}
+
+.bb-cart-list .line-item-img-container img {
+    border-radius: 12px;
+    background: #f6f9ff;
+    padding: 8px;
+}
+
+.bb-cart-list .line-item-label {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: #0f3553;
+    font-weight: 700;
+}
+
+.bb-cart-list .line-item-quantity-select {
+    border-radius: 10px;
+    border-color: #dbe6f3;
+}
+
+.bb-summary-head {
+    font-weight: 700;
+    color: #0f3553;
+    margin-bottom: 10px;
+}
+
+.checkout-aside-summary-list-container .summary-total {
+    font-size: 1.1rem;
+    color: #0f3553;
+}
+
+.checkout-aside-summary-total {
+    border-top: 5px solid #d5d5d5;
+}
+
+.bb-summary-actions .btn-primary {
+    background: #0f3553;
+    border-color: #0f3553;
+    border-radius: 999px;
+}
+
+.bb-summary-actions .btn-primary:hover {
+    background: #0b2b43;
+    border-color: #0b2b43;
+}
+
+@media (max-width: 991.98px) {
+    .bb-cart-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Order summary card positioning and UI */
+.bb-cart-aside {
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+
+
+.bb-summary-head {
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0f3553;
+}
+
+.checkout-aside-summary-list-container {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #e7eef7;
+    padding: 12px 14px;
+}
+
+.checkout-aside-summary-list-container .summary-total {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #0f3553;
+}
+
+.checkout-aside-summary-list-container .summary-value {
+    color: #2d4f6c;
+}
+
+/* Force cart layout: summary aligned with cart list */
+.checkout-container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 24px;
+    align-items: start;
+}
+
+.checkout-main {
+    width: 100% !important;
+}
+
+.checkout-aside {
+    width: 100%;
+    margin-top: 0 !important;
+}
+
+@media (max-width: 991.98px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Fix summary card width and alignment */
+.checkout-container {
+    grid-template-columns: minmax(0, 1fr) 420px;
+}
+
+.bb-cart-summary-card {
+    min-width: 420px;
+}
+
+.checkout-aside-summary-list-container .summary-row,
+.checkout-aside-summary-list-container .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.checkout-aside-summary-list-container .summary-label {
+    white-space: nowrap;
+}
+
+.checkout-aside-summary-list-container .summary-value {
+    white-space: nowrap;
+    text-align: right;
+}
+
+.checkout-aside-add-code {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+@media (max-width: 991.98px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+
+    .bb-cart-summary-card {
+        min-width: 0;
+    }
+}
+
+/* Revert summary positioning (moveable as before), keep new card design */
+.checkout-container {
+    display: block !important;
+}
+
+.bb-cart-aside {
+    position: static !important;
+    top: auto !important;
+}
+
+.bb-cart-summary-card {
+    min-width: 0 !important;
+}
+
+/* Place summary beside cart list (no sticky) */
+.checkout-container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 24px;
+    align-items: start;
+}
+
+.bb-cart-aside {
+    position: static !important;
+    top: auto !important;
+}
+
+@media (max-width: 991.98px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.checkout-container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 28px;
+    align-items: start;
+}
+
+.bb-cart-list {
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: 0 14px 28px rgba(15, 53, 83, 0.10);
+}
+
+.bb-cart-list .line-item {
+    border-bottom: 1px solid #e7eef7;
+    padding: 16px 10px;
+}
+
+.bb-cart-list .line-item:last-child {
+    border-bottom: 0;
+}
+
+.bb-cart-aside {
+    width: 100%;
+    position: static !important;
+}
+
+
+.bb-summary-head {
+    font-weight: 700;
+    color: #0f3553;
+    margin-bottom: 10px;
+}
+
+.checkout-aside-summary-list-container {
+    background: #ffffff;
+    border: 1px solid #e7eef7;
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+
+.checkout-aside-summary-list-container .summary-row,
+.checkout-aside-summary-list-container .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkout-aside-summary-list-container .summary-label,
+.checkout-aside-summary-list-container .summary-value {
+    white-space: nowrap;
+}
+
+.bb-summary-actions .btn-primary {
+    border-radius: 999px;
+    background: #0f3553;
+    border-color: #0f3553;
+}
+
+.bb-summary-actions .btn-primary:hover {
+    background: #0b2b43;
+    border-color: #0b2b43;
+}
+
+@media (max-width: 991.98px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Fix summary list overlap */
+.checkout-aside-summary-list {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    row-gap: 8px;
+    column-gap: 12px;
+}
+
+.checkout-aside-summary-list dt,
+.checkout-aside-summary-list dd {
+    margin: 0 !important;
+    width: auto !important;
+}
+
+.checkout-aside-summary-list dd {
+    text-align: right;
+}
+
+/* FINAL cart summary layout fix */
+.bb-cart-aside .checkout-aside-summary-list {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    row-gap: 10px !important;
+    column-gap: 14px !important;
+}
+
+.bb-cart-aside .checkout-aside-summary-list dt,
+.bb-cart-aside .checkout-aside-summary-list dd {
+    margin: 0 !important;
+    width: auto !important;
+}
+
+.bb-cart-aside .checkout-aside-summary-list dd {
+    text-align: right !important;
+}
+
+.bb-cart-aside .checkout-aside-summary-list .row {
+    display: contents !important;
+}
+
+/* Cart UI sizing fixes */
+.bb-cart-list {
+    max-width: 100%;
+}
+
+.bb-cart-aside .bb-cart-summary-card {
+    width: 360px;
+    max-width: auto !important;
+}
+
+.bb-cart-aside .checkout-aside-summary-list {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    row-gap: 10px !important;
+    column-gap: 14px !important;
+}
+
+.bb-cart-aside .checkout-aside-summary-list dt,
+.bb-cart-aside .checkout-aside-summary-list dd {
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.bb-cart-aside .checkout-aside-summary-list dd {
+    text-align: right !important;
+}
+
+.bb-cart-aside .checkout-aside-add-code input.form-control {
+    width: 100% !important;
+}
+
+.bb-cart-aside .checkout-aside-add-code .checkout-aside-add-promotion-button {
+    width: auto;
+}
+
+.d-grid{
+    margin-top: 3%;
+}
+
+.book-tabs {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    border: none;
+    background: none;
+    margin: 0 15px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #777;
+}
+
+.tab-btn.active {
+    color: #c0392b;
+    border-bottom: 2px solid #c0392b;
+}
+
+.tab-content {
+    margin-top: 20px;
 }

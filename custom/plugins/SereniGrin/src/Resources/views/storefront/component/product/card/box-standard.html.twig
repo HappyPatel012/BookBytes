@@ -1,0 +1,96 @@
+{% block component_product_box %}
+    {% if product %}
+        {% set id = product.id %}
+        {% set name = product.translated.name %}
+        {% set brand = product.manufacturer.translated.name|default('') %}
+        {% set price = product.calculatedPrice.unitPrice %}
+
+        {% set cover = product.cover.media %}
+        {% set headlineLevel = element.config.boxHeadlineLevel.value %}
+        {% set headlineClasses = "product-name-headline mb-0" %}
+
+        {% set searchTerm = page.searchTerm %}
+        {% set childCount = product.childCount %}
+        {% set routeArguments = childCount > 0 and searchTerm ? { productId: id, search: searchTerm } : { productId: id } %}
+
+        <div class="card product-box box-{{ layout }} bb-product-card" data-product-information="{{ {id, name, brand, price}|json_encode }}">
+            <div class="card-body">
+                <div class="bb-product-media">
+                    {% sw_include '@Storefront/storefront/component/product/card/badges.html.twig' %}
+
+                    <div class="product-image-wrapper">
+                        {% set displayMode = displayMode ?: 'standard' %}
+                        {% if layout == 'image' and displayMode == 'standard' %}
+                            {% set displayMode = 'cover' %}
+                        {% endif %}
+
+                        {% if cover.url and cover.isSpatialObject() == false %}
+                            {% set attributes = {
+                                class: 'product-image is-' ~ displayMode,
+                                title: (cover.translated.title ?: name)
+                            } %}
+
+                            {% if cover.getMediaType().getName() == 'VIDEO' %}
+                                {% if config('core.listing.autoplayVideoInListing') %}
+                                    {% set attributes = attributes|merge({ autoplay: true, loop: true }) %}
+                                {% endif %}
+                                {% sw_include '@Storefront/storefront/utilities/video.html.twig' with { media: cover, attributes: attributes } %}
+                            {% else %}
+                                {% set attributes = attributes|merge({ alt: (cover.translated.alt ?: name), loading: 'lazy' }) %}
+                                {% if displayMode == 'cover' or displayMode == 'contain' %}
+                                    {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+                                {% endif %}
+                                {% sw_thumbnails 'product-image-thumbnails' with { media: cover, sizes: sizes, attributes: attributes } %}
+                            {% endif %}
+                        {% else %}
+                            <div class="product-image-placeholder">
+                                {% sw_icon 'placeholder' style { size: 'fluid' } %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {% if config('core.cart.wishlistEnabled') %}
+                        <div class="bb-wishlist">
+                            {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                                appearance: 'circle',
+                                productId: id
+                            } %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="bb-product-info">
+                    {% if brand %}
+                        <div class="bb-product-brand">{{ brand }}</div>
+                    {% endif %}
+
+                    {% if headlineLevel is not empty %}
+                        {{ "<h#{headlineLevel} class=\"#{headlineClasses} bb-product-title\">"|raw }}
+                            <a href="{{ seoUrl('frontend.detail.page', routeArguments) }}"
+                               title="{{ name }}"
+                               class="product-name stretched-link">
+                                {{ name }}
+                            </a>
+                        {{ "</h#{headlineLevel}>"|raw }}
+                    {% else %}
+                        <a href="{{ seoUrl('frontend.detail.page', routeArguments) }}"
+                           title="{{ name }}"
+                           class="product-name stretched-link bb-product-title">
+                            {{ name }}
+                        </a>
+                    {% endif %}
+
+                    <div class="bb-product-price">
+                        {% sw_include '@Storefront/storefront/component/product/card/price-unit.html.twig' %}
+                    </div>
+
+                    
+                        {% if config('core.listing.allowBuyInListing') %}
+                            {% sw_include '@Storefront/storefront/component/product/card/action.html.twig' %}
+                        {% endif %}
+                        
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

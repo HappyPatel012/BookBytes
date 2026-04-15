@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/cmsbuttonexample/administration/",
+  "entryPoints": {
+    "cms-button-example": {
+      "css": [
+        "/bundles/cmsbuttonexample/administration/assets/cms-button-example-Bt9pxePi.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/cmsbuttonexample/administration/assets/cms-button-example-CPb9SDFG.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/cms-button-example-CPb9SDFG.js",
+    "name": "cms-button-example",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/cms-button-example-Bt9pxePi.css"
+    ]
+  }
+}
