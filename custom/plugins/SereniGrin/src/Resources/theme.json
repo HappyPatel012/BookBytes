@@ -12,7 +12,8 @@
   ],
   "script": [
     "@Storefront",
-    "app/storefront/dist/storefront/js/sereni-grin/sereni-grin.js"
+    "app/storefront/dist/storefront/js/sereni-grin/sereni-grin.js",
+    "app/storefront/src/main.js"
   ],
   "asset": [
     "@Storefront",
