@@ -1553,3 +1553,10 @@ body {
 .tab-content {
     margin-top: 20px;
 }
+.blur-elysium-slide-content:has(*:not(:empty)) {
+    display: block !important;
+}
+
+.blur-elysium-slide-content {
+    display: none !important;
+}
