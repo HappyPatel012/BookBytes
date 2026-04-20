@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/offcanvas/navigation.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    <div class="bb-mobile-nav">
+        <div class="bb-mobile-nav-main">
+            {# Hide language/currency switches for cleaner mobile side menu #}
+            {% block layout_navigation_offcanvas_navigation_actions %}{% endblock %}
+
+            {# Categories are loaded dynamically by OffcanvasMenuPlugin #}
+            {% block layout_navigation_offcanvas_navigation_placeholder %}
+                <div class="navigation-offcanvas-container"></div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const authButtons = document.querySelectorAll('.sg-auth-tab-btn');
+    const authPanels = document.querySelectorAll('.sg-auth-panel');
+
+    // New auth switcher (login/signup tabs)
+    if (authButtons.length && authPanels.length) {
+        const setActiveAuthTab = (target) => {
+            authPanels.forEach((panel) => {
+                const isActive = panel.getAttribute('data-auth-panel') === target;
+                panel.classList.toggle('is-active', isActive);
+                panel.hidden = !isActive;
+            });
+
+            authButtons.forEach((button) => {
+                const isActive = button.getAttribute('data-auth-target') === target;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        };
+
+        const initialActiveButton = document.querySelector('.sg-auth-tab-btn.is-active') || authButtons[0];
+        if (initialActiveButton) {
+            const initialTarget = initialActiveButton.getAttribute('data-auth-target');
+            if (initialTarget) {
+                setActiveAuthTab(initialTarget);
+            }
+        }
+
+        authButtons.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = button.getAttribute('data-auth-target');
+                if (!target) {
+                    return;
+                }
+
+                setActiveAuthTab(target);
+            });
+        });
+    }
+
+    // Legacy tab switcher used in other custom sections
     const buttons = document.querySelectorAll('.tab-btn');
     const tabs = document.querySelectorAll('.tab-content');
 

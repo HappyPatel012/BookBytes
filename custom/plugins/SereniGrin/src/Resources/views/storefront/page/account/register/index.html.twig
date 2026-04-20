@@ -1,0 +1,92 @@
+{% sw_extends '@Storefront/storefront/page/account/register/index.html.twig' %}
+
+{% block page_account_register %}
+    {% set isSignup = app.request.query.get('auth') == 'signup' %}
+    <div class="account-register sg-auth-page">
+        <div class="sg-auth-layout">
+            <aside class="sg-auth-visual">
+                <div>
+                    <div class="sg-auth-badge">BookBytes</div>
+                    <h2 class="sg-auth-visual-title">The curator's <span>digital sanctuary.</span></h2>
+                    <p class="sg-auth-visual-copy">
+                        Step back into a world of curated narratives and rare editions. Your personal library awaits its next chapter.
+                    </p>
+                </div>
+
+                <ul class="sg-auth-visual-list">
+                    <li>Thoughtfully curated titles</li>
+                    <li>Fast, secure, uninterrupted checkout</li>
+                    <li>Your personal reading journey in one place</li>
+                </ul>
+
+                <div class="sg-auth-highlights" aria-hidden="true">
+                    <div class="sg-auth-highlight">
+                        <strong>12k+</strong>
+                        <span>Curated Titles</span>
+                    </div>
+                    <div class="sg-auth-highlight">
+                        <strong>4.9/5</strong>
+                        <span>Reader Rating</span>
+                    </div>
+                    <div class="sg-auth-highlight">
+                        <strong>Daily</strong>
+                        <span>Fresh Picks</span>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="sg-auth-main">
+                <header class="sg-auth-main-header">
+                    <p class="sg-auth-kicker">Secure access</p>
+                    <h1 class="sg-auth-title">Welcome back.</h1>
+                    <p class="sg-auth-subtitle">Please enter your details to access your collection.</p>
+                </header>
+
+                <div class="sg-auth-switch" role="tablist" aria-label="Authentication switch">
+                    <a class="sg-auth-tab-btn{% if not isSignup %} is-active{% endif %}"
+                            id="sg-auth-tab-login"
+                            role="tab"
+                            aria-selected="{{ not isSignup ? 'true' : 'false' }}"
+                            aria-controls="sg-auth-panel-login"
+                            data-auth-target="login"
+                            href="{{ path('frontend.account.login.page') }}">
+                        Login
+                    </a>
+                    <a class="sg-auth-tab-btn{% if isSignup %} is-active{% endif %}"
+                            id="sg-auth-tab-signup"
+                            role="tab"
+                            aria-selected="{{ isSignup ? 'true' : 'false' }}"
+                            aria-controls="sg-auth-panel-signup"
+                            data-auth-target="signup"
+                            href="{{ path('frontend.account.login.page', { auth: 'signup' }) }}">
+                        Sign up
+                    </a>
+                </div>
+
+                <div class="sg-auth-panels">
+                    <div class="sg-auth-panel{% if not isSignup %} is-active{% endif %}"
+                         id="sg-auth-panel-login"
+                         data-auth-panel="login"
+                         role="tabpanel"
+                         aria-labelledby="sg-auth-tab-login"
+                         {% if isSignup %}hidden{% endif %}>
+                        {% sw_include '@Storefront/storefront/component/account/login.html.twig' with {
+                            cardTitle: 'account.loginHeader'|trans|sw_sanitize
+                        } %}
+                    </div>
+
+                    <div class="sg-auth-panel{% if isSignup %} is-active{% endif %}"
+                         id="sg-auth-panel-signup"
+                         data-auth-panel="signup"
+                         role="tabpanel"
+                         aria-labelledby="sg-auth-tab-signup"
+                         {% if not isSignup %}hidden{% endif %}>
+                        {% sw_include '@Storefront/storefront/component/account/register.html.twig' with {
+                            cardTitle: 'account.registerPersonalHeader'|trans|sw_sanitize
+                        } %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
