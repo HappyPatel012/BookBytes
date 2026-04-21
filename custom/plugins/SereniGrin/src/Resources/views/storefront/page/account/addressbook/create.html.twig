@@ -1,0 +1,69 @@
+{% sw_extends '@Storefront/storefront/page/account/addressbook/create.html.twig' %}
+
+{% block page_account_main_content %}
+    <div class="bb-account-address-form account-address account-address-form">
+        <section class="bb-address-hero">
+            <div class="bb-address-hero-text">
+                <div class="bb-address-kicker">SereniGrin · {{ 'account.myAccount'|trans|sw_sanitize }}</div>
+                <h1 class="bb-address-title">{{ 'account.addressCreateWelcome'|trans|sw_sanitize }}</h1>
+                <p class="bb-address-subtitle">{{ 'account.addressText'|trans|sw_sanitize }}</p>
+            </div>
+            <div class="bb-address-hero-actions">
+                <a class="btn bb-ghost" href="{{ path('frontend.account.address.page') }}">{{ 'account.addressModalTitle'|trans|sw_sanitize }}</a>
+                <a class="btn bb-ghost" href="{{ path('frontend.account.profile.page') }}">{{ 'account.profileLink'|trans|sw_sanitize }}</a>
+                <a class="btn bb-primary" href="{{ path('frontend.account.order.page') }}">{{ 'account.ordersLink'|trans|sw_sanitize }}</a>
+            </div>
+        </section>
+
+        {% block page_account_address_form_main %}
+            <div class="card bb-address-form-card">
+                <div class="card-body">
+                    {% block page_account_address_form_create %}
+                        <form method="post"
+                              action="{{ path('frontend.account.address.create') }}"
+                              data-form-handler="true">
+                            {% block page_account_address_form_create_personal %}
+                                {% sw_include '@Storefront/storefront/component/address/address-personal.html.twig' with {
+                                    data: data.get('address'),
+                                    prefix: 'address',
+                                    accountType: data.get('address').get('accountType')
+                                } %}
+                            {% endblock %}
+
+                            {% block page_account_address_form_create_general %}
+                                {% sw_include '@Storefront/storefront/component/address/address-form.html.twig' with {
+                                    data: data.get('address'),
+                                    prefix: 'address',
+                                    showFormCompany: true,
+                                    scopeElementSelector: '.account-address-form',
+                                } %}
+                            {% endblock %}
+
+                            {% block page_account_address_required %}
+                                <p class="address-required-info required-fields">
+                                    {{ 'general.requiredFields'|trans|sw_sanitize }}
+                                </p>
+                            {% endblock %}
+
+                            {% block page_account_address_action_buttons %}
+                                <div class="bb-address-form-actions d-flex justify-content-between">
+                                    <a href="{{ path('frontend.account.address.page') }}"
+                                       class="bb-address-back btn"
+                                       aria-label="{{ 'general.back'|trans|striptags }}">
+                                        <span>{{ 'general.back'|trans|sw_sanitize }}</span>
+                                    </a>
+
+                                    <button type="submit"
+                                            class="bb-address-save btn"
+                                            title="{{ 'account.addressSaveChange'|trans|striptags }}">
+                                        {{ 'account.addressSaveChange'|trans|sw_sanitize }}
+                                    </button>
+                                </div>
+                            {% endblock %}
+                        </form>
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

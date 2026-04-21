@@ -1,0 +1,22 @@
+{% sw_extends '@Storefront/storefront/page/account/profile/index.html.twig' %}
+
+{% block page_account_profile %}
+    <div class="bb-account-profile">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block page_account_profile_personal_welcome %}
+    <section class="bb-profile-hero">
+        <div class="bb-profile-hero-text">
+            <div class="bb-profile-kicker">SereniGrin · {{ 'account.myAccount'|trans|sw_sanitize }}</div>
+            <h1 class="bb-profile-title">{{ 'account.profileTitle'|trans|sw_sanitize }}</h1>
+            <p class="bb-profile-subtitle">{{ 'account.profileText'|trans|sw_sanitize }}</p>
+        </div>
+        <div class="bb-profile-hero-actions">
+            <a class="btn bb-ghost" href="{{ path('frontend.account.home.page') }}">{{ 'account.overviewTitle'|trans|sw_sanitize }}</a>
+            <a class="btn bb-ghost" href="{{ path('frontend.account.address.page') }}">{{ 'account.addressLink'|trans|sw_sanitize }}</a>
+            <a class="btn bb-primary" href="{{ path('frontend.account.order.page') }}">{{ 'account.ordersLink'|trans|sw_sanitize }}</a>
+        </div>
+    </section>
+{% endblock %}

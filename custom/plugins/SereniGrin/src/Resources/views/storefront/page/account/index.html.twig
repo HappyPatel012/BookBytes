@@ -2,47 +2,61 @@
 
 {% block page_account_main_content %}
     {% block page_account_overview %}
+        {% set canShipToDefaultCountry = context.customer.defaultShippingAddress
+            and context.customer.defaultShippingAddress.country
+            and context.customer.defaultShippingAddress.country.shippingAvailable %}
+
         <div class="bb-account-overview">
             {% block page_account_overview_shipping_warning %}
-                {% set ableToShipToShippingCountry = context.customer.defaultShippingAddress.country.shippingAvailable %}
-
-                {% if not ableToShipToShippingCountry %}
-                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
-                        type: 'warning',
-                        content: 'account.overviewNotAbleToShip'|trans|sw_sanitize,
-                        announceOnLoad: true
-                    } %}
+                {% if not canShipToDefaultCountry %}
+                    <div class="sg-overview-notification">
+                        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                            type: 'warning',
+                            content: 'account.overviewNotAbleToShip'|trans|sw_sanitize,
+                            announceOnLoad: true
+                        } %}
+                    </div>
                 {% endif %}
             {% endblock %}
 
             {% block page_account_overview_request_group_info %}
                 {% if page.customer.requestedGroup %}
-                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
-                        type: 'info',
-                        content: 'account.overviewCustomerGroupRequest'|trans({
-                            '%group%': page.customer.requestedGroup.translated.name
-                        }),
-                        announceOnLoad: true
-                    } %}
+                    <div class="sg-overview-notification">
+                        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                            type: 'info',
+                            content: 'account.overviewCustomerGroupRequest'|trans({
+                                '%group%': page.customer.requestedGroup.translated.name
+                            }),
+                            announceOnLoad: true
+                        } %}
+                    </div>
                 {% endif %}
             {% endblock %}
 
             <section class="bb-account-hero">
                 <div class="bb-hero-text">
-                    <div class="bb-hero-kicker">BookBytes · Your reading sanctuary</div>
-                    <h1 class="bb-hero-title">Overview</h1>
-                    <p class="bb-hero-subtitle">Manage your profile, addresses and orders in one place.</p>
+                    <div class="bb-hero-kicker">SereniGrin · {{ 'account.myAccount'|trans|sw_sanitize }}</div>
+                    <h1 class="bb-hero-title">{{ 'account.overviewTitle'|trans|sw_sanitize }}</h1>
+                    <p class="bb-hero-subtitle">{{ 'account.overviewInfo'|trans|sw_sanitize }}</p>
+                </div>
+                <div class="bb-hero-quick">
+                    <div class="bb-status-pill{% if canShipToDefaultCountry %} is-positive{% endif %}">
+                        {{ canShipToDefaultCountry ? 'Shipping active' : 'Shipping unavailable' }}
+                    </div>
+                    <div class="bb-status-pill{% if page.newestOrder %} is-positive{% endif %}">
+                        {{ page.newestOrder ? 'Latest order available' : 'No orders yet' }}
+                    </div>
                 </div>
                 <div class="bb-hero-actions">
-                    <a class="btn bb-ghost" href="{{ path('frontend.account.profile.page') }}">Your Profile</a>
-                    <a class="btn bb-ghost" href="{{ path('frontend.account.address.page') }}">Addresses</a>
-                    <a class="btn bb-primary" href="{{ path('frontend.account.order.page') }}">Orders</a>
+                    <a class="btn bb-ghost" href="{{ path('frontend.account.profile.page') }}">{{ 'account.profileLink'|trans|sw_sanitize }}</a>
+                    <a class="btn bb-ghost" href="{{ path('frontend.account.address.page') }}">{{ 'account.addressLink'|trans|sw_sanitize }}</a>
+                    <a class="btn bb-primary bb-ghost" href="{{ path('frontend.account.order.page') }}">{{ 'account.ordersLink'|trans|sw_sanitize }}</a>
                 </div>
             </section>
 
             <section class="bb-account-grid">
                 <div class="bb-card">
-                    <div class="bb-card-head">Personal data</div>
+                    <div class="bb-card-head">{{ 'account.overviewProfileHeader'|trans|sw_sanitize }}</div>
                     <div class="bb-card-body">
                         <p>
                             {% if context.customer.salutation and context.customer.salutation.salutationKey != 'not_specified' %}
@@ -61,9 +75,9 @@
                 </div>
 
                 <div class="bb-card">
-                    <div class="bb-card-head">Newsletter</div>
+                    <div class="bb-card-head">{{ 'account.newsletterTitle'|trans|sw_sanitize }}</div>
                     <div class="bb-card-body">
-                        <div class="js-newsletter-wrapper">
+                        <div class="js-newsletter-wrapper sg-newsletter-wrapper">
                             {% sw_include '@Storefront/storefront/page/account/newsletter.html.twig' with { newsletterAccountPagelet: page.getNewsletterAccountPagelet() } %}
                         </div>
                     </div>
@@ -71,7 +85,7 @@
             </section>
 
             <section class="bb-card bb-full">
-                <div class="bb-card-head">Addresses</div>
+                <div class="bb-card-head">{{ 'account.addressLink'|trans|sw_sanitize }}</div>
                 <div class="bb-card-body">
                     {% sw_include '@Storefront/storefront/page/account/address.html.twig' %}
                 </div>
@@ -79,7 +93,7 @@
 
             {% if page.newestOrder %}
                 <section class="bb-card bb-full">
-                    <div class="bb-card-head">Last order</div>
+                    <div class="bb-card-head">{{ 'account.overviewNewestOrderHeader'|trans|sw_sanitize }}</div>
                     <div class="bb-card-body">
                         <div class="order-table">
                             <div class="order-table-body" data-order-detail-loader="true">

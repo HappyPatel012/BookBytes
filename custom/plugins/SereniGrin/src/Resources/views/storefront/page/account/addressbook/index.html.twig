@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/page/account/addressbook/index.html.twig' %}
+
+{% block page_account_main_content %}
+    <div class="bb-account-address">
+        {% block page_account_main_content_header %}
+            <section class="bb-address-hero">
+                <div class="bb-address-hero-text">
+                    <div class="bb-address-kicker">SereniGrin · {{ 'account.myAccount'|trans|sw_sanitize }}</div>
+                    <h1 class="bb-address-title">{{ 'account.addressModalTitle'|trans|sw_sanitize }}</h1>
+                    <p class="bb-address-subtitle">{{ 'account.addressText'|trans|sw_sanitize }}</p>
+                </div>
+                <div class="bb-address-hero-actions">
+                    <a class="btn bb-ghost" href="{{ path('frontend.account.home.page') }}">{{ 'account.overviewTitle'|trans|sw_sanitize }}</a>
+                    <a class="btn bb-ghost" href="{{ path('frontend.account.profile.page') }}">{{ 'account.profileLink'|trans|sw_sanitize }}</a>
+                    <a class="btn bb-primary" href="{{ path('frontend.account.order.page') }}">{{ 'account.ordersLink'|trans|sw_sanitize }}</a>
+                </div>
+            </section>
+        {% endblock %}
+
+        {% block page_account_main_content_address_manager %}
+            {% sw_include '@Storefront/storefront/page/account/addressbook/address-manager.html.twig' with {
+                defaultShippingAddress: context.customer.defaultShippingAddress,
+                defaultBillingAddress: context.customer.defaultBillingAddress
+            } %}
+        {% endblock %}
+    </div>
+{% endblock %}

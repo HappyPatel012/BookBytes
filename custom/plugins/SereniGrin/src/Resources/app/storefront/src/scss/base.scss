@@ -20,6 +20,9 @@ body {
     z-index: 30;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
+.col-auto order-table-header-heading{
+    font-size: 1.125rem !important;
+}
 
 .bb-header .bb-container {
     padding: 14px 36px 12px;
@@ -1787,17 +1790,18 @@ body {
 }
 
 .account-aside {
-    background: #ffffff;
+    background: #eeeeee;
     border: 1px solid #dbe6f3;
     border-radius: 16px;
     box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+    padding: 7px;
 }
 
 .account-aside .account-aside-header {
-    background: #f6f9ff;
     border-bottom: 1px solid #e7eef7;
     color: #0f3553;
     font-weight: 700;
+    text-align: center;
 }
 
 .account-aside .account-aside-item {
@@ -1805,11 +1809,12 @@ body {
     color: #2f4f6b;
     border-radius: 10px;
     padding: 10px 12px;
+    background-color: #eeeeee;
 }
 
 .account-aside .account-aside-item:hover,
 .account-aside .account-aside-item.is-active {
-    background: #0f3553;
+    background: #9b9c9c;
     color: #ffffff;
 }
 
@@ -1842,10 +1847,548 @@ body {
     border-radius: 14px;
 }
 
+/* SereniGrin account profile page */
+.bb-account-profile {
+    --bb-profile-line: #a2a2a2;
+    --bb-profile-ink: #151515;
+    --bb-profile-muted: #575757;
+    --bb-profile-surface: #eeeeee;
+    --bb-profile-shadow: 0 14px 32px rgba(15, 53, 83, 0.1);
+    --bb-profile-shadow-hover: 0 20px 36px rgba(15, 53, 83, 0.14);
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: var(--bb-profile-ink);
+    padding: 12px 0 8px;
+}
+
+.bb-account-profile .account-profile {
+    color: inherit;
+}
+
+.bb-account-profile .bb-profile-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px;
+    padding: 24px 26px;
+    border-radius: 20px;
+    border: 1px solid var(--bb-profile-line);
+    box-shadow: var(--bb-profile-shadow);
+    background:
+        radial-gradient(circle at 88% 14%, rgba(1, 1, 1, 0.2) 0%, rgba(25, 25, 25, 0) 52%),
+        linear-gradient(145deg, #eeeeee 0%, #9fa0a1 48%, #eeeeee 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.bb-account-profile .bb-profile-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.7rem;
+    color: #4b5f72;
+}
+
+.bb-account-profile .bb-profile-title {
+    margin: 8px 0 6px;
+    font-size: clamp(1.65rem, 3vw, 2rem);
+    color: #151515;
+}
+
+.bb-account-profile .bb-profile-subtitle {
+    margin: 0;
+    color: var(--bb-profile-muted);
+    max-width: 60ch;
+}
+
+.bb-account-profile .bb-profile-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.bb-account-profile .bb-profile-hero-actions .btn {
+    border-radius: 999px;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    min-width: 170px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.bb-account-profile .bb-profile-hero-actions .bb-ghost {
+    border: 1px solid #d2e2f3;
+    color: #2d4f6c;
+    background: rgba(255, 255, 255, 0.94);
+}
+
+.bb-account-profile .bb-profile-hero-actions .bb-ghost:hover {
+    background: #edf4ff;
+    color: #0f3553;
+    border-color: #bdd3eb;
+    transform: translateY(-1px);
+}
+
+.bb-account-profile .bb-profile-hero-actions .bb-primary {
+    background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
+    border: 1px solid #151515;
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(15, 53, 83, 0.18);
+}
+
+.bb-account-profile .bb-profile-hero-actions .bb-primary:hover {
+    background: linear-gradient(163deg, #151515 0%, #e7e7e7 52%, #151515 100%);
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+    transform: translateY(-1px);
+}
+
+.bb-account-profile .account-profile .card {
+    background: var(--bb-profile-surface);
+    border: 1px solid var(--bb-profile-line);
+    border-radius: 18px;
+    box-shadow: var(--bb-profile-shadow);
+    overflow: hidden;
+    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.bb-account-profile .account-profile .card::before {
+    content: "";
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, #a6a6a7 0%, #151515 52%, #a6a6a7 100%);
+    opacity: 0.75;
+}
+
+.bb-account-profile .account-profile .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bb-profile-shadow-hover);
+    border-color: #9fa0a1;
+}
+
+.bb-account-profile .account-profile .card-body {
+    padding: 14px 16px 16px;
+    color: var(--bb-profile-muted);
+}
+
+.bb-account-profile .account-profile .card-title {
+    color: #151515;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.bb-account-profile .account-profile-mail-label {
+    display: block;
+    font-size: 0.77rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #67717b;
+    margin-bottom: 3px;
+}
+
+.bb-account-profile .account-profile-mail {
+    color: #151515;
+    font-weight: 600;
+}
+
+.bb-account-profile .account-profile-change {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    width: 100%;
+    border: 1px solid #d2e2f3;
+    border-radius: 999px;
+    color: #2d4f6c;
+    background: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.bb-account-profile .account-profile-change:hover {
+    color: #0f3553;
+    border-color: #bdd3eb;
+    background: #edf4ff;
+    transform: translateY(-1px);
+}
+
+.bb-account-profile .form-control,
+.bb-account-profile .custom-select,
+.bb-account-profile .form-select {
+    border-color: #d7e4f2;
+    border-radius: 12px;
+    min-height: 42px;
+}
+
+.bb-account-profile .form-control:focus,
+.bb-account-profile .custom-select:focus,
+.bb-account-profile .form-select:focus {
+    border-color: #b4c1cc;
+    box-shadow: 0 0 0 0.18rem rgba(90, 166, 230, 0.18);
+}
+
+.bb-account-profile .required-fields,
+.bb-account-profile .text-muted {
+    color: #656768 !important;
+}
+
+.bb-account-profile .profile-form-submit.btn {
+    border-radius: 999px;
+    border: 1px solid #151515;
+    color: #ffffff;
+    background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
+    box-shadow: 0 10px 20px rgba(15, 53, 83, 0.18);
+    padding: 0.58rem 1.25rem;
+    font-weight: 600;
+}
+
+.bb-account-profile .profile-form-submit.btn:hover {
+    background: linear-gradient(163deg, #151515 0%, #e7e7e7 52%, #151515 100%);
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+/* SereniGrin account address page */
+.bb-account-address {
+    --bb-address-line: #a2a2a2;
+    --bb-address-ink: #151515;
+    --bb-address-muted: #575757;
+    --bb-address-surface: #eeeeee;
+    --bb-address-shadow: 0 14px 32px rgba(15, 53, 83, 0.1);
+    --bb-address-shadow-hover: 0 20px 36px rgba(15, 53, 83, 0.14);
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: var(--bb-address-ink);
+    padding: 12px 0 8px;
+}
+
+.bb-account-address .bb-address-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px;
+    padding: 24px 26px;
+    border-radius: 20px;
+    border: 1px solid var(--bb-address-line);
+    box-shadow: var(--bb-address-shadow);
+    background:
+        radial-gradient(circle at 88% 14%, rgba(1, 1, 1, 0.2) 0%, rgba(25, 25, 25, 0) 52%),
+        linear-gradient(145deg, #eeeeee 0%, #9fa0a1 48%, #eeeeee 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.bb-account-address .bb-address-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.7rem;
+    color: #4b5f72;
+}
+
+.bb-account-address .bb-address-title {
+    margin: 8px 0 6px;
+    font-size: clamp(1.65rem, 3vw, 2rem);
+    color: #151515;
+}
+
+.bb-account-address .bb-address-subtitle {
+    margin: 0;
+    color: var(--bb-address-muted);
+    max-width: 62ch;
+}
+
+.bb-account-address .bb-address-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.bb-account-address .bb-address-hero-actions .btn {
+    border-radius: 999px;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    min-width: 170px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.bb-account-address .bb-address-hero-actions .bb-ghost {
+    border: 1px solid #d2e2f3;
+    color: #2d4f6c;
+    background: rgba(255, 255, 255, 0.94);
+}
+
+.bb-account-address .bb-address-hero-actions .bb-ghost:hover {
+    background: #edf4ff;
+    color: #0f3553;
+    border-color: #bdd3eb;
+    transform: translateY(-1px);
+}
+
+.bb-account-address .bb-address-hero-actions .bb-primary {
+    background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
+    border: 1px solid #151515;
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(15, 53, 83, 0.18);
+}
+
+.bb-account-address .bb-address-hero-actions .bb-primary:hover {
+    background: linear-gradient(163deg, #151515 0%, #e7e7e7 52%, #151515 100%);
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+    transform: translateY(-1px);
+}
+
+.bb-account-address .address-manager-list-base h2 {
+    color: #151515;
+    font-size: 1.32rem;
+    margin-bottom: 10px;
+}
+
+.bb-account-address .address-manager-list-search {
+    border-color: #d7e4f2;
+    border-radius: 12px;
+    min-height: 44px;
+}
+
+.bb-account-address .address-manager-list-search:focus {
+    border-color: #b4c1cc;
+    box-shadow: 0 0 0 0.18rem rgba(90, 166, 230, 0.18);
+}
+
+.bb-account-address .address-manager-modal-address-form.btn {
+    border-radius: 999px;
+    border: 1px solid #151515;
+    color: #ffffff;
+    background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
+    box-shadow: 0 10px 20px rgba(15, 53, 83, 0.18);
+}
+
+.bb-account-address .address-manager-modal-address-form.btn:hover {
+    background: linear-gradient(163deg, #151515 0%, #e7e7e7 52%, #151515 100%);
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+.bb-account-address .address-manager-select-address {
+    width: 100%;
+    border: 1px solid var(--bb-address-line) !important;
+    border-radius: 18px;
+    background: var(--bb-address-surface);
+    box-shadow: var(--bb-address-shadow);
+    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.bb-account-address .address-manager-select-address:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bb-address-shadow-hover);
+    border-color: #9fa0a1 !important;
+}
+
+.bb-account-address .address-manager-select-address .address {
+    color: var(--bb-address-muted);
+}
+
+.bb-account-address .address-manager-select-address .address strong,
+.bb-account-address .address-manager-select-address .address .h5,
+.bb-account-address .address-manager-select-address .address .fw-bold {
+    color: #151515;
+}
+
+.bb-account-address .address-item-default-badge {
+    background: linear-gradient(180deg, #f1f8ff 0%, #e9f3ff 100%) !important;
+    color: #234056 !important;
+    border: 1px solid #d4e3f1;
+    border-radius: 999px;
+}
+
+.bb-account-address .dropdown .dropdown-menu {
+    border-radius: 14px;
+    border: 1px solid #dbe6f3;
+    box-shadow: 0 18px 36px rgba(15, 53, 83, 0.14);
+    padding: 8px;
+}
+
+.bb-account-address .dropdown .dropdown-item {
+    border-radius: 10px;
+    color: #2f4f6b;
+    font-weight: 600;
+    padding: 8px 10px;
+}
+
+.bb-account-address .dropdown .dropdown-item:hover {
+    color: #0f3553;
+    background: #edf4ff;
+}
+
+.bb-account-address .dropdown .dropdown-item.text-danger {
+    color: #8a2c2c !important;
+}
+
+.bb-account-address .dropdown .dropdown-item.text-danger:hover {
+    background: #f9ecec;
+}
+
+.bb-account-address-form {
+    --bb-address-line: #a2a2a2;
+    --bb-address-ink: #151515;
+    --bb-address-muted: #575757;
+    --bb-address-surface: #eeeeee;
+    --bb-address-shadow: 0 14px 32px rgba(15, 53, 83, 0.1);
+    --bb-address-shadow-hover: 0 20px 36px rgba(15, 53, 83, 0.14);
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: var(--bb-address-ink);
+    padding: 12px 0 8px;
+}
+
+.bb-account-address-form .bb-address-form-card {
+    border: 1px solid var(--bb-address-line);
+    border-radius: 18px;
+    background: var(--bb-address-surface);
+    box-shadow: var(--bb-address-shadow);
+    overflow: hidden;
+}
+
+.bb-account-address-form .bb-address-form-card::before {
+    content: "";
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, #a6a6a7 0%, #151515 52%, #a6a6a7 100%);
+    opacity: 0.75;
+}
+
+.bb-account-address-form .bb-address-form-card .card-body {
+    color: var(--bb-address-muted);
+    padding: 16px 18px 18px;
+}
+
+.bb-account-address-form .form-control,
+.bb-account-address-form .custom-select,
+.bb-account-address-form .form-select {
+    border-color: #d7e4f2;
+    border-radius: 12px;
+    min-height: 42px;
+}
+
+.bb-account-address-form .form-control:focus,
+.bb-account-address-form .custom-select:focus,
+.bb-account-address-form .form-select:focus {
+    border-color: #b4c1cc;
+    box-shadow: 0 0 0 0.18rem rgba(90, 166, 230, 0.18);
+}
+
+.bb-account-address-form .required-fields {
+    color: #656768 !important;
+}
+
+.bb-address-form-actions {
+    margin-top: 12px;
+    gap: 12px;
+}
+
+.bb-address-form-actions .bb-address-back,
+.bb-address-form-actions .bb-address-save {
+    border-radius: 999px;
+    min-height: 44px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.bb-address-form-actions .bb-address-back {
+    border: 1px solid #d2e2f3;
+    color: #2d4f6c;
+    background: rgba(255, 255, 255, 0.94);
+}
+
+.bb-address-form-actions .bb-address-back:hover {
+    background: #edf4ff;
+    color: #0f3553;
+    border-color: #bdd3eb;
+    transform: translateY(-1px);
+}
+
+.bb-address-form-actions .bb-address-save {
+    border: 1px solid #151515;
+    color: #ffffff;
+    background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
+    box-shadow: 0 10px 20px rgba(15, 53, 83, 0.18);
+}
+
+.bb-address-form-actions .bb-address-save:hover {
+    background: linear-gradient(163deg, #151515 0%, #e7e7e7 52%, #151515 100%);
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 991.98px) {
+    .bb-account-address .bb-address-hero {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .bb-account-address .bb-address-hero-actions {
+        width: 100%;
+    }
+
+    .bb-account-address .bb-address-hero-actions .btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .bb-address-form-actions {
+        flex-direction: column;
+    }
+
+    .bb-address-form-actions .bb-address-back,
+    .bb-address-form-actions .bb-address-save {
+        width: 100%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .bb-account-profile .bb-profile-hero {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .bb-account-profile .bb-profile-hero-actions {
+        width: 100%;
+    }
+
+    .bb-account-profile .bb-profile-hero-actions .btn {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
 /* Custom account overview layout */
 .bb-account-overview {
+    --bb-overview-line: #a2a2a2;
+    --bb-overview-ink: #151515;
+    --bb-overview-muted: #575757;
+    --bb-overview-surface: #ffffff;
+    --bb-overview-shadow: 0 14px 32px rgba(15, 53, 83, 0.1);
+    --bb-overview-shadow-hover: 0 20px 36px rgba(15, 53, 83, 0.14);
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    color: #23384d;
+    color: var(--bb-overview-ink);
+    position: relative;
+    padding: 12px 0 8px;
+}
+
+.bb-account-overview::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    pointer-events: none;
+    // background:
+    //     radial-gradient(circle at 8% 10%, rgba(138, 180, 220, 0.2) 0%, rgba(138, 180, 220, 0) 40%),
+    //     radial-gradient(circle at 95% 90%, rgba(145, 196, 239, 0.18) 0%, rgba(145, 196, 239, 0) 42%);
 }
 
 .bb-account-hero {
@@ -1853,101 +2396,356 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
-    border: 1px solid #dbe6f3;
-    border-radius: 18px;
-    padding: 22px 24px;
-    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
-    margin-bottom: 18px;
+    background:
+        radial-gradient(circle at 86% 12%, rgba(1, 1, 1, 0.2) 0%, rgba(25, 25, 25, 0) 50%),
+        linear-gradient(145deg, #eeeeee 0%, #9fa0a1 48%, #eeeeee 100%);
+    border: 1px solid var(--bb-overview-line);
+    border-radius: 20px;
+    padding: 24px 26px;
+    box-shadow: var(--bb-overview-shadow);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
 .bb-hero-kicker {
     text-transform: uppercase;
     letter-spacing: 0.16em;
     font-size: 0.7rem;
-    color: #5b7186;
+    color: #5b7189;
 }
 
 .bb-hero-title {
-    margin: 6px 0 4px;
-    color: #0f3553;
+    margin: 6px 0 6px;
+    color: #1c2d3d;
+    font-size: clamp(1.6rem, 3vw, 2rem);
 }
 
 .bb-hero-subtitle {
-    color: #4e6377;
+    color: var(--bb-overview-muted);
     margin: 0;
+    max-width: 52ch;
+}
+
+.bb-hero-quick {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: linear-gradient(180deg, #f1f8ff 0%, #e9f3ff 100%);
+    border: 1px solid #e0eaf5;
+    border-radius: 25px;
+    backdrop-filter: blur(4px);
+}
+
+.bb-status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #425f77;
+    
+}
+
+.bb-status-pill.is-positive {
+    background: transparent;
+    text-align: center;
+    font-weight: 700;
 }
 
 .bb-hero-actions {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .bb-hero-actions .btn {
     border-radius: 999px;
-    padding: 8px 16px;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .bb-hero-actions .bb-ghost {
-    border: 1px solid #dbe6f3;
+    border: 1px solid #d2e2f3;
     color: #2d4f6c;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.94);
+    width:100%
 }
 
 .bb-hero-actions .bb-ghost:hover {
-    background: #eef4ff;
+    background: #edf4ff;
     color: #0f3553;
+    border-color: #bdd3eb;
+    transform: translateY(-1px);
 }
 
 .bb-hero-actions .bb-primary {
-    background: #0f3553;
-    border: 1px solid #0f3553;
+    background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
+    border: 1px solid #151515;
     color: #ffffff;
+    box-shadow: 0 10px 20px rgba(15, 53, 83, 0.18);
 }
 
 .bb-hero-actions .bb-primary:hover {
-    background: #0b2b43;
-    border-color: #0b2b43;
+    background: linear-gradient(163deg, #151515 0%, #e7e7e7 52%, #151515 100%);
+    border-color: #1a1a1a;
+    color: #1a1a1a;
+    transform: translateY(-1px);
 }
 
 .bb-account-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
-.bb-card {
-    background: #ffffff;
-    border: 1px solid #dbe6f3;
-    border-radius: 16px;
-    box-shadow: 0 12px 24px rgba(15, 53, 83, 0.08);
+.bb-account-overview .bb-card {
+    background: #eeeeee;
+    border: 1px solid var(--bb-overview-line);
+    border-radius: 18px;
+    box-shadow: var(--bb-overview-shadow);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
-.bb-card-head {
+.bb-account-overview .bb-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, #a6a6a7 0%, #151515 52%, #a6a6a7 100%);
+    opacity: 0.75;
+}
+
+.bb-account-overview .bb-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bb-overview-shadow-hover);
+    border-color: #9fa0a1;
+}
+
+.bb-account-overview .bb-card-head {
     padding: 14px 16px 0;
     font-weight: 700;
-    color: #0f3553;
+    color: #151515;
+    letter-spacing: 0.01em;
 }
 
-.bb-card-body {
+.bb-account-overview .bb-card-body {
     padding: 12px 16px 16px;
-    color: #4e6377;
+    color: var(--bb-overview-muted);
 }
 
-.bb-card.bb-full {
+.bb-account-overview .bb-card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.bb-account-overview .bb-card.bb-full {
     margin-bottom: 18px;
 }
 
 .bb-muted {
-    color: #5b7186;
+    color: #656768;
+}
+
+.bb-account-overview .form-control,
+.bb-account-overview .custom-select,
+.bb-account-overview .form-select {
+    border-color: #d7e4f2;
+    border-radius: 12px;
+    min-height: 42px;
+}
+
+.bb-account-overview .form-control:focus,
+.bb-account-overview .custom-select:focus,
+.bb-account-overview .form-select:focus {
+    border-color: #b4c1cc;
+    box-shadow: 0 0 0 0.18rem rgba(90, 166, 230, 0.18);
+}
+
+.bb-account-overview .btn.btn-light,
+.bb-account-overview .btn.btn-outline-primary {
+    border-radius: 999px;
+}
+
+// .bb-account-overview .order-table .order-item {
+//     border: 1px solid #d9e5f2;
+//     border-radius: 14px;
+//     box-shadow: 0 8px 18px rgba(15, 53, 83, 0.07);
+// }
+
+.order-table{
+    border: 1px solid #c6c8ca;
+    border-radius: 14px;
+}
+
+.bb-account-overview .address-card,
+.bb-account-overview .overview-billing-address .card,
+.bb-account-overview .overview-shipping-address .card {
+    border: 1px solid #c6c8ca;
+    border-radius: 14px;
+}
+
+/* SereniGrin notification + checkbox system */
+.bb-account-overview {
+    --sg-notice-success-border: #3c6e55;
+    --sg-notice-success-bg: linear-gradient(180deg, #edf4f0 0%, #e3ede7 100%);
+    --sg-notice-success-text: #24362d;
+    --sg-notice-success-icon-bg: #dbe9e2;
+    --sg-notice-info-border: #2f4f6b;
+    --sg-notice-info-bg: linear-gradient(180deg, #edf2f8 0%, #e3eaf3 100%);
+    --sg-notice-info-text: #24394d;
+    --sg-notice-warning-border: #7c6451;
+    --sg-notice-warning-bg: linear-gradient(180deg, #f4eee7 0%, #ece3d9 100%);
+    --sg-notice-warning-text: #3c3128;
+    --sg-checkbox-accent: #2f4f6b;
+}
+
+.bb-account-overview .sg-overview-notification {
+    margin-bottom: 16px;
+}
+
+.bb-account-overview .sg-newsletter-wrapper .newsletter-alerts {
+    margin-bottom: 14px;
+}
+
+.bb-account-overview .alert {
+    border-radius: 10px;
+    border: 1px solid #a8adb4;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 6px 14px rgba(21, 21, 21, 0.08);
+    padding: 10px 12px;
+    color: #2f3640;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.bb-account-overview .alert:hover {
+    border-color: #8f959d;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 10px 20px rgba(21, 21, 21, 0.12);
+    transform: translateY(-1px);
+}
+
+.bb-account-overview .alert .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border-radius: 999px;
+    flex: 0 0 20px;
+    padding: 2px;
+    border: 1px solid currentColor;
+}
+
+.bb-account-overview .alert .alert-content-container {
+    color: inherit;
+    font-size: 1.2rem;
+    line-height: 1.45;
+}
+
+.bb-account-overview .alert.alert-success {
+    border-color: var(--sg-notice-success-border);
+    background: var(--sg-notice-success-bg);
+    color: var(--sg-notice-success-text);
+}
+
+.bb-account-overview .alert.alert-success .icon {
+    color: var(--sg-notice-success-border);
+    background: var(--sg-notice-success-icon-bg);
+}
+
+.bb-account-overview .alert.alert-info {
+    border-color: var(--sg-notice-info-border);
+    background: var(--sg-notice-info-bg);
+    color: var(--sg-notice-info-text);
+}
+
+.bb-account-overview .alert.alert-warning {
+    border-color: var(--sg-notice-warning-border);
+    background: var(--sg-notice-warning-bg);
+    color: var(--sg-notice-warning-text);
+}
+
+.bb-account-overview .sg-newsletter-wrapper .form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+.bb-account-overview .sg-newsletter-wrapper input.form-check-input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    margin-top: 1px;
+    margin-left: 0;
+    flex: 0 0 24px;
+    border-radius: 8px;
+    border: 2px solid var(--sg-checkbox-accent);
+    background: linear-gradient(180deg, #ffffff 0%, #f1f3f6 100%);
+    position: relative;
+    cursor: pointer;
+    transition: all 160ms ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 2px 6px rgba(21, 21, 21, 0.16);
+}
+
+.bb-account-overview .sg-newsletter-wrapper input.form-check-input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0.8);
+    opacity: 0;
+    transition: all 160ms ease;
+}
+
+.bb-account-overview .sg-newsletter-wrapper input.form-check-input[type="checkbox"]:hover {
+    border-color: #1f3f5d;
+    box-shadow: 0 0 0 3px rgba(47, 79, 107, 0.18);
+}
+
+.bb-account-overview .sg-newsletter-wrapper input.form-check-input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(47, 79, 107, 0.24);
+}
+
+.bb-account-overview .sg-newsletter-wrapper input.form-check-input[type="checkbox"]:checked {
+    background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
+    border-color: #151515;
+}
+
+.bb-account-overview .sg-newsletter-wrapper input.form-check-input[type="checkbox"]:checked::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+}
+
+.bb-account-overview .sg-newsletter-wrapper .form-check-label {
+    color: #5d4437;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    transition: color 140ms ease;
+}
+
+.bb-account-overview .sg-newsletter-wrapper input.form-check-input[type="checkbox"]:checked + .form-check-label {
+    color: #2f3640;
 }
 
 @media (max-width: 991.98px) {
     .bb-account-hero {
         flex-direction: column;
-        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .bb-hero-actions .btn {
+        justify-content: center;
     }
 
     .bb-account-grid {
@@ -2051,6 +2849,9 @@ body {
 
 .bb-product-card .card-body {
     padding: 16px;
+}
+.card-body {
+    padding: 10px;
 }
 
 .bb-product-media {
