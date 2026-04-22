@@ -1,0 +1,32 @@
+{% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
+
+{% block page_checkout_container %}
+    <div class="sg-cart-page">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block page_checkout_cart_header %}
+    <div class="sg-cart-hero">
+        <div class="sg-cart-hero-top">
+            <span class="sg-cart-kicker">cart</span>
+        </div>
+        <div class="sg-cart-hero-main">
+            <h1 class="cart-main-header sg-cart-title d-inline-block">
+                {{ 'checkout.cartHeader'|trans|sw_sanitize }}
+            </h1>
+            <span class="sg-cart-counter-pill" aria-label="{{ 'checkout.itemCounter'|trans({'%count%': page.cart.lineItems|length})|striptags }}">
+                {{ page.cart.lineItems|length }}
+            </span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_checkout_summary_header %}
+    <div class="sg-cart-aside-head">
+        <span class="sg-cart-aside-kicker">Order snapshot</span>
+        <h2 class="checkout-aside-summary-header">
+            {{ 'checkout.summaryHeader'|trans|sw_sanitize }}
+        </h2>
+    </div>
+{% endblock %}

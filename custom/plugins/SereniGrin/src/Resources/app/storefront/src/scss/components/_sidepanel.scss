@@ -1,0 +1,24 @@
+.sg-sidepanel {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: #1f1a14;
+}
+
+.sg-sidepanel .offcanvas-cart,
+.sg-sidepanel .bb-mobile-nav,
+.sg-sidepanel .bb-account-menu {
+    position: relative;
+}
+
+.sg-sidepanel .sg-panel-kicker {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 3px 10px;
+    border: 1px solid #a9abb0;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #fafafa 0%, #eeeeef 100%);
+    color: #4b4036;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}

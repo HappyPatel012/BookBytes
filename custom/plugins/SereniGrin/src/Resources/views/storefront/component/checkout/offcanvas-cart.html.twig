@@ -1,0 +1,61 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    <div class="sg-sidepanel sg-sidepanel--cart{% if not page.cart.lineItems|length %} is-empty{% endif %}">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block component_offcanvas_cart_header %}
+    <div class="row align-items-end offcanvas-cart-header sg-cart-header">
+        <div class="col">
+            <span class="sg-panel-kicker">Shelf review</span>
+            <h4 class="sg-cart-title" data-id="off-canvas-headline">
+                {{- 'checkout.cartHeader'|trans|sw_sanitize -}}
+            </h4>
+        </div>
+
+        {% set checkoutItemCounter = page.cart.lineItems|length %}
+
+        {% block component_offcanvas_cart_header_item_counter %}
+            {% if isCartNotEmpty %}
+                <div class="col-auto">
+                    <span class="sg-cart-count-pill">
+                        {{- 'checkout.itemCounter'|trans({'%count%': checkoutItemCounter})|sw_sanitize -}}
+                    </span>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block component_offcanvas_cart_items %}
+    <ul class="offcanvas-cart-items sg-cart-items list-unstyled">
+        {% for lineItem in page.cart.lineItems %}
+            {% block component_offcanvas_cart_item %}
+                {% sw_include '@Storefront/storefront/component/line-item/line-item.html.twig' with {
+                    displayMode: 'offcanvas',
+                    redirectTo: 'frontend.cart.offcanvas'
+                } %}
+            {% endblock %}
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block component_offcanvas_summary %}
+    <div class="sg-cart-summary-wrap">
+        {% sw_include '@Storefront/storefront/component/checkout/offcanvas-cart-summary.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block component_offcanvas_cart_empty %}
+    <div class="sg-cart-empty-notice" role="status" aria-live="polite">
+        <div class="sg-cart-empty-icon">
+            {% sw_icon 'info' style { size: 'sm' } %}
+        </div>
+        <div class="sg-cart-empty-copy">
+            <strong>{{ 'checkout.cartHeader'|trans|sw_sanitize }}</strong>
+            <span>{{ 'checkout.emptyCart'|trans|sw_sanitize }}</span>
+        </div>
+    </div>
+{% endblock %}

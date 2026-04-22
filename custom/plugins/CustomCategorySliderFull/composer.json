@@ -1,0 +1,17 @@
+{
+    "name": "custom/category-slider-full",
+    "description": "Full Category Slider Plugin",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "CustomCategorySliderFull\\": ""
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "CustomCategorySliderFull\\CustomCategorySliderFull",
+        "label": {
+            "en-GB": "Category Slider Full"
+        }
+    }
+}
