@@ -1,0 +1,247 @@
+.bb-product-card {
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f2 100%);
+    box-shadow: 0 12px 24px rgba(21, 21, 21, 0.1);
+    overflow: visible;
+    transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease;
+}
+
+.bb-product-card:hover {
+    transform: translateY(-2px);
+    border-color: #989ca3;
+    box-shadow: 0 16px 28px rgba(21, 21, 21, 0.14);
+}
+
+.bb-product-card .card-body {
+    padding: 10px 10px 14px;
+}
+
+.bb-product-card .bb-product-media {
+    position: relative;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #d3d3d3 0%, #929292 100%);
+    overflow: hidden;
+    border-bottom: 0 !important;
+}
+
+.bb-product-card .product-image-wrapper {
+    border: 0;
+    border-bottom: 0 !important;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f2f2f4 100%);
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.bb-product-card .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    padding: 0;
+    transition: transform 180ms ease;
+    background-color: transparent !important;
+}
+
+.bb-product-card:hover .product-image {
+    transform: scale(1.01);
+}
+
+.bb-product-card .bb-product-info {
+    text-align: center;
+    padding: 0 4px;
+}
+
+.bb-product-card .bb-product-title,
+.bb-product-card .bb-product-title .product-name {
+    margin: 0;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: clamp(1.0rem, 1.3vw, 1.7rem);
+    line-height: 1.16;
+    color: #151515;
+    text-decoration: none;
+}
+
+.bb-product-card .bb-product-title .product-name:hover,
+.bb-product-card .bb-product-title .product-name:focus {
+    color: #2f2a23;
+}
+
+.bb-product-card .bb-product-brand {
+    margin-top: 6px;
+    margin-bottom: 7px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1rem;
+    color: #2f2a23;
+}
+
+.bb-product-card .bb-product-rating {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.bb-product-card .bb-product-rating .icon-review {
+    color: #151515;
+}
+
+.bb-product-card .bb-product-price {
+    margin: 0;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1rem;
+}
+
+.bb-product-card .bb-product-price .product-price {
+    color: #2f2a23;
+    font-weight: 700;
+}
+
+.bb-product-card .bb-product-price .list-price,
+.bb-product-card .bb-product-price .list-price-price {
+    color: #7e848b;
+}
+
+.bb-product-card .bb-product-price .list-price {
+    margin-right: 8px;
+}
+
+.bb-product-card .bb-product-actions-icons {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 170ms ease, transform 170ms ease;
+    z-index: 3;
+}
+
+.bb-product-card:hover .bb-product-actions-icons,
+.bb-product-card:focus-within .bb-product-actions-icons {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bb-product-card .bb-product-actions-icons .product-action,
+.bb-product-card .bb-product-actions-icons .buy-widget,
+.bb-product-card .bb-product-actions-icons .d-grid {
+    margin: 0;
+    width: auto;
+}
+
+.bb-product-card .bb-product-actions-icons .product-wishlist {
+    margin: 0;
+    position: static !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+}
+
+.bb-product-card .bb-product-actions-icons .product-wishlist-action-circle,
+.bb-product-card .bb-product-actions-icons .btn-buy,
+.bb-product-card .bb-product-actions-icons .btn-detail {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 4px 12px rgba(21, 21, 21, 0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    transform: none !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.bb-product-card .bb-product-actions-icons .product-wishlist-action-circle {
+    background: #ffffff;
+}
+
+.bb-product-card .bb-product-actions-icons .product-wishlist-action-circle:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 16px rgba(21, 21, 21, 0.2);
+}
+
+.bb-product-card .bb-product-actions-icons .product-wishlist-action-circle .icon-wishlist-added,
+.bb-product-card .bb-product-actions-icons .product-wishlist-action-circle .icon-wishlist-not-added {
+    color: #151515;
+    width: 18px;
+    height: 18px;
+}
+
+.bb-product-card .bb-product-actions-icons .btn-buy,
+.bb-product-card .bb-product-actions-icons .btn-detail {
+    font-size: 0;
+    color: transparent;
+    background: #3a3b3c;
+}
+
+.bb-product-card .bb-product-actions-icons .btn-buy:hover,
+.bb-product-card .bb-product-actions-icons .btn-detail:hover {
+    background: #151515;
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 16px rgba(21, 21, 21, 0.2);
+}
+
+.bb-product-card .bb-product-actions-icons .btn-buy::before,
+.bb-product-card .bb-product-actions-icons .btn-detail::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.bb-product-card .product-badges {
+    top: 12px;
+    left: 12px;
+}
+
+.bb-product-card .product-badges .badge,
+.bb-product-card .product-badges .badge.bg-danger {
+    border-radius: 6px;
+    border: none;
+    background: #3a3b3c !important;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 6px 10px;
+}
+
+.bb-product-card .bb-product-actions-icons .btn-buy::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6.25' cy='13' r='1'/%3E%3Ccircle cx='12.25' cy='13' r='1'/%3E%3Cpath d='M1.25 2h2l1.6 7.2a1 1 0 0 0 .98.8h5.86a1 1 0 0 0 .98-.8L14 4.5H4.2'/%3E%3C/svg%3E");
+}
+
+.bb-product-card .bb-product-actions-icons .btn-detail::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 3.2C3.9 3.2 1.5 8 1.5 8S3.9 12.8 8 12.8 14.5 8 14.5 8 12.1 3.2 8 3.2Z'/%3E%3Ccircle cx='8' cy='8' r='2.1'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 767.98px) {
+    .bb-product-card .bb-product-title,
+    .bb-product-card .bb-product-title .product-name {
+        font-size: 1.35rem;
+    }
+
+    .bb-product-card .bb-product-brand {
+        font-size: 0.98rem;
+    }
+
+    .bb-product-card .bb-product-actions-icons {
+        opacity: 1;
+        transform: none;
+    }
+}

@@ -353,6 +353,10 @@ body {
 
 }
 
+.cms-section{
+    padding: 0 !important;
+}
+
 /* Shared side panel component (navigation, cart, account offcanvas) */
 .navigation-offcanvas,
 .cart-offcanvas,
@@ -3233,11 +3237,11 @@ body {
 /* Product listing card redesign */
 .product-box .card {
     border-radius: 18px;
-    border: 1px solid #dbe6f3;
+    // border: 1px solid #dbe6f3;
     box-shadow: 0 14px 28px rgba(15, 53, 83, 0.12);
     overflow: hidden;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background: #ffffff;
+    background: transparent !important;
 }
 
 .product-box .card:hover {
@@ -3247,7 +3251,6 @@ body {
 
 .product-box .product-image-wrapper {
     background: #f4f8ff;
-    border-bottom: 1px solid #e7eef7;
 }
 
 .product-image-wrapper {
@@ -3309,176 +3312,208 @@ body {
     filter: brightness(0.95);
 }
 
-/* Product listing card – BookBytes */
+/* Product listing card – BookBytes (New UI) */
 .bb-product-card {
-    border: 1px solid #dbe6f3;
-    border-radius: 18px;
-    background: #ffffff;
-    box-shadow: 0 14px 28px rgba(15, 53, 83, 0.10);
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0;
+    box-shadow: none;
     overflow: hidden;
+    position: relative;
+    text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .bb-product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 18px 36px rgba(15, 53, 83, 0.16);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .bb-product-card .card-body {
-    padding: 16px;
-}
-.card-body {
-    padding: 10px;
+    padding: 0;
 }
 
 .bb-product-media {
     position: relative;
-    background: #f3f7ff;
-    border-radius: 14px;
-    padding: 18px;
+    background: #fff;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 14px;
+    margin-bottom: 0;
+}
+
+.bb-product-media .product-image-wrapper {
+    width: 100%;
 }
 
 .bb-product-media .product-image {
-    max-height: 220px;
+    max-height: 280px;
+    width: 100%;
+    display: block;
 }
 
-.bb-wishlist {
+/* Discount Badge */
+.bb-product-card .badge.bg-danger {
     position: absolute;
-    right: 14px;
-    bottom: 14px;
+    top: 0;
+    left: 0;
+    background: #e63946 !important;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 0;
+    z-index: 2;
 }
 
-.bb-product-brand {
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.68rem;
-    color: #5b7186;
-    margin-bottom: 6px;
+/* Info container below image */
+.bb-product-info {
+    padding: 20px 15px;
 }
 
 .bb-product-title {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    font-size: 1rem;
+    font-size: 1.15rem;
+    font-weight: bold;
     color: #151515;
-    display: inline-block;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.bb-product-brand {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 0.85rem;
+    color: #151515;
     margin-bottom: 8px;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 .bb-product-rating {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    justify-content: center;
+    display: flex;
+}
+
+.bb-product-rating .product-rating {
+    display: flex;
+    gap: 2px;
 }
 
 .bb-product-price {
     font-weight: 700;
-    color: #151515;
-    margin: 8px 0 12px;
+    font-size: 1.1rem;
+    margin: 0;
 }
 
-.bb-product-actions .btn {
-    border-radius: 999px;
-    padding: 8px 14px;
+.bb-product-price .product-price {
+    color: #e63946;
 }
 
-.bb-product-actions .btn-primary {
-    background: #151515;
-    border-color: #151515;
+.bb-product-price .list-price {
+    color: #888888;
+    text-decoration: line-through;
+    font-size: 0.95rem;
+    font-weight: normal;
+    margin-right: 8px;
 }
 
-.bb-product-actions .btn-primary:hover {
-    background: #0b2b43;
-    border-color: #0b2b43;
+/* Hover Actions (Cart + Wishlist) */
+.bb-product-actions-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.9);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
 }
 
-.bb-product-actions .btn-light {
-    background: #f2f6ff;
-    border-color: #dbe6f3;
+.bb-product-card:hover .bb-product-actions-hover {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Product card – compact bookstore style */
-.bb-product-card {
-    border: 1px solid #dbe6f3;
-    border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 10px 22px rgba(15, 53, 83, 0.08);
-    overflow: hidden;
-}
-
-.bb-product-card .card-body {
-    padding: 14px;
-}
-
-.bb-product-media {
-    position: relative;
-    background: #f6f9ff;
-    border-radius: 12px;
-    padding: 16px;
+.bb-product-actions-hover .btn {
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    color: transparent !important;
+    position: relative;
+    overflow: hidden;
 }
 
-.bb-product-media .product-image {
-    max-height: 190px;
+.bb-product-actions-hover .btn-buy,
+.bb-product-actions-hover .btn-primary {
+    background: #e63946;
 }
 
-.bb-product-brand {
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.65rem;
-    color: #5b7186;
-    margin-bottom: 6px;
+.bb-product-actions-hover .btn-buy:hover,
+.bb-product-actions-hover .btn-primary:hover {
+    background: #d62828;
 }
 
-.bb-product-title {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    font-size: 0.98rem;
-    color: #151515;
-    margin-bottom: 6px;
-    line-height: 1.35;
+.bb-product-actions-hover .btn-buy::before,
+.bb-product-actions-hover .btn-primary::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%23fff"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg>');
 }
 
-.bb-product-price {
-    font-weight: 700;
-    color: #151515;
-    margin: 6px 0 10px;
+.bb-product-actions-hover .btn-light,
+.bb-product-actions-hover .product-wishlist-action-circle {
+    background: #fff;
 }
 
-.bb-product-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+.bb-product-actions-hover .btn-light::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%232d4f6c"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 13A6 6 0 1 1 8 2a6 6 0 0 1 0 12z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3.5a.5.5 0 0 1-.5-.5v-3.5A.5.5 0 0 1 8 4z"/></svg>');
 }
 
-.bb-product-actions .btn {
-    border-radius: 10px;
-    padding: 8px 10px;
-    font-size: 0.88rem;
+.bb-product-actions-hover .bb-wishlist-hover {
+    display: flex;
+    align-items: center;
 }
 
-.bb-product-actions .btn-primary {
-    background: #151515;
-    border-color: #151515;
-}
-
-.bb-product-actions .btn-primary:hover {
-    background: #0b2b43;
-    border-color: #0b2b43;
-}
-
-.bb-buy-now {
-    background: #ffffff;
-    border: 1px solid #dbe6f3;
-    color: #2d4f6c;
-}
-
-.bb-buy-now:hover {
-    background: #eef4ff;
-    color: #151515;
+.bb-product-actions-hover .product-wishlist-action-circle {
+    width: 44px;
+    height: 44px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Wishlist count badge in header */
@@ -4006,3 +4041,5 @@ body {
 @import "components/cart-page";
 @import "components/checkout-confirm";
 @import "components/checkout-finish";
+@import "components/product-card";
+@import "components/product-detail";
