@@ -1,0 +1,36 @@
+{% sw_extends '@Storefront/storefront/page/checkout/confirm/index.html.twig' %}
+
+{% block base_esi_header %}
+    {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
+{% endblock %}
+
+{% block page_checkout_container %}
+    <div class="sg-confirm-page">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block page_checkout_confirm_header %}
+    <div class="sg-confirm-hero">
+        <div class="sg-confirm-hero-top">
+            <span class="sg-confirm-kicker">checkout</span>
+        </div>
+        <div class="sg-confirm-hero-main">
+            <h1 class="confirm-main-header sg-confirm-title d-inline-block">
+                {{ 'checkout.confirmHeader'|trans|sw_sanitize }}
+            </h1>
+            <span class="sg-confirm-counter-pill" aria-label="{{ 'checkout.itemCounter'|trans({'%count%': page.cart.lineItems|length})|striptags }}">
+                {{ page.cart.lineItems|length }}
+            </span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_checkout_summary_header %}
+    <div class="sg-confirm-aside-head">
+        <span class="sg-confirm-aside-kicker">Order snapshot</span>
+        <h2 class="checkout-aside-summary-header">
+            {{ 'checkout.summaryHeader'|trans|sw_sanitize }}
+        </h2>
+    </div>
+{% endblock %}

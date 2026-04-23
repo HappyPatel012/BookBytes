@@ -1,0 +1,171 @@
+{% sw_extends '@Storefront/storefront/page/checkout/finish/index.html.twig' %}
+
+{% block base_esi_header %}
+    {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
+{% endblock %}
+
+{% block page_checkout_container %}
+    <div class="sg-finish-page">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block page_checkout_finish_header %}
+    <div class="sg-finish-hero">
+        <div class="sg-finish-check" aria-hidden="true">✓</div>
+        <div class="sg-finish-hero-top">
+            <span class="sg-finish-kicker">Thank you</span>
+        </div>
+        <div class="sg-finish-hero-main">
+            <div class="sg-finish-title-wrap">
+                <h1 class="finish-header sg-finish-title">
+                    {% if page.changedPayment == true %}
+                        {{ 'checkout.finishUpdateHeader'|trans|sw_sanitize }}
+                    {% else %}
+                        {{ 'checkout.finishHeader'|trans({
+                            '%shop%': config('core.basicInformation.shopName')
+                        })|sw_sanitize }}
+                    {% endif %}
+                </h1>
+                <p class="sg-finish-lead">
+                    Order #{{ page.order.orderNumber }} has been placed successfully. A confirmation email has been sent.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_checkout_finish_order %}
+    {% set order = page.order %}
+    {% set billingAddress = order.billingAddress %}
+    {% set deliveries = order.deliveries.elements %}
+
+    {% if feature('v6.8.0.0') %}
+        {% if order.primaryOrderDelivery and order.billingAddress.id != order.primaryOrderDelivery.shippingOrderAddressId %}
+            {% set shippingAddress = order.primaryOrderDelivery.shippingOrderAddress %}
+        {% else %}
+            {% set shippingAddress = billingAddress %}
+        {% endif %}
+    {% else %}
+        {% if deliveries|length > 0 and order.billingAddress.id != deliveries|first.shippingOrderAddressId %}
+            {% set shippingAddress = deliveries|first.shippingOrderAddress %}
+        {% else %}
+            {% set shippingAddress = billingAddress %}
+        {% endif %}
+    {% endif %}
+
+    <div class="sg-finish-meta-grid">
+        <div class="sg-finish-meta-card">
+            <div class="card-title">Shipping address</div>
+            {% sw_include '@Storefront/storefront/component/address/address.html.twig' with { address: shippingAddress } %}
+        </div>
+        <div class="sg-finish-meta-card">
+            <div class="card-title">Billing address</div>
+            {% sw_include '@Storefront/storefront/component/address/address.html.twig' with { address: billingAddress } %}
+        </div>
+        <div class="sg-finish-meta-card">
+            <div class="card-title">Information</div>
+            <p class="sg-finish-info-line">
+                <strong>{{ 'checkout.finishInfoPayment'|trans|sw_sanitize }}</strong>
+                {% if feature('v6.8.0.0') %}
+                    {{ page.order.primaryOrderTransaction.paymentMethod.translated.name }}
+                {% else %}
+                    {{ page.order.transactions.last.paymentMethod.translated.name }}
+                {% endif %}
+            </p>
+            {% if feature('v6.8.0.0') %}
+                {% if page.order.primaryOrderDelivery is defined %}
+                    <p class="sg-finish-info-line">
+                        <strong>{{ 'checkout.finishInfoShipping'|trans|sw_sanitize }}</strong>
+                        {{ page.order.primaryOrderDelivery.shippingMethod.translated.name }}
+                    </p>
+                {% endif %}
+            {% else %}
+                {% if page.order.deliveries.first.shippingMethod is defined %}
+                    <p class="sg-finish-info-line">
+                        <strong>{{ 'checkout.finishInfoShipping'|trans|sw_sanitize }}</strong>
+                        {{ page.order.deliveries.first.shippingMethod.translated.name }}
+                    </p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_checkout_finish_product_table %}
+    <div class="sg-finish-items-wrap">
+        <h2 class="sg-finish-section-title">Items ordered</h2>
+        <div class="card checkout-product-table">
+            <ul class="card-body list-unstyled">
+                {% block page_checkout_finish_table_header %}
+                    {% sw_include '@Storefront/storefront/component/checkout/cart-header.html.twig' with {
+                        showTaxPrice: showTaxPrice,
+                        showRemoveColumn: false,
+                        showSubtotal: showSubtotal
+                    } %}
+                {% endblock %}
+
+                {% block page_checkout_finish_items %}
+                    {% for lineItem in page.order.nestedLineItems %}
+                        {% block page_checkout_finish_item %}
+                            {% sw_include '@Storefront/storefront/component/line-item/line-item.html.twig' with {
+                                redirectTo: 'frontend.checkout.confirm.page',
+                                showTaxPrice: showTaxPrice,
+                                showRemoveButton: false,
+                                showSubtotal: showSubtotal
+                            } %}
+                        {% endblock %}
+                    {% endfor %}
+                {% endblock %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_checkout_summary_header %}
+    <h2 class="checkout-aside-summary-header">
+        {{ 'checkout.summaryHeader'|trans|sw_sanitize }}
+    </h2>
+{% endblock %}
+
+{% block page_checkout_aside_actions %}
+    <div class="sg-finish-aside-actions">
+        <button type="button" class="btn sg-finish-action-btn" onclick="window.print()">
+            Print receipt
+        </button>
+        <a href="{{ path('frontend.home.page') }}" class="btn sg-finish-action-btn is-secondary">
+            Return to dashboard
+        </a>
+    </div>
+{% endblock %}
+
+{% block page_checkout_additional %}
+    <div class="checkout-additional sg-finish-additional">
+        {% if page.order.customerComment %}
+            <div class="card checkout-card">
+                <div class="card-body">
+                    <div class="card-title">{{ 'checkout.customerCommentHeader'|trans|sw_sanitize }}</div>
+                    <div class="checkout-customer-comment-control">{{ page.order.customerComment|sw_sanitize|nl2br }}</div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="sg-finish-steps">
+            <h3 class="sg-finish-steps-title">What happens next?</h3>
+            <div class="sg-finish-steps-grid">
+                <div class="sg-finish-step">
+                    <span class="sg-finish-step-badge">1</span>
+                    <p>We process your order and prepare your package.</p>
+                </div>
+                <div class="sg-finish-step">
+                    <span class="sg-finish-step-badge">2</span>
+                    <p>You receive the tracking details once the parcel leaves our facility.</p>
+                </div>
+                <div class="sg-finish-step">
+                    <span class="sg-finish-step-badge">3</span>
+                    <p>Your order arrives and you can enjoy your new books.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
