@@ -1,0 +1,85 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget-price.html.twig' %}
+
+{% block buy_widget_price_inner %}
+    {% if product.calculatedPrices|length > 1 %}
+        {% set basePrice = product.calculatedPrice %}
+        {% set baseListPrice = basePrice.listPrice %}
+        {% set isBaseListPrice = baseListPrice and baseListPrice.percentage > 0 %}
+
+        <meta itemprop="price" content="{{ basePrice.unitPrice }}">
+
+        <div class="sg-price-main">
+            <p class="product-detail-price{% if isBaseListPrice %} with-list-price{% endif %}">
+                {{ basePrice.unitPrice|currency }}
+            </p>
+
+            {% if isBaseListPrice %}
+                <span class="product-detail-list-price-wrapper">
+                    <span class="list-price-price">{{ baseListPrice.price|currency }}</span>
+                    <span class="list-price-percentage">
+                        {{ 'detail.listPricePercentage'|trans({'%price%': baseListPrice.percentage })|sw_sanitize }}
+                    </span>
+                </span>
+            {% endif %}
+        </div>
+
+        <details class="sg-tier-prices">
+            <summary class="sg-tier-prices__toggle">
+                <span class="sg-tier-prices__toggle-label">Quantity prices</span>
+                <span class="sg-tier-prices__toggle-icon" aria-hidden="true"></span>
+            </summary>
+
+            <div class="product-block-prices">
+                <table class="table product-block-prices-grid">
+                    <thead class="product-block-prices-head">
+                        <tr class="product-block-prices-row">
+                            <th scope="col" class="product-block-prices-cell">
+                                {{ 'detail.dataColumnQuantity'|trans|sw_sanitize }}
+                            </th>
+                            <th scope="col" class="product-block-prices-cell">
+                                {{ 'detail.dataColumnPrice'|trans|sw_sanitize }}
+                            </th>
+                            {% if product.calculatedPrice.referencePrice %}
+                                <th scope="col" class="product-block-prices-cell">
+                                    {{ 'detail.dataColumnReferencePrice'|trans|sw_sanitize }}
+                                </th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody class="product-block-prices-body">
+                        {% for price in product.calculatedPrices %}
+                            <tr class="product-block-prices-row" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                <th scope="row" class="product-block-prices-cell product-block-prices-cell-thin">
+                                    <meta itemprop="priceCurrency" content="{{ context.currency.translated.shortName }}">
+                                    <meta itemprop="price" content="{{ price.unitPrice }}">
+
+                                    {% if loop.last %}
+                                        {{ 'detail.priceDataInfoFrom'|trans|sw_sanitize }}
+                                        <span class="product-block-prices-quantity">{{ price.quantity }}</span>
+                                    {% else %}
+                                        {{ 'detail.priceDataInfoUntil'|trans|sw_sanitize }}
+                                        <span class="product-block-prices-quantity">{{ price.quantity }}</span>
+                                    {% endif %}
+                                </th>
+
+                                <td class="product-block-prices-cell">
+                                    {% sw_include '@Storefront/storefront/component/product/block-price.html.twig' with {
+                                        price: price
+                                    } only %}
+                                </td>
+
+                                {% if price.referencePrice is not null %}
+                                    <td class="product-block-prices-cell product-block-prices-cell-thin">
+                                        {{ price.referencePrice.price|currency }} / {{ price.referencePrice.referenceUnit }} {{ price.referencePrice.unitName }}
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </details>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

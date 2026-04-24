@@ -315,6 +315,21 @@ body {
     .bb-header-nav {
         display: none;
     }
+
+    /* Hide wishlist/account/cart buttons in header on small screens */
+    .bb-header .bb-actions,
+    .bb-header .bb-action-item,
+    .bb-header .header-wishlist-btn,
+    .bb-header .account-menu-btn,
+    .bb-header .header-cart-btn,
+    .bb-header .header-actions-col {
+        display: none !important;
+    }
+
+    // /* Keep hamburger menu button visible */
+    // .bb-header .bb-menu-toggle {
+    //     display: inline-flex !important;
+    // }
 }
 
 @media (max-width: 575.98px) {
@@ -423,20 +438,26 @@ body {
 
 /* Mobile side menu (offcanvas) */
 @media (max-width: 991.98px) {
-    .navigation-offcanvas {
+    .navigation-offcanvas,
+    .offcanvas:has(.product-detail-review),
+    .offcanvas:has(.product-detail-description) {
         --bs-offcanvas-width: min(91vw, 384px);
         border: 0;
         box-shadow: 0 28px 64px rgba(21, 21, 21, 0.34);
     }
 
-    .navigation-offcanvas .offcanvas-header {
+    .navigation-offcanvas .offcanvas-header,
+    .offcanvas:has(.product-detail-review) .offcanvas-header,
+    .offcanvas:has(.product-detail-description) .offcanvas-header {
         padding: 0;
         border: 0;
         background: linear-gradient(163deg, #e7e7e7 0%, #151515 56%, #e7e7e7 100%);
         box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.12);
     }
 
-    .navigation-offcanvas .offcanvas-close {
+    .navigation-offcanvas .offcanvas-close,
+    .offcanvas:has(.product-detail-review) .offcanvas-close,
+    .offcanvas:has(.product-detail-description) .offcanvas-close {
         width: 100%;
         border: 0;
         border-radius: 0;
@@ -454,7 +475,9 @@ body {
         text-transform: uppercase;
     }
 
-    .navigation-offcanvas .offcanvas-close .icon {
+    .navigation-offcanvas .offcanvas-close .icon,
+    .offcanvas:has(.product-detail-review) .offcanvas-close .icon,
+    .offcanvas:has(.product-detail-description) .offcanvas-close .icon {
         width: 20px;
         height: 20px;
         margin: 0;
@@ -567,8 +590,8 @@ body {
         font-size: 0.92em;
     }
 
-    .is-home-link{
-        display: none !important;
+    .is-home-link {
+        display: flex !important;
     }
 
     .bb-mobile-pagelet-footer {

@@ -1,0 +1,46 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget.html.twig' %}
+
+{% block buy_widget_price_unit %}
+    {% set DIGITAL_CONST = constant('Shopware\\Core\\Content\\Product\\ProductDefinition::TYPE_DIGITAL') %}
+    {% set showQuantitySelectAtTop = not product.type is defined or product.type != DIGITAL_CONST or (product.type == DIGITAL_CONST and product.maxPurchase !== 1) %}
+
+    {% if showQuantitySelectAtTop %}
+        <div class="product-detail-price-unit sg-top-quantity">
+            <span class="price-unit-label sg-top-quantity-label">
+                {{ 'component.product.quantitySelect.label'|trans|sw_sanitize }}
+            </span>
+
+            <div id="product-detail-quantity-group-top-{{ product.id }}"
+                 class="input-group product-detail-quantity-group quantity-selector-group"
+                 data-quantity-selector="true">
+                <button type="button"
+                        class="btn btn-outline-light btn-minus js-btn-minus"
+                        aria-label="{{ 'component.product.quantitySelect.decrease'|trans|striptags }}">
+                    {% sw_icon 'minus' style {size: 'xs'} %}
+                </button>
+
+                <input type="number"
+                       form="productDetailPageBuyProductForm"
+                       name="lineItems[{{ product.id }}][quantity]"
+                       class="form-control js-quantity-selector quantity-selector-group-input"
+                       min="{{ product.minPurchase }}"
+                       max="{{ product.calculatedMaxPurchase }}"
+                       step="{{ product.purchaseSteps }}"
+                       value="{{ product.minPurchase }}"
+                       aria-label="{{ 'component.product.quantitySelect.label'|trans|striptags }}" />
+
+                <button type="button"
+                        class="btn btn-outline-light btn-plus js-btn-plus"
+                        aria-label="{{ 'component.product.quantitySelect.increase'|trans|striptags }}">
+                    {% sw_icon 'plus' style {size: 'xs'} %}
+                </button>
+            </div>
+        </div>
+    {% elseif product.purchaseUnit %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block buy_widget_wishlist %}
+    {# Wishlist button is moved to the product image gallery #}
+{% endblock %}

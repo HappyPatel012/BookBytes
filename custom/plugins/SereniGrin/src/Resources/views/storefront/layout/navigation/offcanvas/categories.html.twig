@@ -1,0 +1,48 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/offcanvas/categories.html.twig' %}
+
+{% block layout_navigation_offcanvas_navigation_categories %}
+    {# @var navigation \Shopware\Core\Content\Category\Tree\Tree #}
+    {% set activeId = shopware.navigation.id ?? context.salesChannel.navigationCategoryId %}
+    {% set isRoot = activeId == context.salesChannel.navigationCategoryId %}
+    {% set children = navigation.getChildren(activeId) %}
+    {% set active = navigation.active %}
+    {% set homeLabel = context.salesChannel.translated.homeName|default('general.homeLink'|trans) %}
+
+    <div class="navigation-offcanvas-content{% if isRoot %} navigation-offcanvas-root{% endif %}">
+        {% if not isRoot %}
+            {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/show-all-link.html.twig' %}
+
+            {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/active-item-link.html.twig' with { item: active } %}
+
+            {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/back-link.html.twig' with { item: active } %}
+        {% else %}
+            {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/general-headline.html.twig' %}
+        {% endif %}
+
+        <ul class="list-unstyled navigation-offcanvas-list">
+            {% if isRoot and context.salesChannel.translated.homeEnabled %}
+                <li class="navigation-offcanvas-list-item">
+                    <a class="navigation-offcanvas-link nav-item nav-link"
+                       href="{{ path('frontend.home.page') }}"
+                       title="{{ homeLabel|striptags }}"
+                       itemprop="url">
+                        <span itemprop="name">{{ homeLabel|sw_sanitize }}</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if not isRoot and active.type != 'folder' %}
+                {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/show-active-link.html.twig' with { item: active } %}
+            {% endif %}
+
+            {# @var item \Shopware\Core\Content\Category\Tree\TreeItem #}
+            {% for item in children.tree %}
+                {% set hasChildren = item.category.visibleChildCount > 0 %}
+
+                {% if item.category.type != 'folder' or hasChildren %}
+                    {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/item-link.html.twig' with { item: item, activeId: activeId } %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

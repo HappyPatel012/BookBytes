@@ -1,0 +1,19 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget-form.html.twig' %}
+
+{% block buy_widget_buy_quantity_container %}
+{% endblock %}
+
+{% block buy_widget_buy_button_container %}
+    <div class="col-12">
+        {% block buy_widget_buy_button %}
+            <div class="d-grid">
+                <button class="btn btn-primary btn-buy"
+                        type="submit"
+                        title="{{ 'detail.addProduct'|trans|striptags }}"
+                        aria-label="{{ 'detail.addProduct'|trans|striptags }}">
+                    {{ 'detail.addProduct'|trans|sw_sanitize }}
+                </button>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
