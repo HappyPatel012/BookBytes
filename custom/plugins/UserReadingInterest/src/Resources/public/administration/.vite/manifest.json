@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/user-reading-interest-BLhsk5Rd.js",
+    "name": "user-reading-interest",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/user-reading-interest-DAo32LPy.css"
+    ]
+  }
+}

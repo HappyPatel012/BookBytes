@@ -1,0 +1,97 @@
+{% block user_reading_interest_list %}
+    <sw-page class="user-reading-interest-list">
+        <template #search-bar>
+            <sw-search-bar
+                initial-search-type="user_reading_interest"
+                :initial-search="searchTerm"
+                @search="onSearch" />
+        </template>
+
+        <template #smart-bar-header>
+            <h2>Reading Interests</h2>
+        </template>
+
+        <template #smart-bar-actions>
+            <sw-button variant="secondary" @click="$router.push({ name: 'user.reading.interest.settings' })">
+                Channel Settings
+            </sw-button>
+            <sw-button variant="primary" @click="onCreateNew">
+                Add Interest
+            </sw-button>
+        </template>
+
+        <template #content>
+            <sw-card-view>
+                <sw-card title="Customer Reading Interests" :isLoading="isLoading">
+                    <sw-entity-listing
+                        v-if="items"
+                        :items="items"
+                        :repository="repository"
+                        :columns="columns"
+                        :show-selection="false"
+                        :allow-inline-edit="false"
+                        :show-actions="true"
+                        :allow-delete="false"
+                        :sort-by="currentSortBy"
+                        :sort-direction="sortDirection"
+                        :natural-sorting="naturalSorting"
+                        :full-page="false"
+                        :isLoading="isLoading"
+                        :total="total"
+                        :page="page"
+                        :limit="limit"
+                        @page-change="onPageChange"
+                        @column-sort="onColumnSort"
+                        @search-term-change="onSearch">
+
+                        <template #column-customer.firstName="{ item }">
+                            {{ item.customer ? (item.customer.firstName + ' ' + item.customer.lastName + ' (' + item.customer.email + ')') : '-' }}
+                        </template>
+
+                        <template #column-createdAt="{ item }">
+                            <sw-time-ago v-if="item.createdAt" :date="item.createdAt" />
+                            <span v-else>-</span>
+                        </template>
+
+                        <template #actions="{ item }">
+                            <sw-context-menu-item @click="onEdit(item)">
+                                Edit
+                            </sw-context-menu-item>
+                            <sw-context-menu-item variant="danger" @click="onDelete(item)">
+                                Delete
+                            </sw-context-menu-item>
+                        </template>
+                    </sw-entity-listing>
+                </sw-card>
+            </sw-card-view>
+        </template>
+
+        <sw-modal
+            v-if="showModal"
+            :title="currentItem.id ? 'Edit Reading Interest' : 'Create Reading Interest'"
+            @modal-close="onCloseModal">
+
+            <sw-entity-single-select
+                v-model:value="currentItem.customerId"
+                entity="customer"
+                label="Customer"
+                placeholder="Select customer"
+                :criteria="customerCriteria" />
+
+            <sw-text-field
+                v-model:value="currentItem.name"
+                label="Interest Name"
+                required />
+
+            <sw-textarea-field
+                v-model:value="currentItem.description"
+                label="Description"
+                placeholder="Optional" />
+
+            <template #modal-footer>
+                <sw-button @click="onCloseModal">Cancel</sw-button>
+                <sw-button variant="primary" :isLoading="isSaving" @click="onSave">Save</sw-button>
+            </template>
+        </sw-modal>
+    </sw-page>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% block page_account_main_content %}
+    {% set interestOptions = [
+        'Mystery',
+        'Horror',
+        'Thriller',
+        'Fantasy',
+        'Science Fiction',
+        'Romance',
+        'Historical Fiction',
+        'Young Adult',
+        'Biography',
+        'Self Help'
+    ] %}
+
+    <div class="bb-account-overview bb-account-reading-interest">
+        <section class="bb-account-hero bb-reading-hero">
+            <div class="bb-hero-text">
+                <div class="bb-hero-kicker">Your Account</div>
+                <h1 class="bb-hero-title">My Reading Interests</h1>
+                <p class="bb-hero-subtitle">Build your personal shelf taste. Add, edit, and remove only your own reading interests.</p>
+            </div>
+            <div class="bb-profile-hero-actions">
+                <a class="btn bb-ghost" href="{{ path('frontend.account.home.page') }}">Overview</a>
+                <a class="btn bb-ghost" href="{{ path('frontend.account.profile.page') }}">Your profile</a>
+                <a class="btn bb-primary" href="{{ path('frontend.account.order.page') }}">Orders</a>
+            </div>
+        </section>
+
+        <section class="bb-card bb-full bb-reading-form-card">
+            <div class="bb-card-head">Add New Interest</div>
+            <div class="bb-card-body">
+                <form method="post" action="{{ path('frontend.account.reading_interest.create') }}" class="bb-reading-form">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-lg-4">
+                            <label class="form-label" for="interestName">Interest Name</label>
+                            <select class="form-select" id="interestName" name="name" required>
+                                <option value="" disabled selected>Select interest category</option>
+                                {% for option in interestOptions %}
+                                    <option value="{{ option }}">{{ option }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label" for="interestDescription">Description (optional)</label>
+                            <input class="form-control" id="interestDescription" name="description" type="text" placeholder="e.g. detective fiction, psychological thrillers" />
+                        </div>
+                        <div class="col-lg-2 d-grid">
+                            <button class="btn bb-primary" type="submit">Add Interest</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="bb-card bb-full bb-reading-list-card">
+            <div class="bb-card-head">Your Interests</div>
+            <div class="bb-card-body">
+                {% if interests.total > 0 %}
+                    <div class="table-responsive bb-reading-table-wrap">
+                        <table class="table align-middle bb-reading-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for interest in interests %}
+                                    <tr>
+                                        <td>
+                                            <select class="form-select form-select-sm" form="update-interest-{{ interest.id }}" name="name" required>
+                                                <option value="" disabled>Select interest category</option>
+                                                {% for option in interestOptions %}
+                                                    <option value="{{ option }}" {% if interest.name == option %}selected{% endif %}>{{ option }}</option>
+                                                {% endfor %}
+                                                {% if interest.name not in interestOptions %}
+                                                    <option value="{{ interest.name }}" selected>{{ interest.name }}</option>
+                                                {% endif %}
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input class="form-control form-control-sm" form="update-interest-{{ interest.id }}" name="description" type="text" value="{{ interest.description }}" placeholder="Optional note" />
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-end gap-2">
+                                                <form id="update-interest-{{ interest.id }}" method="post" action="{{ path('frontend.account.reading_interest.update', { id: interest.id }) }}">
+                                                    <button type="submit" class="btn bb-primary btn-sm">Save</button>
+                                                </form>
+                                                <form method="post" action="{{ path('frontend.account.reading_interest.delete', { id: interest.id }) }}" onsubmit="return confirm('Delete this reading interest?');">
+                                                    <button type="submit" class="btn bb-ghost btn-sm">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="bb-reading-empty">
+                        <p class="bb-muted mb-2">No interests added yet.</p>
+                        <p class="mb-0">Add your first one above to personalize your reading journey.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

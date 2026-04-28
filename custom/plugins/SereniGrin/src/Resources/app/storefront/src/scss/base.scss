@@ -4582,6 +4582,57 @@ body {
 .tab-content {
     margin-top: 20px;
 }
+
+/* Reading Interests page (account) */
+.bb-account-reading-interest .bb-reading-hero {
+    margin-bottom: 20px;
+}
+
+.bb-account-reading-interest .bb-reading-form-card,
+.bb-account-reading-interest .bb-reading-list-card {
+    border: 1px solid #b8babd;
+    background: linear-gradient(180deg, #fcfcfc 0%, #efeff0 100%);
+    box-shadow: 0 14px 28px rgba(21, 21, 21, 0.12);
+}
+
+.bb-account-reading-interest .bb-reading-form-card {
+    margin-bottom: 20px;
+}
+
+.bb-account-reading-interest .bb-reading-form .form-label {
+    color: #2f2a23;
+    font-weight: 700;
+}
+
+.bb-account-reading-interest .bb-reading-form .form-control,
+.bb-account-reading-interest .bb-reading-table .form-control {
+    border: 1px solid #a8aaad;
+    background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
+    color: #151515;
+}
+
+.bb-account-reading-interest .bb-reading-table th {
+    font-size: 1.02rem;
+    color: #151515;
+    border-bottom-color: #9ea1a5;
+}
+
+.bb-account-reading-interest .bb-reading-table td {
+    border-bottom-color: #c9cbcf;
+}
+
+.bb-account-reading-interest .bb-reading-empty {
+    border: 1px dashed #a8aaad;
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 991.98px) {
+    .bb-account-reading-interest .bb-reading-table {
+        min-width: 720px;
+    }
+}
 .blur-elysium-slide-content:has(*:not(:empty)) {
     display: block !important;
 }
