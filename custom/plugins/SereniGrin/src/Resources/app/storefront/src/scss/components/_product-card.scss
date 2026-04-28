@@ -80,12 +80,35 @@
 
 .bb-product-card .bb-product-rating {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
     justify-content: center;
     margin-bottom: 10px;
 }
 
-.bb-product-card .bb-product-rating .icon-review {
+.bb-product-card .bb-product-rating-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.bb-product-card .bb-product-rating-star::before {
+    content: "★";
+    display: inline-block;
+    font-size: 0.92rem;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.bb-product-card .bb-product-rating-star.is-filled::before {
     color: #151515;
+}
+
+.bb-product-card .bb-product-rating-count {
+    font-size: 0.76rem;
+    color: #6c727a;
+    letter-spacing: 0.01em;
 }
 
 .bb-product-card .bb-product-price {

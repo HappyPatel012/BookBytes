@@ -1,0 +1,152 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_inner_container %}
+    {% set cmsPath = 'frontend.cms.page.full' %}
+    {% set contactCmsPageId = config('core.basicInformation.contactPage') %}
+    {% set contactUrl = contactCmsPageId ? path(cmsPath, { id: contactCmsPageId }) : '#' %}
+    {% set navigationRoots = footer.navigation.tree|default([]) %}
+    {% set serviceItems = footer.serviceMenu|default([]) %}
+    {% set contactTextPage = 'footer.serviceContactTextPage'|trans({
+        '%url%': contactUrl
+    }) %}
+    {% set isContactSnippetResolved = contactTextPage != 'footer.serviceContactTextPage' %}
+
+    {% for serviceMenuItem in serviceItems %}
+        {% if serviceMenuItem.cmsPageId == contactCmsPageId and serviceMenuItem.seoUrl %}
+            {% set contactUrl = serviceMenuItem.seoUrl %}
+        {% endif %}
+    {% endfor %}
+
+    {% if navigationRoots|length > 0 %}
+        {% for footerItem in navigationRoots %}
+            {% if footerItem.category.cmsPageId == contactCmsPageId and footerItem.category.seoUrl %}
+                {% set contactUrl = footerItem.category.seoUrl %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% set contactTextPage = 'footer.serviceContactTextPage'|trans({
+        '%url%': contactUrl
+    }) %}
+    {% set isContactSnippetResolved = contactTextPage != 'footer.serviceContactTextPage' %}
+
+    <div class="container bb-footer-shell">
+        <div class="row bb-footer-grid">
+            <div class="col-12 col-lg-4 bb-footer-col bb-footer-brand">
+                <div class="bb-footer-brand-panel">
+                
+                    <p class="bb-footer-tagline">
+                        Your reading journey starts here. Discover handpicked books, timeless classics, and modern stories.
+                    </p>
+
+                    <div class="bb-footer-hotline">
+                        <div class="bb-footer-heading">{{ 'footer.serviceHotlineHeadline'|trans|sw_sanitize }}</div>
+                        <p class="bb-footer-hotline-copy">{{ 'footer.serviceHotline'|trans|sw_sanitize }}</p>
+                        {% if isContactSnippetResolved %}
+                            <div class="bb-footer-contact-text">{{ contactTextPage|raw }}</div>
+                        {% else %}
+                            <a class="bb-footer-contact-link" href="{{ contactUrl }}">
+                                Contact support
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 bb-footer-col">
+                <div class="bb-footer-links-card">
+                    <span class="bb-footer-card-kicker">Explore</span>
+                    <div class="bb-footer-heading">Browse</div>
+                    <ul class="bb-footer-links list-unstyled">
+                        {% if navigationRoots|length > 0 %}
+                            {% for root in navigationRoots %}
+                                {% set category = root.category %}
+                                {% if category.type == 'folder' and root.children|length > 0 %}
+                                    {% for child in root.children|slice(0, 2) %}
+                                        {% if child.category.seoUrl %}
+                                            <li class="bb-footer-link-item">
+                                                <a class="bb-footer-link"
+                                                   href="{{ child.category.seoUrl }}"
+                                                   {% if child.category.shouldOpenInNewTab %}target="_blank"{% endif %}
+                                                   title="{{ child.category.translated.name }}">
+                                                    {{ child.category.translated.name }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% elseif category.type == 'folder' %}
+                                    <li class="bb-footer-link-item">
+                                        <span class="bb-footer-link is-folder">{{ category.translated.name }}</span>
+                                    </li>
+                                {% elseif category.seoUrl %}
+                                    <li class="bb-footer-link-item">
+                                        <a class="bb-footer-link"
+                                           href="{{ category.seoUrl }}"
+                                           {% if category.shouldOpenInNewTab %}target="_blank"{% endif %}
+                                           title="{{ category.translated.name }}">
+                                            {{ category.translated.name }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <li class="bb-footer-link-item">
+                                <a class="bb-footer-link" href="{{ path('frontend.home.page') }}">Home</a>
+                            </li>
+                            <li class="bb-footer-link-item">
+                                <a class="bb-footer-link" href="{{ path('frontend.checkout.cart.page') }}">Cart</a>
+                            </li>
+                            <li class="bb-footer-link-item">
+                                <a class="bb-footer-link" href="{{ path('frontend.account.home.page') }}">My account</a>
+                            </li>
+                            {% if config('core.cart.wishlistEnabled') %}
+                                <li class="bb-footer-link-item">
+                                    <a class="bb-footer-link" href="{{ path('frontend.wishlist.page') }}">Wishlist</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 bb-footer-col">
+                <div class="bb-footer-links-card is-service">
+                    <span class="bb-footer-card-kicker">Support</span>
+                    <div class="bb-footer-heading">Service</div>
+                    <ul class="bb-footer-links list-unstyled">
+                        {% if serviceItems|length > 0 %}
+                            {% for serviceMenuItem in serviceItems %}
+                                <li class="bb-footer-link-item">
+                                    <a class="bb-footer-link"
+                                       href="{{ serviceMenuItem.seoUrl }}"
+                                       {% if serviceMenuItem.shouldOpenInNewTab %}target="_blank"{% endif %}
+                                       title="{{ serviceMenuItem.translated.name }}">
+                                        {{ serviceMenuItem.translated.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="bb-footer-link-item"><a class="bb-footer-link" href="{{ contactUrl }}">Contact</a></li>
+                            <li class="bb-footer-link-item"><a class="bb-footer-link" href="{{ path('frontend.account.home.page') }}">Account help</a></li>
+                            <li class="bb-footer-link-item"><a class="bb-footer-link" href="{{ path('frontend.checkout.cart.page') }}">Order support</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="bb-footer-strip" aria-label="Store highlights">
+            <div class="bb-footer-pill">Secure checkout</div>
+            <div class="bb-footer-pill">Curated collection</div>
+            <div class="bb-footer-pill">Fast delivery support</div>
+        </div>
+
+        {% block layout_footer_payment_shipping_logos %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+
+    {% block layout_footer_bottom %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}

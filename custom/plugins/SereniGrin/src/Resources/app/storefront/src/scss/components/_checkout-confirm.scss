@@ -333,14 +333,34 @@
     margin-bottom: 0.8rem;
 }
 
-.sg-confirm-page .form-check-input {
+.sg-confirm-page .form-check:not(.form-switch) .form-check-input[type="checkbox"],
+.sg-confirm-page input.custom-control-input[type="checkbox"] {
+    -webkit-appearance: auto;
+    appearance: auto;
+    accent-color: #151515;
+    width: 1.1rem;
+    height: 1.1rem;
+    min-width: 1.1rem;
+    min-height: 1.1rem;
+    margin-top: 0.15rem;
     border: 1px solid #9ca1a8;
+    border-radius: 4px;
+    background: #ffffff;
     box-shadow: none;
+    transform: none;
 }
 
-.sg-confirm-page .form-check-input:checked {
-    background-color: #151515;
-    border-color: #151515;
+.sg-confirm-page .form-check:not(.form-switch) .form-check-input[type="checkbox"]::after,
+.sg-confirm-page input.custom-control-input[type="checkbox"]::after {
+    content: none !important;
+}
+
+.sg-confirm-page .form-check:not(.form-switch) .form-check-input[type="checkbox"]:hover,
+.sg-confirm-page .form-check:not(.form-switch) .form-check-input[type="checkbox"]:focus,
+.sg-confirm-page input.custom-control-input[type="checkbox"]:hover,
+.sg-confirm-page input.custom-control-input[type="checkbox"]:focus {
+    border-color: #7f858c;
+    box-shadow: 0 0 0 3px rgba(97, 98, 102, 0.16);
 }
 
 .sg-confirm-page .checkout-confirm-tos-label,
@@ -350,15 +370,35 @@
     color: var(--sg-confirm-soft);
 }
 
+.sg-confirm-page .btn.btn-link-inline,
 .sg-confirm-page .btn-link-inline {
+    display: inline;
+    min-height: 0;
+    height: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    letter-spacing: 0;
+    font-size: inherit;
+    font-weight: 700;
+    text-transform: none;
+    transform: none;
     color: #2f2a23;
     text-decoration: underline;
     text-decoration-color: rgba(47, 42, 35, 0.45);
 }
 
+.sg-confirm-page .btn.btn-link-inline:hover,
+.sg-confirm-page .btn.btn-link-inline:focus,
 .sg-confirm-page .btn-link-inline:hover,
 .sg-confirm-page .btn-link-inline:focus {
     color: #151515;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
     text-decoration-color: #151515;
 }
 
@@ -367,8 +407,13 @@
 .sg-confirm-page .confirm-shipping .btn {
     border: 1px solid #979ca3;
     border-radius: 10px;
+    min-height: 40px;
     background: linear-gradient(180deg, #f8f8f9 0%, #e8e8ea 100%);
     color: #2f2a23;
+    letter-spacing: 0.01em;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-transform: none;
 }
 
 .sg-confirm-page .confirm-address .btn:hover,

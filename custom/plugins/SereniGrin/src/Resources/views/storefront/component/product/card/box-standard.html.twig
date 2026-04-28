@@ -88,13 +88,19 @@
                     {% endif %}
 
                     {% if config('core.listing.showReview') %}
-                        <div class="bb-product-rating">
-                            {% if product.ratingAverage %}
-                                {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
-                                    points: product.ratingAverage,
-                                    style: 'text-primary'
-                                } %}
-                            {% endif %}
+                        {% set ratingAverage = product.ratingAverage|default(0) %}
+                        {% set ratingCount = product.extensions.sgReviewStats.reviewCount|default(0) %}
+
+                        <div class="bb-product-rating" aria-label="{{ ratingCount }} reviews">
+                            <div class="bb-product-rating-stars" aria-hidden="true">
+                                {% for star in 1..5 %}
+                                    <span class="bb-product-rating-star{% if ratingAverage >= star %} is-filled{% endif %}"></span>
+                                {% endfor %}
+                            </div>
+                            <span class="bb-product-rating-count">
+                                {{ ratingCount }}
+                                {{ 'detail.reviewLinkText'|trans({'%count%': ratingCount})|sw_sanitize }}
+                            </span>
                         </div>
                     {% endif %}
 

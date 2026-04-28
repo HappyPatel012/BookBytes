@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const cleanupTransientBackdrops = () => {
+        const hasOpenModal = document.querySelector('.modal.show') !== null;
+        const hasOpenOffcanvas = document.querySelector('.offcanvas.show') !== null;
+
+        // Remove stale modal backdrops when no modal is actually open.
+        if (!hasOpenModal) {
+            document.querySelectorAll('.modal-backdrop').forEach((backdrop) => backdrop.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.removeProperty('padding-right');
+        }
+
+        // Remove stale offcanvas backdrops when no offcanvas is open.
+        if (!hasOpenOffcanvas) {
+            document.querySelectorAll('.offcanvas-backdrop').forEach((backdrop) => backdrop.remove());
+        }
+    };
+
+    cleanupTransientBackdrops();
+    window.addEventListener('pageshow', cleanupTransientBackdrops);
+
     const authButtons = document.querySelectorAll('.sg-auth-tab-btn');
     const authPanels = document.querySelectorAll('.sg-auth-panel');
 

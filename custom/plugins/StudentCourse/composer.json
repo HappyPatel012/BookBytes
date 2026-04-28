@@ -1,0 +1,22 @@
+{
+  "name": "custom/student-course",
+  "description": "Student course listing plugin with storefront pagination",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "require": {
+    "shopware/core": "*",
+    "shopware/storefront": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "StudentCourse\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "StudentCourse\\StudentCourse",
+    "label": {
+      "en-GB": "Student Course",
+      "de-DE": "Student Course"
+    }
+  }
+}

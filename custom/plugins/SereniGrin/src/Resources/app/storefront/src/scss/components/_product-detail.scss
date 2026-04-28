@@ -178,11 +178,13 @@
     margin-bottom: 6px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-reviews {
+.sg-product-detail-page .product-detail-reviews,
+.offcanvas .product-detail-reviews {
     margin-bottom: 10px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-reviews .icon-review {
+.sg-product-detail-page .product-detail-reviews .icon-review,
+.offcanvas .product-detail-reviews .icon-review {
     color: #151515;
 }
 
@@ -255,16 +257,44 @@
 }
 
 .sg-product-detail-page .product-detail-tax-link,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-reviews-link {
+.sg-product-detail-page .product-detail-reviews-link,
+.offcanvas .product-detail-reviews-link {
     color: var(--sg-detail-soft);
     text-decoration: underline;
     text-decoration-color: rgba(75, 64, 54, 0.45);
 }
 
 .sg-product-detail-page .product-detail-tax-link:hover,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-reviews-link:hover {
+.sg-product-detail-page .product-detail-reviews-link:hover,
+.offcanvas .product-detail-reviews-link:hover {
     color: #151515;
     text-decoration-color: #151515;
+}
+
+/* Keep captcha/review widgets from being squeezed into tiny clipped boxes */
+.sg-product-detail-page .product-detail-review .basic-captcha,
+.sg-product-detail-page .product-detail-review .basic-captcha-content,
+.sg-product-detail-page .product-detail-review .basic-captcha-content-code,
+.sg-product-detail-page .product-detail-review .captcha-google-re-captcha-v2,
+.sg-product-detail-page .product-detail-review .captcha-google-re-captcha-v3,
+.sg-product-detail-page .product-detail-review .grecaptcha-v2-container,
+.sg-product-detail-page .product-detail-review .g-recaptcha {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: visible;
+    background: transparent;
+}
+.product-detail-review{
+    width: auto;
+    height: auto;
+}
+.sg-product-detail-page .product-detail-review iframe[src*="recaptcha"],
+.sg-product-detail-page .product-detail-review iframe[src*="google.com/recaptcha"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 78px;
+    border: 0;
 }
 
 .sg-product-detail-page .product-detail-delivery-information {
@@ -437,12 +467,11 @@
     max-width: 72ch;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-content {
+.sg-product-detail-page .product-detail-review .product-detail-review-content {
     --bs-gutter-x: 18px;
-    gap: 10px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-widget {
+.sg-product-detail-page .product-detail-review .product-detail-review-widget {
     border: 1px solid #bec3cb;
     border-radius: 16px;
     background: linear-gradient(180deg, #fdfdfe 0%, #f1f3f6 100%);
@@ -451,70 +480,70 @@
     top: 12px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-info {
+.sg-product-detail-page .product-detail-review .product-detail-review-info {
     margin-bottom: 6px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-title {
+.sg-product-detail-page .product-detail-review .product-detail-review-title {
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: #181512;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-rating .h6 {
+.sg-product-detail-page .product-detail-review .product-detail-review-rating .h6 {
     margin: 4px 0 0;
     color: #2a2420;
     font-weight: 700;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-widget hr {
+.sg-product-detail-page .product-detail-review .product-detail-review-widget hr {
     margin: 14px 0;
     border-color: #c7ccd3;
     opacity: 1;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-filter {
+.sg-product-detail-page .product-detail-review .product-detail-review-filter {
     align-items: center;
     margin: 0 0 10px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-checkbox .form-check {
+.sg-product-detail-page .product-detail-review .product-detail-review-checkbox .form-check {
     margin: 0;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-checkbox .form-check-label,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-checkbox .custom-control-label {
+.sg-product-detail-page .product-detail-review .product-detail-review-checkbox .form-check-label,
+.sg-product-detail-page .product-detail-review .product-detail-review-checkbox .custom-control-label {
     color: #2f2a23;
     font-weight: 600;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-progressbar-container {
+.sg-product-detail-page .product-detail-review .product-detail-review-progressbar-container {
     height: 14px;
     border-radius: 999px;
     background: #e4e7eb;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-progressbar-bar {
+.sg-product-detail-page .product-detail-review .product-detail-review-progressbar-bar {
     background: linear-gradient(90deg, #d7a838 0%, #efc95c 100%);
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-share p {
+.sg-product-detail-page .product-detail-review .product-detail-review-share p {
     margin: 0;
     color: #4d453d;
     font-weight: 700;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-teaser .h4 {
+.sg-product-detail-page .product-detail-review .product-detail-review-teaser .h4 {
     font-size: 1.75rem;
     color: #1f1a14;
     margin-bottom: 8px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-teaser p {
+.sg-product-detail-page .product-detail-review .product-detail-review-teaser p {
     color: #4c4339;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-teaser-btn {
+.sg-product-detail-page .product-detail-review .product-detail-review-teaser-btn {
     border: 1px solid #1c1c1c;
     border-radius: 12px;
     min-height: 44px;
@@ -522,12 +551,12 @@
     background: linear-gradient(160deg, #ececec 0%, #151515 57%, #ececec 100%);
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-main .alert {
+.sg-product-detail-page .product-detail-review .product-detail-review-main .alert {
     border-radius: 12px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form {
+.sg-product-detail-page .product-detail-review .product-detail-review-login,
+.sg-product-detail-page .product-detail-review .product-detail-review-form {
     border: 1px solid #bcc2cb;
     border-radius: 16px;
     background: linear-gradient(180deg, #fdfdfe 0%, #f2f4f7 100%);
@@ -536,21 +565,21 @@
     margin-bottom: 12px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login .card-title,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form label {
+.sg-product-detail-page .product-detail-review .product-detail-review-login .card-title,
+.sg-product-detail-page .product-detail-review .product-detail-review-form label {
     color: #181512;
     font-weight: 700;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login .login-form-description,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .form-text {
+.sg-product-detail-page .product-detail-review .product-detail-review-login .login-form-description,
+.sg-product-detail-page .product-detail-review .product-detail-review-form .form-text {
     color: #544b41;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login .form-control,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .form-control,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .form-select,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form textarea {
+.sg-product-detail-page .product-detail-review .product-detail-review-login .form-control,
+.sg-product-detail-page .product-detail-review .product-detail-review-form .form-control,
+.sg-product-detail-page .product-detail-review .product-detail-review-form .form-select,
+.sg-product-detail-page .product-detail-review .product-detail-review-form textarea {
     border: 1px solid #aeb5be;
     border-radius: 12px;
     background: #ffffff;
@@ -558,31 +587,31 @@
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login .form-control:focus,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .form-control:focus,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form textarea:focus {
+.sg-product-detail-page .product-detail-review .product-detail-review-login .form-control:focus,
+.sg-product-detail-page .product-detail-review .product-detail-review-form .form-control:focus,
+.sg-product-detail-page .product-detail-review .product-detail-review-form textarea:focus {
     border-color: #727b86;
     box-shadow: 0 0 0 0.16rem rgba(21, 21, 21, 0.12);
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .product-detail-review-form-rating {
+.sg-product-detail-page .product-detail-review .product-detail-review-form .product-detail-review-form-rating {
     border: 1px solid #c3c8d0;
     border-radius: 12px;
     background: linear-gradient(180deg, #fbfcfd 0%, #f2f4f7 100%);
     padding: 12px 12px 8px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .product-detail-review-form-rating-text {
+.sg-product-detail-page .product-detail-review .product-detail-review-form .product-detail-review-form-rating-text {
     margin: 4px 0 0;
     color: #2e2923;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .product-detail-review-form-content textarea {
+.sg-product-detail-page .product-detail-review .product-detail-review-form .product-detail-review-form-content textarea {
     min-height: 190px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login .btn-primary,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .btn-review-submit {
+.sg-product-detail-page .product-detail-review .product-detail-review-login .btn-primary,
+.sg-product-detail-page .product-detail-review .product-detail-review-form .btn-review-submit {
     border: 1px solid #1c1c1c;
     border-radius: 11px;
     min-height: 42px;
@@ -590,8 +619,8 @@
     background: linear-gradient(160deg, #ececec 0%, #151515 57%, #ececec 100%);
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login .btn-outline-secondary,
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form .product-detail-review-cancel {
+.sg-product-detail-page .product-detail-review .product-detail-review-login .btn-outline-secondary,
+.sg-product-detail-page .product-detail-review .product-detail-review-form .product-detail-review-cancel {
     border: 1px solid #9ea5ae;
     border-radius: 11px;
     min-height: 42px;
@@ -600,13 +629,13 @@
     color: #2f2a23;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form-footer {
+.sg-product-detail-page .product-detail-review .product-detail-review-form-footer {
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid #c4cad2;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-actions {
+.sg-product-detail-page .product-detail-review .product-detail-review-actions {
     padding: 10px 12px;
     margin: 0px 10px;
     border: 1px solid #c2c7cf;
@@ -614,45 +643,45 @@
     background: linear-gradient(180deg, #fafbfc 0%, #f0f2f5 100%);
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-language .form-switch {
+.sg-product-detail-page .product-detail-review .product-detail-review-language .form-switch {
     display: flex;
     align-items: center;
     gap: 10px;
     margin: 0;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-language .form-check-label {
+.sg-product-detail-page .product-detail-review .product-detail-review-language .form-check-label {
     margin: 0;
     color: #3d352d;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-sortby-form {
+.sg-product-detail-page .product-detail-review .product-detail-review-sortby-form {
     display: flex;
     align-items: center;
     gap: 8px;
     margin: 0;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-sortby-label {
+.sg-product-detail-page .product-detail-review .product-detail-review-sortby-label {
     margin: 0;
     color: #3d352d;
     width: 100%;
     font-weight: 700;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-sortby .form-select {
+.sg-product-detail-page .product-detail-review .product-detail-review-sortby .form-select {
     min-width: 140px;
     border-color: #9ea5ae;
     border-radius: 10px;
     background-color: #f8f9fb;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-counter {
+.sg-product-detail-page .product-detail-review .product-detail-review-counter {
     color: #453d35;
     margin: 10px 0 12px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-list {
+.sg-product-detail-page .product-detail-review .product-detail-review-list {
     max-height: 720px;
     overflow-y: auto;
     padding-right: 6px;
@@ -660,30 +689,30 @@
     scrollbar-color: #7f878f #e3e7ec;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-list::-webkit-scrollbar {
+.sg-product-detail-page .product-detail-review .product-detail-review-list::-webkit-scrollbar {
     width: 10px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-list::-webkit-scrollbar-track {
+.sg-product-detail-page .product-detail-review .product-detail-review-list::-webkit-scrollbar-track {
     background: #e3e7ec;
     border-radius: 999px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-list::-webkit-scrollbar-thumb {
+.sg-product-detail-page .product-detail-review .product-detail-review-list::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #959ca5 0%, #616972 100%);
     border-radius: 999px;
     border: 2px solid #e3e7ec;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-list::-webkit-scrollbar-thumb:hover {
+.sg-product-detail-page .product-detail-review .product-detail-review-list::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #7d8590 0%, #4f5660 100%);
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-list-content {
+.sg-product-detail-page .product-detail-review .product-detail-review-list-content {
     margin-bottom: 12px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-item {
+.sg-product-detail-page .product-detail-review .product-detail-review-item {
     border: 1px solid #bdc3cc;
     border-radius: 14px;
     background: linear-gradient(180deg, #ffffff 0%, #f6f7f9 100%);
@@ -691,38 +720,80 @@
     padding: 14px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-item-date small {
+.sg-product-detail-page .product-detail-review .product-detail-review-item-date small {
     color: #6a635a;
     font-weight: 600;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-item-title .h5 {
+.sg-product-detail-page .product-detail-review .product-detail-review-item-title .h5 {
     color: #151515;
     margin-bottom: 6px;
     font-size: 1.55rem;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-item-content {
+.sg-product-detail-page .product-detail-review .product-detail-review-item-content {
     color: #2f2a23;
     line-height: 1.7;
     margin: 6px 0 2px;
     font-size: 1.12rem;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-pagination {
+.sg-product-detail-page .product-detail-review .product-detail-review-pagination {
     margin-top: 16px;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-pagination .page-link {
+.sg-product-detail-page .product-detail-review .product-detail-review-pagination .page-link {
     border-color: #aeb4bd;
     color: #2f2a23;
     background: #f9fafb;
 }
 
-.sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-pagination .page-item.active .page-link {
+.sg-product-detail-page .product-detail-review .product-detail-review-pagination .page-item.active .page-link {
     border-color: #151515;
     background: #151515;
     color: #fff;
+}
+
+/* Stability fix: keep review tab content readable on laptop/tablet */
+.sg-product-detail-page .product-detail-review.tab-pane-container {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.sg-product-detail-page .product-detail-review .product-detail-review-content {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    overflow: visible;
+}
+
+.sg-product-detail-page .product-detail-review .product-detail-review-content > .col-sm-4,
+.sg-product-detail-page .product-detail-review .product-detail-review-content > .col {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 0;
+}
+
+@media (min-width: 768px) {
+    .sg-product-detail-page .product-detail-review .product-detail-review-content > .col-sm-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+
+    .sg-product-detail-page .product-detail-review .product-detail-review-content > .col {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+}
+
+/* Remove unexpected standalone embeds/widgets inside review tab */
+.sg-product-detail-page .product-detail-review > iframe,
+.sg-product-detail-page .product-detail-review .product-detail-review-content > iframe,
+.sg-product-detail-page .product-detail-review .product-detail-tabs-content > iframe {
+    display: none !important;
 }
 
 @media (max-width: 991.98px) {
@@ -757,31 +828,31 @@
         padding: 14px 12px 14px;
     }
 
-    .sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-widget {
+    .sg-product-detail-page .product-detail-review .product-detail-review-widget {
         position: static;
         margin-bottom: 12px;
     }
 
-    .sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-actions {
+    .sg-product-detail-page .product-detail-review .product-detail-review-actions {
         row-gap: 10px;
     }
 
-    .sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-sortby-form {
+    .sg-product-detail-page .product-detail-review .product-detail-review-sortby-form {
         justify-content: space-between;
         width: 100%;
     }
 
-    .sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-sortby .form-select {
+    .sg-product-detail-page .product-detail-review .product-detail-review-sortby .form-select {
         min-width: 0;
         width: auto;
     }
 
-    .sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-login,
-    .sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-form {
+    .sg-product-detail-page .product-detail-review .product-detail-review-login,
+    .sg-product-detail-page .product-detail-review .product-detail-review-form {
         padding: 12px;
     }
 
-    .sg-product-detail-page .product-detail-review, .offcanvas .product-detail-review-list {
+    .sg-product-detail-page .product-detail-review .product-detail-review-list {
         max-height: none;
         overflow: visible;
         padding-right: 0;
