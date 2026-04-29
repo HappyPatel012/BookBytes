@@ -3,6 +3,7 @@
 namespace UserReadingInterest\Migration;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ParameterType;
 use Shopware\Core\Framework\Migration\MigrationStep;
 
 class Migration1745823000NormalizeInterestOptionsConfig extends MigrationStep
@@ -32,7 +33,7 @@ class Migration1745823000NormalizeInterestOptionsConfig extends MigrationStep
                     'configuration_value' => json_encode(['_value' => $normalized], JSON_THROW_ON_ERROR),
                 ],
                 ['id' => hex2bin((string) $row['id'])],
-                ['configuration_value' => \PDO::PARAM_STR]
+                ['configuration_value' => ParameterType::STRING]
             );
         }
     }
@@ -66,4 +67,3 @@ class Migration1745823000NormalizeInterestOptionsConfig extends MigrationStep
         ));
     }
 }
-

@@ -6,7 +6,6 @@
 
         <template #smart-bar-actions>
             <sw-button-process
-                :is-loading="isSaving"
                 variant="primary"
                 @click="onSave">
                 Save
@@ -14,19 +13,10 @@
         </template>
 
         <template #content>
-            <sw-card-view>
-                <sw-card title="Allowed Sales Channels" :isLoading="isLoading">
-                    <p class="sw-field__help-text" style="margin-bottom: 12px;">
-                        Select channels where Reading Interests are enabled. If empty, feature is disabled everywhere.
-                    </p>
-
-                    <sw-entity-multi-id-select
-                        v-model:value="allowedSalesChannels"
-                        entity="sales_channel"
-                        label="Allowed sales channels"
-                        placeholder="Select one or more sales channels" />
-                </sw-card>
-            </sw-card-view>
+            <sw-system-config
+                ref="systemConfig"
+                domain="UserReadingInterest.config"
+                :sales-channel-switchable="false" />
         </template>
     </sw-page>
 {% endblock %}

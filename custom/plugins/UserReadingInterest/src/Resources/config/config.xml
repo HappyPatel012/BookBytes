@@ -31,11 +31,5 @@
             <placeholder>Type option and press Enter or comma</placeholder>
         </component>
 
-        <input-field type="text">
-            <name>customOptionLabel</name>
-            <label>Custom option label</label>
-            <label lang="de-DE">Bezeichnung für benutzerdefinierte Option</label>
-            <defaultValue>Other (custom)</defaultValue>
-        </input-field>
     </card>
 </config>

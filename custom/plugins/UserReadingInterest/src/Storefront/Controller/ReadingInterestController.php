@@ -27,7 +27,7 @@ class ReadingInterestController extends StorefrontController
     }
 
     #[Route(path: '/account/reading-interests', name: 'frontend.account.reading_interest.page', methods: ['GET'])]
-    public function index(SalesChannelContext $salesChannelContext): Response
+    public function index(Request $request, SalesChannelContext $salesChannelContext): Response
     {
         if (!$this->isEnabled($salesChannelContext->getSalesChannelId())) {
             return $this->redirectToRoute('frontend.account.home.page');
@@ -45,12 +45,12 @@ class ReadingInterestController extends StorefrontController
         $interests = $this->readingInterestRepository->search($criteria, $salesChannelContext->getContext());
 
         $interestOptions = $this->getInterestOptions($salesChannelContext);
-        $customOptionLabel = (string) ($this->systemConfigService->get('UserReadingInterest.config.customOptionLabel') ?? 'Other (custom)');
+        $editInterestId = (string) $request->query->get('edit', '');
 
         return $this->renderStorefront('@Storefront/storefront/page/account/reading-interest/index.html.twig', [
             'interests' => $interests,
             'interestOptions' => $interestOptions,
-            'customOptionLabel' => $customOptionLabel,
+            'editInterestId' => $editInterestId,
             'activeRoute' => 'frontend.account.reading_interest.page',
         ]);
     }
