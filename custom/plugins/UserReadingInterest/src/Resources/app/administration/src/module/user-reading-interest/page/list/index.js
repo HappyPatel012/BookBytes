@@ -57,6 +57,7 @@ Shopware.Component.register('user-reading-interest-list', {
         customerCriteria() {
             return new Criteria(1, 10);
         },
+
     },
 
     created() {
