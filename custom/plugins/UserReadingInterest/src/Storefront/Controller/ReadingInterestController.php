@@ -6,6 +6,7 @@ use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
@@ -20,7 +21,8 @@ class ReadingInterestController extends StorefrontController
 {
     public function __construct(
         private readonly EntityRepository $readingInterestRepository,
-        private readonly SystemConfigService $systemConfigService
+        private readonly SystemConfigService $systemConfigService,
+        private readonly EntityRepository $categoryRepository
     ) {
     }
 
@@ -42,8 +44,13 @@ class ReadingInterestController extends StorefrontController
 
         $interests = $this->readingInterestRepository->search($criteria, $salesChannelContext->getContext());
 
+        $interestOptions = $this->getInterestOptions($salesChannelContext);
+        $customOptionLabel = (string) ($this->systemConfigService->get('UserReadingInterest.config.customOptionLabel') ?? 'Other (custom)');
+
         return $this->renderStorefront('@Storefront/storefront/page/account/reading-interest/index.html.twig', [
             'interests' => $interests,
+            'interestOptions' => $interestOptions,
+            'customOptionLabel' => $customOptionLabel,
             'activeRoute' => 'frontend.account.reading_interest.page',
         ]);
     }
@@ -60,7 +67,7 @@ class ReadingInterestController extends StorefrontController
             return $this->redirectToRoute('frontend.account.login.page');
         }
 
-        $name = trim((string) $request->request->get('name', ''));
+        $name = $this->resolveInterestName($request);
         $description = trim((string) $request->request->get('description', ''));
 
         if ($name === '') {
@@ -99,7 +106,7 @@ class ReadingInterestController extends StorefrontController
             return $this->redirectToRoute('frontend.account.reading_interest.page');
         }
 
-        $name = trim((string) $request->request->get('name', ''));
+        $name = $this->resolveInterestName($request);
         $description = trim((string) $request->request->get('description', ''));
 
         if ($name === '') {
@@ -166,5 +173,78 @@ class ReadingInterestController extends StorefrontController
         }
 
         return \in_array($salesChannelId, $allowedSalesChannels, true);
+    }
+
+    private function resolveInterestName(Request $request): string
+    {
+        $name = trim((string) $request->request->get('name', ''));
+
+        if ($name !== '__custom__') {
+            return $name;
+        }
+
+        return trim((string) $request->request->get('customName', ''));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function getInterestOptions(SalesChannelContext $salesChannelContext): array
+    {
+        $options = [];
+
+        foreach ($this->normalizeManualInterestOptions(
+            $this->systemConfigService->get('UserReadingInterest.config.interestOptions')
+        ) as $value) {
+            $options[] = $value;
+        }
+
+        $manualCategoryIds = $this->systemConfigService->get('UserReadingInterest.config.manualCategories');
+        if (\is_array($manualCategoryIds) && $manualCategoryIds !== []) {
+            $validCategoryIds = array_values(array_filter($manualCategoryIds, static fn ($id): bool => \is_string($id) && Uuid::isValid($id)));
+            if ($validCategoryIds !== []) {
+                $criteria = new Criteria($validCategoryIds);
+                $criteria->setLimit(500);
+                $criteria->addSorting(new FieldSorting('name', FieldSorting::ASCENDING));
+
+                $categories = $this->categoryRepository->search($criteria, $salesChannelContext->getContext());
+                foreach ($categories as $category) {
+                    $name = trim((string) ($category->getTranslation('name') ?? $category->get('name') ?? ''));
+                    if ($name !== '') {
+                        $options[] = $name;
+                    }
+                }
+            }
+        }
+
+        $unique = array_values(array_unique($options));
+        sort($unique, SORT_NATURAL | SORT_FLAG_CASE);
+
+        return $unique;
+    }
+
+    /**
+     * @param mixed $configuredOptions
+     *
+     * @return list<string>
+     */
+    private function normalizeManualInterestOptions(mixed $configuredOptions): array
+    {
+        if (\is_array($configuredOptions)) {
+            return array_values(array_filter(
+                array_map(static fn ($value): string => trim((string) $value), $configuredOptions),
+                static fn ($value): bool => $value !== ''
+            ));
+        }
+
+        $manual = trim((string) ($configuredOptions ?? ''));
+        if ($manual === '') {
+            return [];
+        }
+
+        return array_values(array_filter(
+            array_map(static fn ($value): string => trim((string) $value), preg_split('/\r\n|\r|\n/', $manual) ?: []),
+            static fn ($value): bool => $value !== ''
+        ));
     }
 }

@@ -1,18 +1,9 @@
 {% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
 
 {% block page_account_main_content %}
-    {% set interestOptions = [
-        'Mystery',
-        'Horror',
-        'Thriller',
-        'Fantasy',
-        'Science Fiction',
-        'Romance',
-        'Historical Fiction',
-        'Young Adult',
-        'Biography',
-        'Self Help'
-    ] %}
+    {% set interestOptions = interestOptions|default([]) %}
+    {% set allowCustomInterest = allowCustomInterest|default(true) %}
+    {% set customOptionLabel = customOptionLabel|default('Other (custom)') %}
 
     <div class="bb-account-overview bb-account-reading-interest">
         <section class="bb-account-hero bb-reading-hero">
@@ -40,9 +31,18 @@
                                 {% for option in interestOptions %}
                                     <option value="{{ option }}">{{ option }}</option>
                                 {% endfor %}
+                                {% if allowCustomInterest %}
+                                    <option value="__custom__">{{ customOptionLabel }}</option>
+                                {% endif %}
                             </select>
                         </div>
-                        <div class="col-lg-6">
+                        {% if allowCustomInterest %}
+                            <div class="col-lg-3">
+                                <label class="form-label" for="interestCustomName">Custom Interest (optional)</label>
+                                <input class="form-control" id="interestCustomName" name="customName" type="text" placeholder="Type custom category" />
+                            </div>
+                        {% endif %}
+                        <div class="col-lg-{{ allowCustomInterest ? '4' : '6' }}">
                             <label class="form-label" for="interestDescription">Description (optional)</label>
                             <input class="form-control" id="interestDescription" name="description" type="text" placeholder="e.g. detective fiction, psychological thrillers" />
                         </div>
@@ -76,13 +76,26 @@
                                                 {% for option in interestOptions %}
                                                     <option value="{{ option }}" {% if interest.name == option %}selected{% endif %}>{{ option }}</option>
                                                 {% endfor %}
-                                                {% if interest.name not in interestOptions %}
+                                                {% if allowCustomInterest %}
+                                                    <option value="__custom__" {% if interest.name not in interestOptions %}selected{% endif %}>{{ customOptionLabel }}</option>
+                                                {% elseif interest.name not in interestOptions %}
                                                     <option value="{{ interest.name }}" selected>{{ interest.name }}</option>
                                                 {% endif %}
                                             </select>
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-sm" form="update-interest-{{ interest.id }}" name="description" type="text" value="{{ interest.description }}" placeholder="Optional note" />
+                                            {% if allowCustomInterest %}
+                                                <div class="row g-2">
+                                                    <div class="col-6">
+                                                        <input class="form-control form-control-sm" form="update-interest-{{ interest.id }}" name="customName" type="text" value="{{ interest.name not in interestOptions ? interest.name : '' }}" placeholder="Custom category (optional)" />
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input class="form-control form-control-sm" form="update-interest-{{ interest.id }}" name="description" type="text" value="{{ interest.description }}" placeholder="Optional note" />
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <input class="form-control form-control-sm" form="update-interest-{{ interest.id }}" name="description" type="text" value="{{ interest.description }}" placeholder="Optional note" />
+                                            {% endif %}
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-end gap-2">

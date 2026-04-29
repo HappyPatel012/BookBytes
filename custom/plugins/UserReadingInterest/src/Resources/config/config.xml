@@ -12,5 +12,30 @@
             <helpText>Select the sales channels where reading interests should be enabled.</helpText>
             <helpText lang="de-DE">Wählen Sie die Verkaufskanäle aus, in denen Leseinteressen aktiv sein sollen.</helpText>
         </component>
+
+        <component name="sw-entity-multi-id-select">
+            <name>manualCategories</name>
+            <entity>category</entity>
+            <label>Manual categories</label>
+            <label lang="de-DE">Manuelle Kategorien</label>
+            <helpText>Select categories for manual assignment mode.</helpText>
+            <helpText lang="de-DE">Kategorien für den manuellen Zuweisungsmodus auswählen.</helpText>
+        </component>
+
+        <component name="sw-tagged-field">
+            <name>interestOptions</name>
+            <label>Interest dropdown options (manual)</label>
+            <label lang="de-DE">Interessen-Dropdown-Optionen (manuell)</label>
+            <helpText>Add options as tags. Type a value, then press Enter or comma. These options are merged with selected Manual categories.</helpText>
+            <helpText lang="de-DE">Optionen als Tags hinzufügen. Wert eingeben und Enter oder Komma drücken. Diese Optionen werden mit den ausgewählten manuellen Kategorien zusammengeführt.</helpText>
+            <placeholder>Type option and press Enter or comma</placeholder>
+        </component>
+
+        <input-field type="text">
+            <name>customOptionLabel</name>
+            <label>Custom option label</label>
+            <label lang="de-DE">Bezeichnung für benutzerdefinierte Option</label>
+            <defaultValue>Other (custom)</defaultValue>
+        </input-field>
     </card>
 </config>

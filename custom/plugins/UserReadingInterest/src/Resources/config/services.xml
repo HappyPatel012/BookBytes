@@ -11,6 +11,7 @@
         <service id="UserReadingInterest\Storefront\Controller\ReadingInterestController" public="true">
             <argument type="service" id="user_reading_interest.repository" />
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="category.repository" />
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

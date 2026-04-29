@@ -3,11 +3,11 @@
   "entryPoints": {
     "user-reading-interest": {
       "css": [
-        "/bundles/userreadinginterest/administration/assets/user-reading-interest-DAo32LPy.css"
+        "/bundles/userreadinginterest/administration/assets/user-reading-interest-DgspsIfQ.css"
       ],
       "dynamic": [],
       "js": [
-        "/bundles/userreadinginterest/administration/assets/user-reading-interest-BLhsk5Rd.js"
+        "/bundles/userreadinginterest/administration/assets/user-reading-interest-Cb-WcchG.js"
       ],
       "legacy": false,
       "preload": []

@@ -62,7 +62,20 @@
                             :class="'sw-system-config--field-' + kebabCase(element.name)"
                         >
                             <template #content="props">
+                                <sw-tagged-field
+                                    v-if="isInterestOptionsField(element.name)"
+                                    class="user-reading-interest-options-tags"
+                                    :key="props.isInheritField + props.isInherited"
+                                    :disabled="props.isInherited"
+                                    :value="interestOptionsTextToTags(props.currentValue)"
+                                    :label="getMeteorElementBind(element, props).label"
+                                    :help-text="getMeteorElementBind(element, props).helpText"
+                                    placeholder="Type option and press Enter or comma"
+                                    :add-on-key="['enter', ',']"
+                                    @update:value="onInterestOptionsTagsChange($event, props)"
+                                />
                                 <sw-form-field-renderer
+                                    v-else
                                     v-if="props"
                                     v-bind="getMeteorElementBind(element, props)"
                                     v-on="getMeteorElementEventsHandler(element, props)"
@@ -81,7 +94,20 @@
                             :class="'sw-system-config--field-' + kebabCase(getElementBind(element).name)"
                         >
                             <template #content="props">
+                                <sw-tagged-field
+                                    v-if="isInterestOptionsField(getElementBind(element).name)"
+                                    class="user-reading-interest-options-tags"
+                                    :key="props.isInheritField + props.isInherited"
+                                    :disabled="props.isInherited"
+                                    :value="interestOptionsTextToTags(props.currentValue)"
+                                    :label="getElementBind(element, props).label"
+                                    :help-text="getElementBind(element, props).helpText"
+                                    placeholder="Type option and press Enter or comma"
+                                    :add-on-key="['enter', ',']"
+                                    @update:value="onInterestOptionsTagsChange($event, props)"
+                                />
                                 <sw-form-field-renderer
+                                    v-else
                                     v-bind="getElementBind(element, props)"
                                     :key="props.isInheritField + props.isInherited"
                                     :disabled="props.isInherited"

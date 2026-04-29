@@ -51,9 +51,9 @@
     <template #default>
         <sw-system-config
             ref="systemConfig"
+            class="uri-hide-sales-channel-switch"
             :domain="domain"
-            sales-channel-switchable
-            :sales-channel-id="salesChannelId"
+            :sales-channel-switchable="false"
         />
     </template>
 </sw-meteor-page>
