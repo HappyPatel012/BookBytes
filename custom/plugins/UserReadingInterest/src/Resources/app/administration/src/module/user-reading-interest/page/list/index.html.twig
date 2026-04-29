@@ -15,6 +15,9 @@
             <sw-button variant="secondary" @click="$router.push({ name: 'user.reading.interest.settings' })">
                 Channel Settings
             </sw-button>
+            <sw-button variant="secondary" :isLoading="isExporting" @click="onExportCsv">
+                Export CSV
+            </sw-button>
             <sw-button variant="primary" @click="onCreateNew">
                 Add Interest
             </sw-button>

@@ -17,6 +17,10 @@ Shopware.Component.register('user-reading-interest-list', {
         return {
             items: null,
             isLoading: false,
+            isExporting: false,
+            page: 1,
+            limit: 10,
+            total: 0,
             sortBy: 'createdAt',
             naturalSorting: false,
             sortDirection: 'DESC',
@@ -51,7 +55,7 @@ Shopware.Component.register('user-reading-interest-list', {
         },
 
         customerCriteria() {
-            return new Criteria(1, 25);
+            return new Criteria(1, 10);
         },
     },
 
@@ -80,7 +84,9 @@ Shopware.Component.register('user-reading-interest-list', {
             });
         },
 
-        onPageChange() {
+        onPageChange({ page = 1, limit = 10 } = {}) {
+            this.page = page;
+            this.limit = limit;
             this.getList();
         },
 
@@ -154,6 +160,125 @@ Shopware.Component.register('user-reading-interest-list', {
             }).catch(() => {
                 this.createNotificationError({ message: 'Could not delete reading interest.' });
             });
+        },
+
+        createExportCriteria(page, limit) {
+            const criteria = new Criteria(page, limit);
+            criteria.setTerm(this.searchTerm);
+            criteria.addAssociation('customer');
+            criteria.addSorting(Criteria.sort(this.sortBy, this.sortDirection, this.naturalSorting));
+
+            return criteria;
+        },
+
+        async fetchAllInterestsForExport() {
+            const pageSize = 500;
+            let page = 1;
+            let total = 0;
+            const allItems = [];
+
+            do {
+                const result = await this.repository.search(
+                    this.createExportCriteria(page, pageSize),
+                    Shopware.Context.api
+                );
+
+                total = result.total || 0;
+
+                result.forEach((item) => {
+                    allItems.push(item);
+                });
+
+                page += 1;
+
+                if (result.length < pageSize) {
+                    break;
+                }
+            } while (allItems.length < total);
+
+            return allItems;
+        },
+
+        escapeCsvValue(value) {
+            const stringValue = value === null || value === undefined ? '' : String(value);
+            const escaped = stringValue.replace(/"/g, '""');
+
+            if (/[",\n\r]/.test(escaped)) {
+                return `"${escaped}"`;
+            }
+
+            return escaped;
+        },
+
+        formatDate(value) {
+            if (!value) {
+                return '';
+            }
+
+            try {
+                return new Date(value).toISOString();
+            } catch (e) {
+                return String(value);
+            }
+        },
+
+        convertRowsToCsv(rows) {
+            const headers = [
+                'ID',
+                'Interest Name',
+                'Description',
+                'Customer First Name',
+                'Customer Last Name',
+                'Customer Email',
+                'Created At',
+                'Updated At',
+            ];
+
+            const lines = [headers.map((header) => this.escapeCsvValue(header)).join(',')];
+
+            rows.forEach((item) => {
+                lines.push([
+                    this.escapeCsvValue(item.id),
+                    this.escapeCsvValue(item.name),
+                    this.escapeCsvValue(item.description || ''),
+                    this.escapeCsvValue(item.customer?.firstName || ''),
+                    this.escapeCsvValue(item.customer?.lastName || ''),
+                    this.escapeCsvValue(item.customer?.email || ''),
+                    this.escapeCsvValue(this.formatDate(item.createdAt)),
+                    this.escapeCsvValue(this.formatDate(item.updatedAt)),
+                ].join(','));
+            });
+
+            return lines.join('\r\n');
+        },
+
+        downloadCsv(content) {
+            const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+
+            link.href = url;
+            link.download = `reading-interests-${timestamp}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        },
+
+        async onExportCsv() {
+            this.isExporting = true;
+
+            try {
+                const rows = await this.fetchAllInterestsForExport();
+                const csv = this.convertRowsToCsv(rows);
+                this.downloadCsv(csv);
+                this.createNotificationSuccess({ message: `Exported ${rows.length} reading interests.` });
+            } catch (e) {
+                this.createNotificationError({ message: 'Could not export reading interests CSV.' });
+            } finally {
+                this.isExporting = false;
+            }
         },
     },
 });

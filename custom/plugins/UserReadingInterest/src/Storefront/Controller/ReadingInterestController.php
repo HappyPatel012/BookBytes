@@ -6,6 +6,7 @@ use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\NotFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
@@ -75,6 +76,11 @@ class ReadingInterestController extends StorefrontController
             return $this->redirectToRoute('frontend.account.reading_interest.page');
         }
 
+        if ($this->interestNameExistsForCustomer($name, $customer->getId(), $salesChannelContext->getContext())) {
+            $this->addFlash('danger', 'This interest already exists in your interest list.');
+            return $this->redirectToRoute('frontend.account.reading_interest.page');
+        }
+
         $this->readingInterestRepository->create([
             [
                 'id' => Uuid::randomHex(),
@@ -111,6 +117,11 @@ class ReadingInterestController extends StorefrontController
 
         if ($name === '') {
             $this->addFlash('danger', 'Interest name is required.');
+            return $this->redirectToRoute('frontend.account.reading_interest.page');
+        }
+
+        if ($this->interestNameExistsForCustomer($name, $customer->getId(), $salesChannelContext->getContext(), $id)) {
+            $this->addFlash('danger', 'This interest already exists in your interest list.');
             return $this->redirectToRoute('frontend.account.reading_interest.page');
         }
 
@@ -162,6 +173,52 @@ class ReadingInterestController extends StorefrontController
         $criteria = (new Criteria([$id]))->addFilter(new EqualsFilter('customerId', $customerId));
 
         return $this->readingInterestRepository->searchIds($criteria, $context)->firstId() !== null;
+    }
+
+    private function interestNameExistsForCustomer(
+        string $name,
+        string $customerId,
+        Context $context,
+        ?string $excludeId = null
+    ): bool {
+        $normalizedName = mb_strtolower(trim($name));
+
+        if ($normalizedName === '') {
+            return false;
+        }
+
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('customerId', $customerId));
+        $criteria->addFilter(new EqualsFilter('name', $name));
+        $criteria->setLimit(1);
+
+        if ($excludeId !== null && Uuid::isValid($excludeId)) {
+            $criteria->addFilter(new NotFilter(NotFilter::CONNECTION_AND, [
+                new EqualsFilter('id', $excludeId),
+            ]));
+        }
+
+        $exactMatch = $this->readingInterestRepository->searchIds($criteria, $context)->firstId() !== null;
+        if ($exactMatch) {
+            return true;
+        }
+
+        $allCriteria = new Criteria();
+        $allCriteria->addFilter(new EqualsFilter('customerId', $customerId));
+        $allCriteria->setLimit(500);
+        $allRows = $this->readingInterestRepository->search($allCriteria, $context);
+
+        foreach ($allRows as $row) {
+            if ($excludeId !== null && $row->getUniqueIdentifier() === $excludeId) {
+                continue;
+            }
+
+            if (mb_strtolower(trim((string) $row->get('name'))) === $normalizedName) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function isEnabled(string $salesChannelId): bool
