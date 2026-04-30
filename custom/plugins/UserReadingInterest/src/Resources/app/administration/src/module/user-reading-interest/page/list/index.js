@@ -25,10 +25,14 @@ Shopware.Component.register('user-reading-interest-list', {
             naturalSorting: false,
             sortDirection: 'DESC',
             searchTerm: '',
+            filterTerm: '',
+            selectedAttribute: 'all',
             interestOptions: [],
             showModal: false,
             currentItem: this.createEmptyItem(),
             isSaving: false,
+            selectedItems: {},
+            isBulkDeleting: false,
         };
     },
 
@@ -47,14 +51,34 @@ Shopware.Component.register('user-reading-interest-list', {
                 { property: 'description', label: 'Description', allowResize: true },
                 { property: 'customer.firstName', label: 'Customer', allowResize: true },
                 { property: 'createdAt', label: 'Created', allowResize: true },
+                { property: 'rowActions', label: 'Action', allowResize: false, sortable: false },
+            ];
+        },
+
+        attributeOptions() {
+            return [
+                { label: 'All fields', value: 'all' },
+                { label: 'Interest', value: 'name' },
+                { label: 'Description', value: 'description' },
+                { label: 'Customer first name', value: 'customer.firstName' },
+                { label: 'Customer last name', value: 'customer.lastName' },
+                { label: 'Customer email', value: 'customer.email' },
             ];
         },
 
         defaultCriteria() {
             const criteria = new Criteria(this.page, this.limit);
-            criteria.setTerm(this.searchTerm);
             criteria.addAssociation('customer');
             criteria.addSorting(Criteria.sort(this.sortBy, this.sortDirection, this.naturalSorting));
+            const trimmedSearch = String(this.searchTerm || '').trim();
+
+            if (trimmedSearch) {
+                if (this.selectedAttribute === 'all') {
+                    criteria.setTerm(trimmedSearch);
+                } else {
+                    criteria.addFilter(Criteria.contains(this.selectedAttribute, trimmedSearch));
+                }
+            }
 
             return criteria;
         },
@@ -82,6 +106,14 @@ Shopware.Component.register('user-reading-interest-list', {
             return options;
         },
 
+        selectedIds() {
+            return Object.keys(this.selectedItems || {});
+        },
+
+        hasSelection() {
+            return this.selectedIds.length > 0;
+        },
+
     },
 
     created() {
@@ -90,8 +122,29 @@ Shopware.Component.register('user-reading-interest-list', {
 
     methods: {
         async createdComponent() {
+            this.applyDefaultPagination();
             await this.loadInterestOptions();
             await this.getList();
+        },
+
+        applyDefaultPagination() {
+            const queryLimit = Number(this.$route?.query?.limit);
+
+            if (Number.isNaN(queryLimit) || queryLimit !== 10) {
+                this.limit = 10;
+                this.page = 1;
+
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        limit: 10,
+                        page: 1,
+                    },
+                });
+                return;
+            }
+
+            this.limit = 10;
         },
 
         createEmptyItem() {
@@ -101,6 +154,11 @@ Shopware.Component.register('user-reading-interest-list', {
                 name: '',
                 description: '',
             };
+        },
+
+        normalizeDescriptionValue(entity) {
+            const rawValue = entity?.description ?? entity?.translated?.description ?? '';
+            return String(rawValue || '');
         },
 
         getList() {
@@ -127,8 +185,54 @@ Shopware.Component.register('user-reading-interest-list', {
 
         onSearch(term) {
             this.searchTerm = term;
+            this.filterTerm = term;
             this.page = 1;
             this.getList();
+        },
+
+        onApplyFilters() {
+            this.searchTerm = String(this.filterTerm || '').trim();
+            this.page = 1;
+            this.getList();
+        },
+
+        onResetFilters() {
+            this.filterTerm = '';
+            this.searchTerm = '';
+            this.selectedAttribute = 'all';
+            this.page = 1;
+            this.getList();
+        },
+
+        onSelectionChange(selection) {
+            this.selectedItems = selection || {};
+        },
+
+        clearSelection() {
+            this.selectedItems = {};
+
+            if (this.$refs.readingInterestListing && typeof this.$refs.readingInterestListing.resetSelection === 'function') {
+                this.$refs.readingInterestListing.resetSelection();
+            }
+        },
+
+        async onBulkDeleteSelected() {
+            if (!this.hasSelection || this.isBulkDeleting) {
+                return;
+            }
+
+            this.isBulkDeleting = true;
+
+            try {
+                await Promise.all(this.selectedIds.map((id) => this.repository.delete(id, Shopware.Context.api)));
+                this.createNotificationSuccess({ message: `${this.selectedIds.length} reading interest(s) deleted.` });
+                this.clearSelection();
+                await this.getList();
+            } catch (e) {
+                this.createNotificationError({ message: 'Could not delete selected reading interests.' });
+            } finally {
+                this.isBulkDeleting = false;
+            }
         },
 
         onCreateNew() {
@@ -144,7 +248,7 @@ Shopware.Component.register('user-reading-interest-list', {
                     id: entity.id,
                     customerId: entity.customerId,
                     name: entity.name || '',
-                    description: entity.description || '',
+                    description: this.normalizeDescriptionValue(entity),
                 };
                 this.showModal = true;
             }).catch(() => {
@@ -220,15 +324,25 @@ Shopware.Component.register('user-reading-interest-list', {
             }
 
             this.isSaving = true;
+            const normalizedName = this.currentItem.name.trim();
 
             const payload = {
                 id: this.currentItem.id,
                 customerId: this.currentItem.customerId,
-                name: this.currentItem.name.trim(),
+                name: normalizedName,
                 description: this.currentItem.description ? this.currentItem.description.trim() : null,
             };
 
             try {
+                const duplicateExists = await this.hasDuplicateInterest(payload.customerId, normalizedName, payload.id);
+
+                if (duplicateExists) {
+                    this.createNotificationError({
+                        message: 'This user already has the same category/interest. Duplicate entries are not allowed.',
+                    });
+                    return;
+                }
+
                 const entity = this.currentItem.id
                     ? await this.repository.get(this.currentItem.id, Shopware.Context.api)
                     : this.repository.create(Shopware.Context.api);
@@ -243,6 +357,25 @@ Shopware.Component.register('user-reading-interest-list', {
             } finally {
                 this.isSaving = false;
             }
+        },
+
+        async hasDuplicateInterest(customerId, interestName, currentId = null) {
+            const criteria = new Criteria(1, 500);
+            criteria.addFilter(Criteria.equals('customerId', customerId));
+
+            const existing = await this.repository.search(criteria, Shopware.Context.api);
+            const normalizedTarget = String(interestName || '').trim().toLowerCase();
+
+            return existing.some((item) => {
+                const itemId = item?.id || null;
+                const itemName = String(item?.name || '').trim().toLowerCase();
+
+                if (currentId && itemId === currentId) {
+                    return false;
+                }
+
+                return itemName === normalizedTarget;
+            });
         },
 
         onDelete(item) {
