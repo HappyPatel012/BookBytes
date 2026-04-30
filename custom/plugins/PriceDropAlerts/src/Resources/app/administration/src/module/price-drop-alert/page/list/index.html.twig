@@ -1,0 +1,26 @@
+{% block price_drop_alert_list %}
+    <sw-page class="price-drop-alert-list">
+        <template #content>
+            <sw-entity-listing
+                v-if="items"
+                :items="items"
+                :repository="repository"
+                :show-selection="false"
+                :columns="columns"
+                :is-loading="isLoading"
+                :full-page="false"
+                :sort-by="sortBy"
+                :sort-direction="sortDirection"
+                :allow-column-edit="false"
+                :allow-inline-edit="false"
+                :allow-delete="false"
+                :allow-edit="false"
+                :page="page"
+                :limit="limit"
+                :total="total"
+                @page-change="onPageChange"
+                @column-sort="onColumnSort"
+            />
+        </template>
+    </sw-page>
+{% endblock %}
