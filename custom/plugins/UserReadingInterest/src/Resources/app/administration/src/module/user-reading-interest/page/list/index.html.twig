@@ -67,34 +67,36 @@
                     </sw-entity-listing>
                 </sw-card>
             </sw-card-view>
+            <sw-modal
+                v-if="showModal"
+                :title="currentItem.id ? 'Edit Reading Interest' : 'Create Reading Interest'"
+                @modal-close="onCloseModal">
+
+                <sw-entity-single-select
+                    v-model:value="currentItem.customerId"
+                    entity="customer"
+                    label="Customer"
+                    placeholder="Select customer"
+                    label-property="email"
+                    :criteria="customerCriteria" />
+
+                <sw-single-select
+                    v-model:value="currentItem.name"
+                    label="Interest Name"
+                    :options="interestSelectOptions"
+                    placeholder="Select interest"
+                    required />
+
+                <sw-textarea-field
+                    v-model:value="currentItem.description"
+                    label="Description"
+                    placeholder="Optional" />
+
+                <template #modal-footer>
+                    <sw-button @click="onCloseModal">Cancel</sw-button>
+                    <sw-button variant="primary" :isLoading="isSaving" @click="onSave">Save</sw-button>
+                </template>
+            </sw-modal>
         </template>
-
-        <sw-modal
-            v-if="showModal"
-            :title="currentItem.id ? 'Edit Reading Interest' : 'Create Reading Interest'"
-            @modal-close="onCloseModal">
-
-            <sw-entity-single-select
-                v-model:value="currentItem.customerId"
-                entity="customer"
-                label="Customer"
-                placeholder="Select customer"
-                :criteria="customerCriteria" />
-
-            <sw-text-field
-                v-model:value="currentItem.name"
-                label="Interest Name"
-                required />
-
-            <sw-textarea-field
-                v-model:value="currentItem.description"
-                label="Description"
-                placeholder="Optional" />
-
-            <template #modal-footer>
-                <sw-button @click="onCloseModal">Cancel</sw-button>
-                <sw-button variant="primary" :isLoading="isSaving" @click="onSave">Save</sw-button>
-            </template>
-        </sw-modal>
     </sw-page>
 {% endblock %}

@@ -6,7 +6,7 @@ const { Criteria } = Shopware.Data;
 Shopware.Component.register('user-reading-interest-list', {
     template,
 
-    inject: ['repositoryFactory'],
+    inject: ['repositoryFactory', 'systemConfigApiService'],
 
     mixins: [
         Shopware.Mixin.getByName('notification'),
@@ -25,6 +25,7 @@ Shopware.Component.register('user-reading-interest-list', {
             naturalSorting: false,
             sortDirection: 'DESC',
             searchTerm: '',
+            interestOptions: [],
             showModal: false,
             currentItem: this.createEmptyItem(),
             isSaving: false,
@@ -34,6 +35,10 @@ Shopware.Component.register('user-reading-interest-list', {
     computed: {
         repository() {
             return this.repositoryFactory.create('user_reading_interest');
+        },
+
+        categoryRepository() {
+            return this.repositoryFactory.create('category');
         },
 
         columns() {
@@ -55,16 +60,40 @@ Shopware.Component.register('user-reading-interest-list', {
         },
 
         customerCriteria() {
-            return new Criteria(1, 10);
+            const criteria = new Criteria(1, 25);
+            criteria.addSorting(Criteria.sort('firstName', 'ASC'));
+
+            return criteria;
+        },
+
+        interestSelectOptions() {
+            const options = this.interestOptions.map((value) => ({ label: value, value }));
+
+            if (
+                this.currentItem.name
+                && !this.interestOptions.includes(this.currentItem.name)
+            ) {
+                options.unshift({
+                    label: `${this.currentItem.name} (current)`,
+                    value: this.currentItem.name,
+                });
+            }
+
+            return options;
         },
 
     },
 
     created() {
-        this.getList();
+        this.createdComponent();
     },
 
     methods: {
+        async createdComponent() {
+            await this.loadInterestOptions();
+            await this.getList();
+        },
+
         createEmptyItem() {
             return {
                 id: null,
@@ -108,13 +137,21 @@ Shopware.Component.register('user-reading-interest-list', {
         },
 
         onEdit(item) {
-            this.currentItem = {
-                id: item.id,
-                customerId: item.customerId,
-                name: item.name,
-                description: item.description || '',
-            };
-            this.showModal = true;
+            this.isLoading = true;
+
+            return this.repository.get(item.id, Shopware.Context.api).then((entity) => {
+                this.currentItem = {
+                    id: entity.id,
+                    customerId: entity.customerId,
+                    name: entity.name || '',
+                    description: entity.description || '',
+                };
+                this.showModal = true;
+            }).catch(() => {
+                this.createNotificationError({ message: 'Could not load reading interest for editing.' });
+            }).finally(() => {
+                this.isLoading = false;
+            });
         },
 
         onCloseModal() {
@@ -122,7 +159,61 @@ Shopware.Component.register('user-reading-interest-list', {
             this.currentItem = this.createEmptyItem();
         },
 
-        onSave() {
+        normalizeManualInterestOptions(configuredOptions) {
+            if (Array.isArray(configuredOptions)) {
+                return configuredOptions
+                    .map((value) => String(value || '').trim())
+                    .filter((value) => value !== '');
+            }
+
+            const manual = String(configuredOptions || '').trim();
+            if (!manual) {
+                return [];
+            }
+
+            return manual
+                .split(/\r\n|\r|\n/)
+                .map((value) => String(value || '').trim())
+                .filter((value) => value !== '');
+        },
+
+        async loadInterestOptions() {
+            try {
+                const config = await this.systemConfigApiService.getValues('UserReadingInterest.config');
+                const manualValues = this.normalizeManualInterestOptions(
+                    config['UserReadingInterest.config.interestOptions']
+                );
+
+                const manualCategoryIds = Array.isArray(config['UserReadingInterest.config.manualCategories'])
+                    ? config['UserReadingInterest.config.manualCategories']
+                    : [];
+
+                const categoryNames = [];
+                const validCategoryIds = manualCategoryIds.filter((id) => typeof id === 'string' && id.length > 0);
+
+                if (validCategoryIds.length > 0) {
+                    const criteria = new Criteria(1, 500);
+                    criteria.addFilter(Criteria.equalsAny('id', validCategoryIds));
+                    criteria.addSorting(Criteria.sort('name', 'ASC'));
+
+                    const categories = await this.categoryRepository.search(criteria, Shopware.Context.api);
+                    categories.forEach((category) => {
+                        const name = String(category?.translated?.name || category?.name || '').trim();
+                        if (name) {
+                            categoryNames.push(name);
+                        }
+                    });
+                }
+
+                this.interestOptions = [...new Set([...manualValues, ...categoryNames])]
+                    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base', numeric: true }));
+            } catch (e) {
+                this.interestOptions = [];
+                this.createNotificationError({ message: 'Could not load configured interest options.' });
+            }
+        },
+
+        async onSave() {
             if (!this.currentItem.customerId || !this.currentItem.name.trim()) {
                 this.createNotificationError({ message: 'Customer and interest name are required.' });
                 return;
@@ -137,21 +228,21 @@ Shopware.Component.register('user-reading-interest-list', {
                 description: this.currentItem.description ? this.currentItem.description.trim() : null,
             };
 
-            const entity = this.currentItem.id
-                ? { ...this.currentItem }
-                : this.repository.create(Shopware.Context.api);
+            try {
+                const entity = this.currentItem.id
+                    ? await this.repository.get(this.currentItem.id, Shopware.Context.api)
+                    : this.repository.create(Shopware.Context.api);
 
-            Object.assign(entity, payload);
-
-            this.repository.save(entity, Shopware.Context.api).then(() => {
+                Object.assign(entity, payload);
+                await this.repository.save(entity, Shopware.Context.api);
                 this.createNotificationSuccess({ message: 'Reading interest saved.' });
                 this.onCloseModal();
-                this.getList();
-            }).catch(() => {
+                await this.getList();
+            } catch (e) {
                 this.createNotificationError({ message: 'Could not save reading interest.' });
-            }).finally(() => {
+            } finally {
                 this.isSaving = false;
-            });
+            }
         },
 
         onDelete(item) {
