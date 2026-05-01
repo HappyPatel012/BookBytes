@@ -6,14 +6,19 @@
     {% if app.request.attributes.get('_route') == 'frontend.wishlist.page' and context.customer and not context.customer.guest %}
         {% set subscribedIds = page.extensions.bookbytesPriceDropAlerts.productIds ?? [] %}
         {% set isSubscribed = product.id in subscribedIds %}
+        {% set tooltipText = isSubscribed ? 'price-drop-alert.button.active'|trans|sw_sanitize : 'price-drop-alert.button.default'|trans|sw_sanitize %}
 
-        <div class="product-action mt-2">
+        <div class="product-action bb-price-drop-action">
             <form method="post" action="{{ path('frontend.price_drop_alert.toggle') }}">
                 <input type="hidden" name="productId" value="{{ product.id }}">
                 <input type="hidden" name="redirectTo" value="frontend.wishlist.page">
-                <button class="btn {{ isSubscribed ? 'btn-success' : 'btn-outline-primary' }} w-100" type="submit">
-                    {{ isSubscribed ? 'price-drop-alert.button.active'|trans|sw_sanitize : 'price-drop-alert.button.default'|trans|sw_sanitize }}
+                <button
+                    class="btn bb-price-drop-alert-btn{{ isSubscribed ? ' is-active' : '' }}"
+                    type="submit"
+                    aria-label="{{ tooltipText }}">
+                    {% sw_icon 'bell' style { size: 'xs' } %}
                 </button>
+                <span class="bb-price-drop-alert-tooltip">{{ tooltipText }}</span>
             </form>
         </div>
     {% endif %}

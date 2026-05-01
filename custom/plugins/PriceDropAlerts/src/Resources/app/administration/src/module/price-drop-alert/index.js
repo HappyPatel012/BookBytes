@@ -1,4 +1,5 @@
 import './page/list';
+import './page/settings';
 
 Shopware.Module.register('price-drop-alert', {
     type: 'plugin',
@@ -23,6 +24,10 @@ Shopware.Module.register('price-drop-alert', {
         list: {
             component: 'price-drop-alert-list',
             path: 'list',
+        },
+        settings: {
+            component: 'price-drop-alert-settings',
+            path: 'settings',
         },
     },
 

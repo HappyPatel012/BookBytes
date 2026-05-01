@@ -1,5 +1,11 @@
 {% block price_drop_alert_list %}
     <sw-page class="price-drop-alert-list">
+        <template #smart-bar-actions>
+            <sw-button variant="secondary" @click="$router.push({ name: 'price.drop.alert.settings' })">
+                Channel Settings
+            </sw-button>
+        </template>
+
         <template #content>
             <sw-entity-listing
                 v-if="items"

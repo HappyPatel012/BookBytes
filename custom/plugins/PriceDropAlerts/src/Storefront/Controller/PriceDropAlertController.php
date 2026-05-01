@@ -8,6 +8,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shopware\Storefront\Controller\StorefrontController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,8 @@ class PriceDropAlertController extends StorefrontController
 {
     public function __construct(
         private readonly EntityRepository $alertRepository,
-        private readonly PriceResolver $priceResolver
+        private readonly PriceResolver $priceResolver,
+        private readonly SystemConfigService $systemConfigService
     ) {
     }
 
@@ -36,6 +38,11 @@ class PriceDropAlertController extends StorefrontController
 
         if (!Uuid::isValid($productId)) {
             $this->addFlash('danger', 'Invalid product selected for price alert.');
+            return $this->redirectToRoute($redirectTo);
+        }
+
+        if (!$this->isSalesChannelAllowed($salesChannelContext->getSalesChannelId())) {
+            $this->addFlash('danger', 'Price-drop alerts are not available for this sales channel.');
             return $this->redirectToRoute($redirectTo);
         }
 
@@ -84,5 +91,15 @@ class PriceDropAlertController extends StorefrontController
         $this->addFlash('success', 'You will be notified when this price drops.');
 
         return $this->redirectToRoute($redirectTo);
+    }
+
+    private function isSalesChannelAllowed(string $salesChannelId): bool
+    {
+        $allowedSalesChannels = $this->systemConfigService->get('PriceDropAlerts.config.enabledSalesChannels');
+        if (!\is_array($allowedSalesChannels) || $allowedSalesChannels === []) {
+            return true;
+        }
+
+        return \in_array($salesChannelId, $allowedSalesChannels, true);
     }
 }

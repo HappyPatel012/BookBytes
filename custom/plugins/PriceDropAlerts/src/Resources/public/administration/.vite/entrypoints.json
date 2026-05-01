@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/pricedropalerts/administration/",
+  "entryPoints": {
+    "price-drop-alerts": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-P_4YzXna.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

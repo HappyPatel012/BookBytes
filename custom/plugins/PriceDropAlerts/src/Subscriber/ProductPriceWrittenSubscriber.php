@@ -9,6 +9,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Event\EntityWrittenEvent;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProductPriceWrittenSubscriber implements EventSubscriberInterface
@@ -16,7 +17,8 @@ class ProductPriceWrittenSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly EntityRepository $alertRepository,
         private readonly EntityRepository $productRepository,
-        private readonly PriceDropMailService $mailService
+        private readonly PriceDropMailService $mailService,
+        private readonly SystemConfigService $systemConfigService
     ) {
     }
 
@@ -59,6 +61,11 @@ class ProductPriceWrittenSubscriber implements EventSubscriberInterface
         }
 
         foreach ($alerts as $alert) {
+            $salesChannelId = (string) $alert->get('salesChannelId');
+            if (!$this->isSalesChannelAllowed($salesChannelId)) {
+                continue;
+            }
+
             $productId = (string) $alert->get('productId');
             $newGross = $priceByProductId[$productId] ?? null;
 
@@ -78,8 +85,8 @@ class ProductPriceWrittenSubscriber implements EventSubscriberInterface
                 continue;
             }
 
-            $this->mailService->send(
-                (string) $alert->get('salesChannelId'),
+            $sent = $this->mailService->send(
+                $salesChannelId,
                 [
                     'id' => $customer->getUniqueIdentifier(),
                     'firstName' => $customer->getFirstName(),
@@ -94,6 +101,10 @@ class ProductPriceWrittenSubscriber implements EventSubscriberInterface
                 $event->getContext()
             );
 
+            if (!$sent) {
+                continue;
+            }
+
             $this->alertRepository->update([
                 [
                     'id' => $alert->getUniqueIdentifier(),
@@ -102,5 +113,15 @@ class ProductPriceWrittenSubscriber implements EventSubscriberInterface
                 ],
             ], $event->getContext());
         }
+    }
+
+    private function isSalesChannelAllowed(string $salesChannelId): bool
+    {
+        $allowedSalesChannels = $this->systemConfigService->get('PriceDropAlerts.config.enabledSalesChannels');
+        if (!\is_array($allowedSalesChannels) || $allowedSalesChannels === []) {
+            return true;
+        }
+
+        return \in_array($salesChannelId, $allowedSalesChannels, true);
     }
 }
