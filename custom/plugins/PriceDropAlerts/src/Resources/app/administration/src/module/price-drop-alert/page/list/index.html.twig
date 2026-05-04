@@ -1,9 +1,22 @@
 {% block price_drop_alert_list %}
     <sw-page class="price-drop-alert-list">
+        <template #smart-bar-header>
+            <h2>Price Drop Alerts</h2>
+        </template>
+
         <template #smart-bar-actions>
-            <sw-button variant="secondary" @click="$router.push({ name: 'price.drop.alert.settings' })">
-                Channel Settings
-            </sw-button>
+            <div class="price-drop-alert-list__actions">
+                <sw-switch-field
+                    v-model:value="showProductPrice"
+                    :disabled="isSavingConfig"
+                    bordered
+                    label="Show product price"
+                    @update:value="onTogglePriceVisibility"
+                />
+                <sw-button variant="secondary" @click="$router.push({ name: 'price.drop.alert.settings' })">
+                    Channel Settings
+                </sw-button>
+            </div>
         </template>
 
         <template #content>

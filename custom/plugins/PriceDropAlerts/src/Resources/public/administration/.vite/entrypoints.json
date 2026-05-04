@@ -2,10 +2,12 @@
   "base": "/bundles/pricedropalerts/administration/",
   "entryPoints": {
     "price-drop-alerts": {
-      "css": [],
+      "css": [
+        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-DILekCuV.css"
+      ],
       "dynamic": [],
       "js": [
-        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-P_4YzXna.js"
+        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-BC6vx_OF.js"
       ],
       "legacy": false,
       "preload": []

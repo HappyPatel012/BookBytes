@@ -5,6 +5,11 @@
         </template>
 
         <template #smart-bar-actions>
+            <sw-button
+                variant="secondary"
+                @click="onCancel">
+                Cancel
+            </sw-button>
             <sw-button-process
                 variant="primary"
                 @click="onSave">

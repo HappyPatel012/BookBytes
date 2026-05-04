@@ -8,6 +8,16 @@ Shopware.Component.register('user-reading-interest-settings', {
     ],
 
     methods: {
+        onCancel() {
+            this.$router.push({
+                name: 'user.reading.interest.index',
+                query: {
+                    limit: 10,
+                    page: 1,
+                },
+            });
+        },
+
         onSave() {
             this.$refs.systemConfig.saveAll().then(() => {
                 this.createNotificationSuccess({ message: 'Settings saved.' });

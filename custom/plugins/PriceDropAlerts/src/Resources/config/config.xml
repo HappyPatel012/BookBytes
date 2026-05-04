@@ -12,5 +12,6 @@
             <helpText>Select the sales channels where price drop alerts should be enabled.</helpText>
             <helpText lang="de-DE">Wählen Sie die Verkaufskanäle aus, in denen Preisalarm-Benachrichtigungen aktiv sein sollen.</helpText>
         </component>
+
     </card>
 </config>

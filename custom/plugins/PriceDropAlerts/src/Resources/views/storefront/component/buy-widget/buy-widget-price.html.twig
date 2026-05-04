@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget-price.html.twig' %}
+
+{% block buy_widget_price_inner %}
+    {% if config('PriceDropAlerts.config.showProductPrice') is not same as(false) %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
