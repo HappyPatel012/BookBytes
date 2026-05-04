@@ -14,6 +14,7 @@ class WishlistPageSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly EntityRepository $alertRepository,
+        private readonly EntityRepository $backInStockAlertRepository,
         private readonly SystemConfigService $systemConfigService
     )
     {
@@ -42,14 +43,21 @@ class WishlistPageSubscriber implements EventSubscriberInterface
         $criteria->setLimit(500);
 
         $result = $this->alertRepository->search($criteria, $event->getContext());
+        $backInStockResult = $this->backInStockAlertRepository->search($criteria, $event->getContext());
 
         $productIds = [];
         foreach ($result as $alert) {
             $productIds[] = (string) $alert->get('productId');
         }
 
+        $backInStockProductIds = [];
+        foreach ($backInStockResult as $alert) {
+            $backInStockProductIds[] = (string) $alert->get('productId');
+        }
+
         $event->getPage()->addExtension('bookbytesPriceDropAlerts', new ArrayStruct([
             'productIds' => array_values(array_unique($productIds)),
+            'backInStockProductIds' => array_values(array_unique($backInStockProductIds)),
         ]));
     }
 

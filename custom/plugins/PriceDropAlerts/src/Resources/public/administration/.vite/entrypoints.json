@@ -3,11 +3,11 @@
   "entryPoints": {
     "price-drop-alerts": {
       "css": [
-        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-DILekCuV.css"
+        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-JCEyVYTs.css"
       ],
       "dynamic": [],
       "js": [
-        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-BC6vx_OF.js"
+        "/bundles/pricedropalerts/administration/assets/price-drop-alerts-Dcmb1NlR.js"
       ],
       "legacy": false,
       "preload": []

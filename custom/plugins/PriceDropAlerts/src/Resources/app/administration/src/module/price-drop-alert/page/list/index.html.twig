@@ -1,17 +1,32 @@
 {% block price_drop_alert_list %}
     <sw-page class="price-drop-alert-list">
         <template #smart-bar-header>
-            <h2>Price Drop Alerts</h2>
+            <h2>{{ pageTitle }}</h2>
         </template>
 
         <template #smart-bar-actions>
             <div class="price-drop-alert-list__actions">
+                <sw-single-select
+                    :value="alertType"
+                    label="Alert list"
+                    :options="alertTypeOptions"
+                    @update:value="onChangeAlertType"
+                />
                 <sw-switch-field
+                    v-if="alertType === 'priceDrop'"
                     v-model:value="showProductPrice"
                     :disabled="isSavingConfig"
                     bordered
                     label="Show product price"
                     @update:value="onTogglePriceVisibility"
+                />
+                <sw-switch-field
+                    v-if="alertType === 'backInStock'"
+                    v-model:value="autoCreateBackInStockFromWishlist"
+                    :disabled="isSavingConfig"
+                    bordered
+                    label="Auto create from wishlist (stock 0)"
+                    @update:value="onToggleBackInStockAutoCreate"
                 />
                 <sw-button variant="secondary" @click="$router.push({ name: 'price.drop.alert.settings' })">
                     Channel Settings

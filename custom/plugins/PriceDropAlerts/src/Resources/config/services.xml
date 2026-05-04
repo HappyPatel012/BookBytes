@@ -4,6 +4,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="PriceDropAlerts\Core\Content\BackInStockAlert\BackInStockAlertDefinition">
+            <tag name="shopware.entity.definition" entity="bookbytes_back_in_stock_alert"/>
+        </service>
+
         <service id="PriceDropAlerts\Core\Content\PriceDropAlert\PriceDropAlertDefinition">
             <tag name="shopware.entity.definition" entity="bookbytes_price_drop_alert"/>
         </service>
@@ -20,6 +24,14 @@
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
         </service>
 
+        <service id="PriceDropAlerts\Service\BackInStockMailService">
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
         <service id="PriceDropAlerts\Storefront\Controller\PriceDropAlertController" public="true">
             <argument type="service" id="bookbytes_price_drop_alert.repository"/>
             <argument type="service" id="PriceDropAlerts\Service\PriceResolver"/>
@@ -29,8 +41,18 @@
             </call>
         </service>
 
+        <service id="PriceDropAlerts\Storefront\Controller\BackInStockAlertController" public="true">
+            <argument type="service" id="bookbytes_back_in_stock_alert.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="PriceDropAlerts\Subscriber\WishlistPageSubscriber">
             <argument type="service" id="bookbytes_price_drop_alert.repository"/>
+            <argument type="service" id="bookbytes_back_in_stock_alert.repository"/>
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -41,6 +63,20 @@
             <argument type="service" id="PriceDropAlerts\Service\PriceDropMailService"/>
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="PriceDropAlerts\Subscriber\ProductStockWrittenSubscriber">
+            <argument type="service" id="bookbytes_back_in_stock_alert.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="PriceDropAlerts\Service\BackInStockMailService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="PriceDropAlerts\Command\BackInStockAutoCreateCommand">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="console.command"/>
         </service>
     </services>
 </container>
