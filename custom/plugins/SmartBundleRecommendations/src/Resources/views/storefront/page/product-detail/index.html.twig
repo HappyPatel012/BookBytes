@@ -1,0 +1,22 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
+
+{% block page_product_detail_tabs_content %}
+    {{ parent() }}
+    {% set bundle = page.extensions.smartBundleRecommendations ?? null %}
+    {% if bundle and bundle.items|length > 0 %}
+        <div class="smart-bundle-recommendations" data-smart-bundle data-product-id="{{ bundle.productId }}">
+            <h3>Frequently Bought Together</h3>
+            <ul>
+                {% for item in bundle.items %}
+                    <li>
+                        <label>
+                            <input type="checkbox" class="smart-bundle-item" value="{{ item.relatedProductId }}" checked>
+                            {{ item.product.translated.name|default(item.product.name) }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button class="btn btn-primary" type="button" data-add-all-to-cart>Add all to cart</button>
+        </div>
+    {% endif %}
+{% endblock %}

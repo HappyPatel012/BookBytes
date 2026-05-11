@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="true" autoconfigure="true" public="false"/>
+
+        <service id="SmartBundleRecommendations\Core\Content\BundleRule\BundleRuleDefinition">
+            <tag name="shopware.entity.definition" entity="bookbytes_bundle_rule"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\Core\Content\BundleCandidate\BundleCandidateDefinition">
+            <tag name="shopware.entity.definition" entity="bookbytes_bundle_candidate"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\Core\Content\BundleEvent\BundleEventDefinition">
+            <tag name="shopware.entity.definition" entity="bookbytes_bundle_event"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\Service\BundleRecommendationService">
+            <argument type="service" id="bookbytes_bundle_rule.repository"/>
+            <argument type="service" id="bookbytes_bundle_candidate.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="cache.app"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\Service\BundleEventTracker">
+            <argument type="service" id="bookbytes_bundle_event.repository"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\ScheduledTask\BundleReindexTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\ScheduledTask\BundleReindexTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\StoreApi\BundleRecommendationRoute" public="true"/>
+        <service id="SmartBundleRecommendations\StoreApi\BundleAnalyticsRoute" public="true"/>
+
+        <service id="SmartBundleRecommendations\Subscriber\ProductPageSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="SmartBundleRecommendations\Subscriber\ReindexTriggerSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>
