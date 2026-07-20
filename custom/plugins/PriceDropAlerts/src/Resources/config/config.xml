@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Price Drop Alerts</title>
+
+        <component name="sw-entity-multi-id-select">
+            <name>enabledSalesChannels</name>
+            <entity>sales_channel</entity>
+            <label>Allowed sales channels</label>
+            <label lang="de-DE">Erlaubte Verkaufskanäle</label>
+            <helpText>Select the sales channels where price drop alerts should be enabled.</helpText>
+            <helpText lang="de-DE">Wählen Sie die Verkaufskanäle aus, in denen Preisalarm-Benachrichtigungen aktiv sein sollen.</helpText>
+        </component>
+
+        <input-field type="bool">
+            <name>autoCreateBackInStockFromWishlist</name>
+            <label>Auto-create back-in-stock alerts from wishlist</label>
+            <label lang="de-DE">Back-in-Stock-Benachrichtigungen aus Merkliste automatisch erstellen</label>
+            <defaultValue>false</defaultValue>
+            <helpText>When enabled, command bookbytes:back-in-stock:auto-create creates alerts for wishlist products with stock 0.</helpText>
+            <helpText lang="de-DE">Wenn aktiviert, erstellt der Befehl bookbytes:back-in-stock:auto-create Alarme für Merkliste-Produkte mit Bestand 0.</helpText>
+        </input-field>
+
+    </card>
+</config>

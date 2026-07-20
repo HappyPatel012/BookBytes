@@ -1,0 +1,27 @@
+{
+  "name": "bookbytes/smart-bundle-recommendations",
+  "description": "Smart bundle recommendations for Bookbytes",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "require": {
+    "shopware/core": "*",
+    "shopware/storefront": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SmartBundleRecommendations\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SmartBundleRecommendations\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "SmartBundleRecommendations\\SmartBundleRecommendations",
+    "label": {
+      "en-GB": "Smart Bundle Recommendations",
+      "de-DE": "Smart Bundle Recommendations"
+    }
+  }
+}

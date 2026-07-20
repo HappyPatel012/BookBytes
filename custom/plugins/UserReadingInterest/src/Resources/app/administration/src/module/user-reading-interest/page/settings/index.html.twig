@@ -1,0 +1,27 @@
+{% block user_reading_interest_settings %}
+    <sw-page class="user-reading-interest-settings">
+        <template #smart-bar-header>
+            <h2>Reading Interest Settings</h2>
+        </template>
+
+        <template #smart-bar-actions>
+            <sw-button
+                variant="secondary"
+                @click="onCancel">
+                Cancel
+            </sw-button>
+            <sw-button-process
+                variant="primary"
+                @click="onSave">
+                Save
+            </sw-button-process>
+        </template>
+
+        <template #content>
+            <sw-system-config
+                ref="systemConfig"
+                domain="UserReadingInterest.config"
+                :sales-channel-switchable="false" />
+        </template>
+    </sw-page>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% block price_drop_alert_settings %}
+    <sw-page class="price-drop-alert-settings">
+        <template #smart-bar-header>
+            <h2>Price Drop Alert Settings</h2>
+        </template>
+
+        <template #smart-bar-actions>
+            <sw-button
+                variant="secondary"
+                @click="onCancel">
+                Cancel
+            </sw-button>
+            <sw-button-process
+                variant="primary"
+                @click="onSave">
+                Save
+            </sw-button-process>
+        </template>
+
+        <template #content>
+            <sw-system-config
+                ref="systemConfig"
+                domain="PriceDropAlerts.config"
+                :sales-channel-switchable="false" />
+        </template>
+    </sw-page>
+{% endblock %}

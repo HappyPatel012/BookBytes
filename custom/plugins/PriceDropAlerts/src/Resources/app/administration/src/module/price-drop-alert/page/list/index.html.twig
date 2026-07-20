@@ -1,0 +1,60 @@
+{% block price_drop_alert_list %}
+    <sw-page class="price-drop-alert-list">
+        <template #smart-bar-header>
+            <h2>{{ pageTitle }}</h2>
+        </template>
+
+        <template #smart-bar-actions>
+            <div class="price-drop-alert-list__actions">
+                <sw-single-select
+                    :value="alertType"
+                    label="Alert list"
+                    :options="alertTypeOptions"
+                    @update:value="onChangeAlertType"
+                />
+                <sw-switch-field
+                    v-if="alertType === 'priceDrop'"
+                    v-model:value="showProductPrice"
+                    :disabled="isSavingConfig"
+                    bordered
+                    label="Show product price"
+                    @update:value="onTogglePriceVisibility"
+                />
+                <sw-switch-field
+                    v-if="alertType === 'backInStock'"
+                    v-model:value="autoCreateBackInStockFromWishlist"
+                    :disabled="isSavingConfig"
+                    bordered
+                    label="Auto create from wishlist (stock 0)"
+                    @update:value="onToggleBackInStockAutoCreate"
+                />
+                <sw-button variant="secondary" @click="$router.push({ name: 'price.drop.alert.settings' })">
+                    Channel Settings
+                </sw-button>
+            </div>
+        </template>
+
+        <template #content>
+            <sw-entity-listing
+                v-if="items"
+                :items="items"
+                :repository="repository"
+                :show-selection="false"
+                :columns="columns"
+                :is-loading="isLoading"
+                :full-page="false"
+                :sort-by="sortBy"
+                :sort-direction="sortDirection"
+                :allow-column-edit="false"
+                :allow-inline-edit="false"
+                :allow-delete="false"
+                :allow-edit="false"
+                :page="page"
+                :limit="limit"
+                :total="total"
+                @page-change="onPageChange"
+                @column-sort="onColumnSort"
+            />
+        </template>
+    </sw-page>
+{% endblock %}

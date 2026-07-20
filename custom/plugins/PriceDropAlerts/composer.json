@@ -1,0 +1,22 @@
+{
+  "name": "bookbytes/price-drop-alerts",
+  "description": "Wishlist-based price drop alerts for Bookbytes",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "require": {
+    "shopware/core": "*",
+    "shopware/storefront": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "PriceDropAlerts\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "PriceDropAlerts\\PriceDropAlerts",
+    "label": {
+      "en-GB": "Price Drop Alerts",
+      "de-DE": "Price Drop Alerts"
+    }
+  }
+}

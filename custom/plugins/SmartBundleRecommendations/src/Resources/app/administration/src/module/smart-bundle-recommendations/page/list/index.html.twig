@@ -1,0 +1,13 @@
+<sw-page class="smart-bundle-recommendations-list">
+    <template #smart-bar-header>
+        <h2>Smart Bundle Recommendations</h2>
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <sw-card title="Rules" :isLoading="isLoading">
+                <sw-data-grid :dataSource="rules" :columns="[{ property: 'name', label: 'Name' }, { property: 'active', label: 'Active' }]" />
+            </sw-card>
+        </sw-card-view>
+    </template>
+</sw-page>

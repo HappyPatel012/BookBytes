@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Smart Bundle Recommendations</title>
+        <input-field type="bool">
+            <name>enabled</name>
+            <label>Enable plugin feature flag</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="int">
+            <name>defaultLimit</name>
+            <label>Default top N items</label>
+            <defaultValue>3</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>strictStockCheck</name>
+            <label>Strict stock checks</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+</config>

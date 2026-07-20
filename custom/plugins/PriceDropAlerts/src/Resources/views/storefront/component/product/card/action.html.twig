@@ -1,0 +1,25 @@
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+
+{% block component_product_box_action_inner %}
+    {{ parent() }}
+
+    {% if app.request.attributes.get('_route') == 'frontend.wishlist.page' and context.customer and not context.customer.guest %}
+        {% set subscribedIds = page.extensions.bookbytesPriceDropAlerts.productIds ?? [] %}
+        {% set isSubscribed = product.id in subscribedIds %}
+        {% set tooltipText = isSubscribed ? 'price-drop-alert.button.active'|trans|sw_sanitize : 'price-drop-alert.button.default'|trans|sw_sanitize %}
+
+        <div class="product-action bb-price-drop-action">
+            <form method="post" action="{{ path('frontend.price_drop_alert.toggle') }}">
+                <input type="hidden" name="productId" value="{{ product.id }}">
+                <input type="hidden" name="redirectTo" value="frontend.wishlist.page">
+                <button
+                    class="btn bb-price-drop-alert-btn{{ isSubscribed ? ' is-active' : '' }}"
+                    type="submit"
+                    aria-label="{{ tooltipText }}">
+                    {% sw_icon 'bell' style { size: 'xs' } %}
+                </button>
+                <span class="bb-price-drop-alert-tooltip">{{ tooltipText }}</span>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

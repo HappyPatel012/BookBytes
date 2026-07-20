@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/user-reading-interest-D8dm2kf2.js",
+    "name": "user-reading-interest",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/user-reading-interest-CmH_9NgV.css"
+    ]
+  }
+}

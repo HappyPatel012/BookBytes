@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/userreadinginterest/administration/",
+  "entryPoints": {
+    "user-reading-interest": {
+      "css": [
+        "/bundles/userreadinginterest/administration/assets/user-reading-interest-CmH_9NgV.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/userreadinginterest/administration/assets/user-reading-interest-D8dm2kf2.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}
