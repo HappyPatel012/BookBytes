@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33ecb273c50cb0be05c5992c8dcf6b49",
+    "content-hash": "2b5421ee10e04c4044ff13f3cece3c78",
     "packages": [
         {
             "name": "async-aws/core",
@@ -2645,54 +2645,6 @@
                 "source": "https://github.com/jsonrainbow/json-schema/tree/v6.7.2"
             },
             "time": "2026-02-15T15:06:22+00:00"
-        },
-        {
-            "name": "klaviyo/shopware-klaviyo",
-            "version": "4.2.0",
-            "dist": {
-                "type": "path",
-                "url": "custom/plugins/klavi_overd",
-                "reference": "13c65a0d1a99e648e44af8c1c8d0627314d043a3"
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^8.2",
-                "shopware/administration": "6.7.*",
-                "shopware/core": "6.7.*",
-                "shopware/storefront": "6.7.*"
-            },
-            "type": "shopware-platform-plugin",
-            "extra": {
-                "shopware-plugin-class": "Klaviyo\\Integration\\klavi_overd",
-                "plugin-icon": "src/Resources/config/plugin.png",
-                "label": {
-                    "de-DE": "Klaviyo: Email Marketing & SMS",
-                    "en-GB": "Klaviyo: Email Marketing & SMS"
-                },
-                "description": {
-                    "de-DE": "Plugin, das Klaviyo mit Shopware verbindet und wesentliche Funktionen zur Nutzung von E-Mail-Marketingkampagnen bietet",
-                    "en-GB": "Plugin that connects Klaviyo with Shopware and provides essential functionality to use email marketing campaigns"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Klaviyo\\Integration\\": "src/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "H1",
-                    "homepage": "https://h1.nl/"
-                }
-            ],
-            "description": "Shopware 6 plugin for Klaviyo integration",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         },
         {
             "name": "laminas/laminas-code",
@@ -6300,10 +6252,16 @@
         {
             "name": "swag/paypal",
             "version": "10.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shopware/SwagPayPal.git",
+                "reference": "7edff8049ffbb385c72f1ebe783dc9300f0abb16"
+            },
             "dist": {
-                "type": "path",
-                "url": "custom/plugins/SwagPayPal",
-                "reference": "1267c5d80000c4a3724d62f7e8693e27d62377b0"
+                "type": "zip",
+                "url": "https://api.github.com/repos/shopware/SwagPayPal/zipball/7edff8049ffbb385c72f1ebe783dc9300f0abb16",
+                "reference": "7edff8049ffbb385c72f1ebe783dc9300f0abb16",
+                "shasum": ""
             },
             "require": {
                 "shopware/core": "~6.7.0@dev",
@@ -6315,97 +6273,31 @@
             },
             "type": "shopware-platform-plugin",
             "extra": {
-                "shopware-plugin-class": "Swag\\PayPal\\SwagPayPal",
-                "copyright": "(c) by shopware AG",
                 "label": {
                     "de-DE": "PayPal-Produkte für Shopware 6",
                     "en-GB": "PayPal Products for Shopware 6"
                 },
+                "copyright": "(c) by shopware AG",
                 "description": {
                     "de-DE": "Bieten Sie Ihren Kunden Deutschlands beliebteste Bezahlmöglichkeiten mit nur einer Integration: Das PayPal-Plugin bietet PayPal Checkout, den Expressbutton, Zettle und vieles mehr",
                     "en-GB": "Get access to over 100 currencies and 200 markets worldwide with the payment module PayPal for your Shopware shop. Experience an easy and comfortable way of payment."
+                },
+                "supportLink": {
+                    "de-DE": "https://issues.shopware.com/",
+                    "en-GB": "https://issues.shopware.com/"
                 },
                 "manufacturerLink": {
                     "de-DE": "https://store.shopware.com/shopware-ag.html",
                     "en-GB": "https://store.shopware.com/en/shopware-ag.html"
                 },
-                "supportLink": {
-                    "de-DE": "https://issues.shopware.com/",
-                    "en-GB": "https://issues.shopware.com/"
-                }
+                "shopware-plugin-class": "Swag\\PayPal\\SwagPayPal"
             },
             "autoload": {
                 "psr-4": {
                     "Swag\\PayPal\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Swag\\PayPal\\Test\\": "tests/"
-                }
-            },
-            "scripts": {
-                "jest": [
-                    "npm run unit-setup --prefix ../../../src/Administration/Resources/app/administration",
-                    "npm run unit --prefix src/Resources/app/administration"
-                ],
-                "jest:watch": [
-                    "npm run unit-setup --prefix ../../../src/Administration/Resources/app/administration",
-                    "npm run unit-watch --prefix src/Resources/app/administration"
-                ],
-                "lint": [
-                    "@ecs-fix",
-                    "@phpstan",
-                    "@phpunit"
-                ],
-                "ecs": [
-                    "../../../vendor/bin/php-cs-fixer fix --dry-run"
-                ],
-                "ecs-fix": [
-                    "../../../vendor/bin/php-cs-fixer fix"
-                ],
-                "init:admin": [
-                    "npm ci --no-audit --prefer-offline --prefix src/Resources/app/administration"
-                ],
-                "lint:admin": [
-                    "npm run lint-fix --prefix src/Resources/app/administration"
-                ],
-                "lint:admin:ci": [
-                    "npm run lint --prefix src/Resources/app/administration"
-                ],
-                "init:storefront": [
-                    "npm ci --no-audit --prefer-offline --prefix src/Resources/app/storefront"
-                ],
-                "lint:storefront": [
-                    "@lint:storefront:ci --fix"
-                ],
-                "lint:storefront:ci": [
-                    "cd src/Resources/app/storefront && ../../../../../../../src/Storefront/Resources/app/storefront/node_modules/.bin/eslint --config ../../../../../../../src/Storefront/Resources/app/storefront/.eslintrc.js ./src",
-                    "cd src/Resources/app/storefront && ../../../../../../../src/Storefront/Resources/app/storefront/node_modules/.bin/stylelint --config ../../../../../../../src/Storefront/Resources/app/storefront/stylelint.config.js ./src/scss"
-                ],
-                "phpunit": [
-                    "../../../vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "php bin/phpstan-config-generator.php",
-                    "php ../../../vendor/bin/phpstan analyze"
-                ],
-                "rector": [
-                    "../../../vendor/bin/rector process"
-                ],
-                "rector-dry": [
-                    "../../../vendor/bin/rector process --dry-run"
-                ],
-                "openapi:generate": [
-                    "../../../bin/console swag:paypal:openapi:generate",
-                    "npm run openapi-types --prefix src/Resources/app/administration"
-                ],
-                "bc-check": [
-                    "php ../../../vendor-bin/roave-backward-compatibility-check/bin/verify-version.php",
-                    "@putenv TMPDIR=./..",
-                    "../../../vendor/bin/roave-backward-compatibility-check"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -6415,10 +6307,11 @@
                 }
             ],
             "description": "PayPal integration for Shopware 6",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/shopware/SwagPayPal/issues",
+                "source": "https://github.com/shopware/SwagPayPal/tree/10.5.0"
+            },
+            "time": "2026-03-12T15:02:13+00:00"
         },
         {
             "name": "symfony/asset",
@@ -11711,5 +11604,5 @@
         "composer-runtime-api": "^2.0"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
