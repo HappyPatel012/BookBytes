@@ -1,0 +1,82 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% block page_account_main_content %}
+    <div class="bb-account-overview bb-account-reading-interest">
+        <section class="bb-account-hero">
+            <div class="bb-hero-text">
+                <div class="bb-hero-kicker">Your Account</div>
+                <h1 class="bb-hero-title">My Reading Interests</h1>
+                <p class="bb-hero-subtitle">Add, update, and manage your preferred reading categories.</p>
+            </div>
+            <div class="bb-hero-actions">
+                <a class="btn bb-ghost" href="{{ path('frontend.account.home.page') }}">Overview</a>
+                <a class="btn bb-ghost" href="{{ path('frontend.account.profile.page') }}">Your profile</a>
+                <a class="btn bb-primary" href="{{ path('frontend.account.order.page') }}">Orders</a>
+            </div>
+        </section>
+
+        <section class="bb-card bb-full mb-4">
+            <div class="bb-card-head">Add Interest</div>
+            <div class="bb-card-body">
+                <form method="post" action="{{ path('frontend.account.reading_interest.create') }}">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-lg-4">
+                            <label class="form-label" for="interestName">Interest Name</label>
+                            <input class="form-control" id="interestName" name="name" type="text" required placeholder="Mystery" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label" for="interestDescription">Description (optional)</label>
+                            <input class="form-control" id="interestDescription" name="description" type="text" placeholder="Short note about this reading preference" />
+                        </div>
+                        <div class="col-lg-2 d-grid">
+                            <button class="btn bb-primary" type="submit">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="bb-card bb-full">
+            <div class="bb-card-head">Your Interests</div>
+            <div class="bb-card-body">
+                {% if interests.total > 0 %}
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 28%">Name</th>
+                                    <th style="width: 42%">Description</th>
+                                    <th style="width: 30%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for interest in interests %}
+                                    <tr>
+                                        <td>
+                                            <input class="form-control form-control-sm" form="update-interest-{{ interest.id }}" name="name" type="text" value="{{ interest.name }}" required />
+                                        </td>
+                                        <td>
+                                            <input class="form-control form-control-sm" form="update-interest-{{ interest.id }}" name="description" type="text" value="{{ interest.description }}" />
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <form id="update-interest-{{ interest.id }}" method="post" action="{{ path('frontend.account.reading_interest.update', { id: interest.id }) }}">
+                                                    <button type="submit" class="btn bb-primary btn-sm">Save</button>
+                                                </form>
+                                                <form method="post" action="{{ path('frontend.account.reading_interest.delete', { id: interest.id }) }}" onsubmit="return confirm('Delete this reading interest?');">
+                                                    <button type="submit" class="btn bb-ghost btn-sm">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="bb-muted mb-0">No reading interests added yet.</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

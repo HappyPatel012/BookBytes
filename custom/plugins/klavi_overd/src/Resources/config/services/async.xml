@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Message Handlers and Scheduled Tasks -->
+        <service id="Klaviyo\Integration\Async\Task\ScheduleEventJobsTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\Task\ScheduleFullHistoricalSyncTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\Task\ScheduleFullSubscriberSyncTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\Task\ScheduleFullCustomerOrderSyncTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\Task\ScheduleFullCustomerSubsSyncTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\TaskHandler\ScheduleEventJobsHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\TaskHandler\ScheduleFullHistoricalSyncTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\TaskHandler\ScheduleFullSubscriberSyncTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\TaskHandler\ScheduleFullCustomerOrderSyncTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\TaskHandler\ScheduleFullCustomerSubsSyncTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\Task\OldJobCleanupScheduledTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\TaskHandler\OldJobCleanupScheduledTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="od_scheduler_job.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\Task\ExcludedSubscribersSyncScheduledTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+        <service id="Klaviyo\Integration\Async\TaskHandler\ExcludedSubscribersSyncScheduledTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+        <!-- /Message Handlers and Scheduled Tasks -->
+
+        <!-- Operations' definitions -->
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\EventsProcessingOperation">
+            <argument type="service" id="klaviyo_job_event.repository"/>
+            <argument type="service" id="klaviyo_job_cart_request.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="Klaviyo\Integration\Model\Channel\GetValidChannels"/>
+            <argument type="service" id="Klaviyo\Integration\Configuration\ConfigurationRegistry"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="logger"/>
+            <tag name="od.job_handler" code="od-klaviyo-events-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\CartEventSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\System\Tracking\EventsTracker"/>
+            <argument type="service" id="klaviyo_job_cart_request.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\CartRequestSerializer"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <tag name="od.job_handler" code="od-klaviyo-cart-event-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\CustomerProfileSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\System\Tracking\EventsTracker"/>
+            <argument type="service" id="customer.repository"/>
+            <tag name="od.job_handler" code="od-klaviyo-customer-profile-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\FullOrderSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\Channel\GetValidChannels"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="od.job_handler" code="od-klaviyo-full-order-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\FullSubscriberSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="newsletter_recipient.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\Channel\GetValidChannels"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="od.job_handler" code="od-klaviyo-full-subscriber-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\FullCustomerOrderSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="customer.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\Channel\GetValidChannels"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="od.job_handler" code="od-klaviyo-full-customer-order-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\FullCustomerSubsSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="customer.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\Channel\GetValidChannels"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Klaviyo\Integration\System\ConfigService"/>
+            <tag name="od.job_handler" code="od-klaviyo-full-customer-subs-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\ExcludedSubscriberSyncOperation">
+            <argument type="service" id="newsletter_recipient.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <tag name="od.job_handler" code="od-klaviyo-excluded-subscriber-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\OrderEventsSyncOperation">
+            <argument type="service" id="klaviyo_job_event.repository"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Klaviyo\Integration\System\Tracking\EventsTracker"/>
+            <tag name="od.job_handler" code="od-klaviyo-order-event-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\OrderSyncOperation">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Klaviyo\Integration\System\Tracking\EventsTracker"/>
+            <tag name="od.job_handler" code="od-klaviyo-order-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\SubscriberSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\KlaviyoGateway"/>
+            <argument type="service" id="Klaviyo\Integration\Configuration\ConfigurationRegistry"/>
+            <argument type="service" id="newsletter_recipient.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Model\Channel\GetValidChannels"/>
+            <tag name="od.job_handler" code="od-klaviyo-subscriber-sync-handler"/>
+        </service>
+        <service id="Klaviyo\Integration\Model\UseCase\Operation\DailyEventProcessExcludedSubscriberSyncOperation">
+            <argument type="service" id="Klaviyo\Integration\Model\UseCase\ScheduleBackgroundJob"/>
+            <argument type="service" id="Klaviyo\Integration\Model\Channel\GetValidChannels"/>
+            <tag name="od.job_handler" code="od-klaviyo-daily-excluded-subscriber-sync-handler"/>
+        </service>
+        <!-- /Operations' definitions -->
+    </services>
+</container>

@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\GetProfileIdByCustomerIdRequestTranslator"/>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\GetProfileIdByEmailRequestTranslator"/>
+
+        <service id="od.klaviyo.profile.search.strategy.byid"
+                 class="Klaviyo\Integration\Klaviyo\Gateway\Domain\Profile\Search\Strategy\SearchByFieldStrategy">
+            <tag name="od.klaviyo.profile.search.strategy" priority="100"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\ClientRegistry"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\GetProfileIdByCustomerIdRequestTranslator"/>
+        </service>
+        <service id="od.klaviyo.profile.search.strategy.byemail"
+                 class="Klaviyo\Integration\Klaviyo\Gateway\Domain\Profile\Search\Strategy\SearchByFieldStrategy">
+            <tag name="od.klaviyo.profile.search.strategy" priority="50"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\ClientRegistry"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\GetProfileIdByEmailRequestTranslator"/>
+        </service>
+
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Domain\Profile\Search\Strategy\CompositeSearchStrategy">
+            <argument type="tagged_iterator" tag="od.klaviyo.profile.search.strategy" />
+        </service>
+
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\KlaviyoGateway">
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\ClientRegistry"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\OrderEventRequestTranslator"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\ProductEventRequestTranslator"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CartEventRequestTranslator"/>
+            <argument type="service"
+                      id="Klaviyo\Integration\Klaviyo\Gateway\Translator\SubscribersToKlaviyoRequestsTranslator"/>
+            <argument type="service"
+                      id="Klaviyo\Integration\Klaviyo\Gateway\Translator\IdentifyProfileRequestTranslator"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Domain\Profile\Search\Strategy\CompositeSearchStrategy"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\UpdateProfileRequestTranslator"/>
+            <argument type="service" id="monolog.logger.od_klaviyo"/>
+            <argument type="service"
+                      id="Klaviyo\Integration\Klaviyo\Gateway\Translator\RealSubscribersToKlaviyoRequestsTranslator"/>
+        </service>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\OrderEventRequestTranslator">
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="order_address.repository"/>
+            <argument type="service" id="order_delivery.repository"/>
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Entity\Helper\AddressDataHelper"/>
+            <argument type="service" id="Klaviyo\Integration\Entity\Helper\ProductDataHelper"/>
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CustomerPropertiesTranslator"/>
+            <argument type="service" id="Klaviyo\Integration\Configuration\ConfigurationRegistry"/>
+        </service>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\ProductEventRequestTranslator">
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CustomerPropertiesTranslator"/>
+            <argument type="service" id="Klaviyo\Integration\Entity\Helper\ProductDataHelper"/>
+        </service>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CustomerPropertiesTranslator">
+            <argument type="service" id="Klaviyo\Integration\Entity\Helper\AddressDataHelper"/>
+            <argument type="service" id="Klaviyo\Integration\Configuration\ConfigurationRegistry"/>
+            <argument type="service" id="sales_channel.repository"/>
+            <argument type="service" id="Klaviyo\Integration\Utils\LocaleCodeProducer"/>
+            <argument type="service" id="customer_group.repository"/>
+            <argument type="service" id="customer.repository"/>
+        </service>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\UpdateProfileRequestTranslator">
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CustomerPropertiesTranslator"/>
+        </service>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\NewsletterSubscriberPropertiesTranslator"/>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CartEventRequestTranslator">
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CustomerPropertiesTranslator"/>
+            <argument type="service" id="Klaviyo\Integration\Entity\Helper\ProductDataHelper"/>
+            <argument type="service" id="Klaviyo\Integration\Storefront\Checkout\Cart\RestoreUrlService\RestoreUrlService"/>
+            <argument type="service" id="Klaviyo\Integration\Entity\Helper\NewsletterSubscriberHelper"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service"
+                      id="Klaviyo\Integration\Klaviyo\Gateway\Translator\NewsletterSubscriberPropertiesTranslator"/>
+            <argument type="service" id="Klaviyo\Integration\Configuration\ConfigurationRegistry"/>
+        </service>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\IdentifyProfileRequestTranslator">
+            <argument type="service" id="Klaviyo\Integration\Klaviyo\Gateway\Translator\CustomerPropertiesTranslator"/>
+        </service>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\SubscribersToKlaviyoRequestsTranslator"/>
+        <service id="Klaviyo\Integration\Klaviyo\Gateway\Translator\RealSubscribersToKlaviyoRequestsTranslator"/>
+    </services>
+
+</container>

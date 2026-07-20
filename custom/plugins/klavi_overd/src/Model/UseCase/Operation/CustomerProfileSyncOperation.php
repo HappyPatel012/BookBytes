@@ -1,0 +1,65 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Klaviyo\Integration\Model\UseCase\Operation;
+
+use Klaviyo\Integration\Async\Message\CustomerProfileSyncMessage;
+use Klaviyo\Integration\System\Tracking\Event\Customer\ProfileEventsBag;
+use Klaviyo\Integration\System\Tracking\EventsTrackerInterface;
+use Klaviyo\Integration\Od\Scheduler\Model\Job\JobHandlerInterface;
+use Klaviyo\Integration\Od\Scheduler\Model\Job\JobResult;
+use Klaviyo\Integration\Od\Scheduler\Model\Job\Message\InfoMessage;
+use Shopware\Core\Checkout\Customer\CustomerCollection;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
+use Klaviyo\Integration\Od\Scheduler\Model\Job\Message\WarningMessage;
+
+class CustomerProfileSyncOperation implements JobHandlerInterface
+{
+    public const OPERATION_HANDLER_CODE = 'od-klaviyo-customer-profile-sync-handler';
+
+    private EventsTrackerInterface $eventsTracker;
+    private EntityRepository $customerRepository;
+
+    public function __construct(
+        EventsTrackerInterface $eventsTracker,
+        EntityRepository $customerRepository
+    ) {
+        $this->eventsTracker = $eventsTracker;
+        $this->customerRepository = $customerRepository;
+    }
+
+    /**
+     * @param CustomerProfileSyncMessage $message
+     * @return JobResult
+     */
+    public function execute(object $message): JobResult
+    {
+        $result = new JobResult();
+        $result->addMessage(
+            new InfoMessage(\sprintf('Total %s customer profiles to update.', \count($message->getCustomerIds())))
+        );
+
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsAnyFilter('id', $message->getCustomerIds()));
+
+        /** @var CustomerCollection $customers */
+        $customers = $this->customerRepository->search($criteria, $message->getContext())->getEntities();
+        $messageResult = $this->eventsTracker->trackCustomerWritten(
+            $message->getContext(),
+            ProfileEventsBag::fromCollection($customers)
+        );
+
+        if (!empty($messageResult)) {
+            foreach ($messageResult as $message) {
+                $result->addMessage(new WarningMessage($message));
+            }
+
+            return $result;
+        }
+
+        return new JobResult();
+    }
+}

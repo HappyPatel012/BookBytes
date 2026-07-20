@@ -1,0 +1,30 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget.html.twig' %}
+
+{% block page_product_detail_buy_form %}
+    {{ parent() }}
+
+    {% if page.getExtension('klaviyoIntegrationPluginExtension').configuration.trackSubscribedToBackInStock and
+        page.extensions.klaviyoIntegrationPluginExtension.backInStockData and not page.product.translated.customFields.klaviyo_back_in_stock_disabled %}
+
+        {% if page.product.isCloseout and page.product.availableStock < page.product.minPurchase %}
+            {% block klaviyo_back_in_stock_modal_open %}
+                <button class="btn btn-primary" data-bs-toggle="modal"
+                        style="{% if extensionData.configuration.popUpOpenBtnColor %}color: {{ extensionData.configuration.popUpOpenBtnColor }};{% endif %}{% if extensionData.configuration.popUpOpenBtnBgColor %}background-color: {{ extensionData.configuration.popUpOpenBtnBgColor }}; border-color: {{ extensionData.configuration.popUpOpenBtnBgColor }};{% endif %}"
+                        data-bs-target="#back-in-stock-modal"> {{ "klaviyo.back-in-stock.modal.openBtnLabel"|trans }}
+                </button>
+            {% endblock %}
+        {% endif %}
+
+    {% endif %}
+{% endblock %}
+
+{% block page_product_detail_buy_inner %}
+    {% if page.getExtension('klaviyoIntegrationPluginExtension').configuration.trackSubscribedToBackInStock and
+        page.extensions.klaviyoIntegrationPluginExtension.backInStockData and not page.product.translated.customFields.klaviyo_back_in_stock_disabled %}
+
+        {% sw_include '@Storefront/storefront/page/product-detail/back-in-stock-form.html.twig' with {
+            extensionData: page.getExtension('klaviyoIntegrationPluginExtension')
+        } %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

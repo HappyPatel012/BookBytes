@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="UserReadingInterest\Core\Content\ReadingInterest\ReadingInterestDefinition">
+            <tag name="shopware.entity.definition" entity="user_reading_interest" />
+        </service>
+
+        <service id="UserReadingInterest\Storefront\Controller\ReadingInterestController" public="true">
+            <argument type="service" id="user_reading_interest.repository" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="category.repository" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="UserReadingInterest\StoreApi\Controller\ReadingInterestApiController" public="true">
+            <argument type="service" id="user_reading_interest.repository" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+    </services>
+</container>
